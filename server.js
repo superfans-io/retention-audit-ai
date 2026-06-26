@@ -11,7 +11,10 @@ app.use(express.json({ limit: '10mb' }));
 app.use(cors({ origin: '*' }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+const openai = new OpenAI({ 
+  apiKey: process.env.OPENAI_API_KEY,
+  fetch: globalThis.fetch // 👈 Forces native streaming engine execution
+});
 
 // ─────────────────────────────────────────────────────────────────────────────
 // SYSTEM PROMPT — The brain of the Retention Audit AI
@@ -510,7 +513,7 @@ app.get('/health', (req, res) => res.json({ status: 'ok' }));
 
 // Catch-all — serve frontend
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  res.send("Superfans Playbook AI Engine is active and running successfully!");
 });
 
 // ─────────────────────────────────────────────────────────────────────────────
