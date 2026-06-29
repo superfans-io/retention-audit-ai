@@ -484,6 +484,63 @@ Please first search the web for information about ${brandInfo.name} at ${brandIn
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+// FOLLOW-UP CHAT — grounded in playbook + session context only
+// ─────────────────────────────────────────────────────────────────────────────
+
+const FOLLOW_UP_PROMPT = `
+You are the Retention Audit AI — a follow-up assistant for D2C retention questions.
+
+STRICT RULES:
+- Answer ONLY using the High-Value Customer Playbook and the session context provided (brand info, quiz answers, retention audit).
+- Do NOT invent brand facts, metrics, or programs not mentioned in the session context or audit.
+- Do NOT give advice outside retention, loyalty, LTV, ambassadors, pop-ups, bundling, direct mail, and channel strategy covered in the playbook.
+- Be concise: 2–4 short paragraphs max. Direct, specific, never corporate.
+- Use the brand name and category naturally.
+- Ground recommendations in playbook stats and frameworks when relevant.
+- If asked something outside scope, politely redirect to retention topics from the playbook.
+
+TONE: Smart friend who gets ecommerce — same voice as the audit.
+`.trim();
+
+async function generateFollowUpReply(brandInfo, quizAnswers, audit, message, history = []) {
+  const sessionContext = `
+SESSION CONTEXT — DO NOT GO BEYOND THIS:
+
+Brand Name: ${brandInfo.name}
+Category: ${brandInfo.category}
+Store URL: ${brandInfo.url}
+
+Quiz Responses:
+1. Loyalty Program: ${quizAnswers.q1 || 'Not answered'}
+2. Pop-ups / Personalisation Quiz: ${quizAnswers.q2 || 'Not answered'}
+3. Affiliate / Ambassador Program: ${quizAnswers.q3 || 'Not answered'}
+4. Customer Feedback & UGC: ${quizAnswers.q4 || 'Not answered'}
+5. Between-Purchase Communication: ${quizAnswers.q5 || 'Not answered'}
+
+Retention Audit (already delivered to the user):
+${audit}
+`.trim();
+
+  const historyMessages = (history || []).flatMap(turn => [
+    { role: 'user', content: turn.user },
+    { role: 'assistant', content: turn.assistant },
+  ]);
+
+  const completion = await openai.chat.completions.create({
+    model: 'gpt-4o',
+    messages: [
+      { role: 'system', content: `${FOLLOW_UP_PROMPT}\n\n${SYSTEM_PROMPT}\n\n${sessionContext}` },
+      ...historyMessages,
+      { role: 'user', content: message },
+    ],
+    max_tokens: 1024,
+    temperature: 0.6,
+  });
+
+  return completion.choices[0].message.content;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 // ROUTES
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -505,6 +562,32 @@ app.post('/api/audit', async (req, res) => {
   } catch (error) {
     console.error('[Audit Error]', error?.message || error);
     res.status(500).json({ error: 'Failed to generate audit. Please try again in a moment.' });
+  }
+});
+
+app.post('/api/follow-up', async (req, res) => {
+  try {
+    const { brandInfo, quizAnswers, audit, message, history } = req.body;
+
+    if (!brandInfo?.name || !audit || !message?.trim()) {
+      return res.status(400).json({ error: 'Missing required follow-up context or message.' });
+    }
+
+    console.log(`[Follow-up] Brand: ${brandInfo.name} | Message: ${message.slice(0, 80)}`);
+
+    const reply = await generateFollowUpReply(
+      brandInfo,
+      quizAnswers || {},
+      audit,
+      message.trim(),
+      history || []
+    );
+
+    res.json({ reply });
+
+  } catch (error) {
+    console.error('[Follow-up Error]', error?.message || error);
+    res.status(500).json({ error: 'Failed to generate a reply. Please try again in a moment.' });
   }
 });
 
