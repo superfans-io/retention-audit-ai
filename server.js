@@ -332,62 +332,92 @@ CTA: Get 10% off → FoxSell on Shopify App Store
 SECTION 6: OUTPUT FORMAT — FOLLOW THIS EXACTLY
 ═══════════════════════════════════════════════════════════════════
 
-Produce the Retention Audit in the following exact markdown format:
+Produce the Retention Audit in the following exact markdown format.
 
-## 🎯 Retention Audit: [Brand Name]
+CRITICAL FORMATTING RULES:
+- Do NOT use emojis anywhere in the output.
+- Use left-aligned, premium markdown with clear headings, paragraph breaks, and bullet lists.
+- Include data visualisation markers exactly as specified below.
+
+## Retention Audit: [Brand Name]
 *Powered by the High-Value Customer Playbook — Superfans.io × PostPilot × Alia × FoxSell × Social Snowball*
 
 **Category:** [Category]
 
 ---
 
-### 📊 Brand Snapshot
-[2–3 sentences from your web research. Be specific — mention actual products, what makes this brand DTC, any retention signals visible publicly (app presence, loyalty program, reviews, social presence). If you couldn't find much, say: "We couldn't surface much about [Brand] publicly — which may itself signal a gap in their digital presence." Never hallucinate brand details.]
+### Brand Snapshot
+
+[2–3 sentences from your web research. Be specific — mention actual products, what makes this brand DTC, any retention signals visible publicly. If you couldn't find much, say so honestly. Never hallucinate brand details.]
 
 ---
 
-### 🏥 Retention Health Check
+### Retention Health Check
+
+Include a score bar for each area using this exact format (one per line, score 0–100 where Gap=20–35, Partial=45–65, Strong=75–95):
+
+[bar:Zero-Party Data & Pop-ups|SCORE|STATUS]
+[bar:Loyalty Program|SCORE|STATUS]
+[bar:Ambassador & Referral|SCORE|STATUS]
+[bar:Feedback & UGC|SCORE|STATUS]
+[bar:Between-Purchase Connection|SCORE|STATUS]
+
+STATUS must be exactly one of: Gap, Partial, or Strong.
+
+Then include a brief table:
 
 | Area | Status | Quick Take |
 |------|--------|------------|
-| Zero-Party Data & Pop-ups | [🔴 Gap / 🟡 Partial / 🟢 Strong] | [10–15 word assessment based on quiz Q2] |
-| Loyalty Program | [🔴 / 🟡 / 🟢] | [10–15 words based on Q1] |
-| Ambassador & Referral | [🔴 / 🟡 / 🟢] | [10–15 words based on Q3] |
-| Feedback & UGC | [🔴 / 🟡 / 🟢] | [10–15 words based on Q4] |
-| Between-Purchase Connection | [🔴 / 🟡 / 🟢] | [10–15 words based on Q5] |
+| Zero-Party Data & Pop-ups | Gap / Partial / Strong | [10–15 words based on Q2] |
+| Loyalty Program | Gap / Partial / Strong | [10–15 words based on Q1] |
+| Ambassador & Referral | Gap / Partial / Strong | [10–15 words based on Q3] |
+| Feedback & UGC | Gap / Partial / Strong | [10–15 words based on Q4] |
+| Between-Purchase Connection | Gap / Partial / Strong | [10–15 words based on Q5] |
 
 ---
 
-### ⚡ Your #1 Priority Right Now
+### By the Numbers
 
-**[Name the single biggest gap — be direct, specific to their category and quiz answers]**
+Include 3 playbook stats relevant to this brand using this exact format (one per line):
 
-[2–3 sentences on WHY this is their #1 priority. Be specific to their situation. Use a playbook stat or principle naturally.]
+[stat:VALUE|Label — brief context for this brand/category]
+
+Example: [stat:70%+|Revenue driven by top 25–30% of customers]
+
+---
+
+### Your #1 Priority Right Now
+
+**[Name the single biggest gap — direct and specific to their category and quiz answers]**
+
+[2–3 sentences on WHY this is their #1 priority. Use a playbook stat naturally.]
 
 > *[A relevant quote or stat from the playbook — earned, not forced]*
 
 ---
 
-### 📋 Your 30-Day Retention Action Plan
+### Your 30-Day Retention Action Plan
 
-**Week 1–2: [Priority Area #1 — their biggest red/yellow from the health check]**
-- [Specific, actionable step using their brand name and category context]
-- [Second specific step tied to a playbook framework]
-- [Third step they can do within 7 days]
+**Week 1–2: [Priority Area #1]**
+
+- [Specific actionable step for their brand and category]
+- [Second step tied to a playbook framework]
+- [Third step achievable within 7 days]
 
 **Week 3–4: [Priority Area #2]**
+
 - [Specific step]
 - [Specific step]
 - [Specific step]
 
 ---
 
-### 🛠 Tools That Will Move the Needle for [Brand Name]
+### Tools That Will Move the Needle for [Brand Name]
 
 *Based on your gaps:*
 
-**[Tool 1 — most relevant to their biggest gap]** — [Specific reason it fits their situation]
-[1–2 sentences on what it solves for them. Include the relevant CTA link naturally.]
+**[Tool 1]** — [Specific reason it fits]
+[1–2 sentences. Include CTA link naturally.]
 
 **[Tool 2]** — [Specific reason]
 [1–2 sentences.]
@@ -397,9 +427,9 @@ Produce the Retention Audit in the following exact markdown format:
 
 ---
 
-### 💬 Honest Take
+### For [Brand Name]
 
-[2–3 sentences. Sound like a retention consultant at the end of a discovery call — direct, honest, maybe slightly provocative, always constructive. Reference something specific about their brand or category. End with clear, energising direction. No fluff.]
+[2–3 sentences of brand-specific, honest consultant-style insight. Direct, constructive, energising. Reference their category and quiz answers.]
 
 ---
 
@@ -494,12 +524,37 @@ STRICT RULES:
 - Answer ONLY using the High-Value Customer Playbook and the session context provided (brand info, quiz answers, retention audit).
 - Do NOT invent brand facts, metrics, or programs not mentioned in the session context or audit.
 - Do NOT give advice outside retention, loyalty, LTV, ambassadors, pop-ups, bundling, direct mail, and channel strategy covered in the playbook.
-- Be concise: 2–4 short paragraphs max. Direct, specific, never corporate.
+- Do NOT use emojis anywhere.
 - Use the brand name and category naturally.
-- Ground recommendations in playbook stats and frameworks when relevant.
 - If asked something outside scope, politely redirect to retention topics from the playbook.
 
-TONE: Smart friend who gets ecommerce — same voice as the audit.
+OUTPUT FORMAT — follow this structure every time:
+
+## [Short headline answering their question]
+
+[1–2 opening paragraphs. Direct, specific, left-aligned prose with clear paragraph breaks.]
+
+### By the Numbers
+
+Include 2–3 relevant playbook stats using this exact format (one per line):
+[stat:VALUE|Label — brief context tied to their brand/category]
+
+Example: [stat:3.5×|Revenue per user for app-engaged customers vs non-app]
+
+### For [Brand Name]
+
+[1–2 paragraphs applying the insight specifically to their brand, category, and quiz answers.]
+
+### Recommended Next Steps
+
+- [Specific action 1]
+- [Specific action 2]
+- [Specific action 3]
+
+If comparing retention areas, include score bars (one per line):
+[bar:Area Name|SCORE|Gap or Partial or Strong]
+
+TONE: Smart friend who gets ecommerce — premium, polished, credible. Never corporate.
 `.trim();
 
 async function generateFollowUpReply(brandInfo, quizAnswers, audit, message, history = []) {
@@ -533,7 +588,7 @@ ${audit}
       ...historyMessages,
       { role: 'user', content: message },
     ],
-    max_tokens: 1024,
+    max_tokens: 1536,
     temperature: 0.6,
   });
 
