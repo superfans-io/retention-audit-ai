@@ -585,8 +585,24 @@ function raStartQuiz() {
   raState.answers = {};
   raState.quizStep = 0;
   raShowComposer(false);
-  document.getElementById('ra-main-title').textContent = "Tell us a little about your brand (It'll only take a minute, we promise!)";
-  setTimeout(() => raAskQuiz(0), 400);
+  document.getElementById('ra-main-title').textContent = '';
+
+  let intro = document.getElementById('ra-quiz-intro');
+  if (!intro) {
+    intro = document.createElement('div');
+    intro.id = 'ra-quiz-intro';
+    intro.className = 'ra-m bot';
+    const summary = document.getElementById('ra-summary');
+    if (summary && summary.nextSibling) {
+      document.getElementById('ra-display-pane').insertBefore(intro, summary.nextSibling);
+    } else {
+      document.getElementById('ra-display-pane').appendChild(intro);
+    }
+  }
+  intro.innerHTML = '<p style="margin:0;font-size:16px;color:#FAF6FF;line-height:1.6;">Tell us a little about your brand <span style="color:rgba(238,224,254,0.6);font-size:14px;">(It\'ll only take a minute, we promise!)</span></p>';
+
+  raUpdateProgress(1);
+  setTimeout(() => raAskQuiz(0), 500);
 }
 
 function raAskQuiz(step) {
