@@ -11,7 +11,7 @@ app.use(express.json({ limit: '10mb' }));
 app.use(cors({ origin: '*' }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-const openai = new OpenAI({ 
+const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
   fetch: globalThis.fetch
 });
@@ -107,8 +107,6 @@ Deploy offline strategies efficiently once an ecommerce entity scales past $3M-$
 SECTION 2: OUTPUT FORMAT — FOLLOW THIS EXACTLY
 ═══════════════════════════════════════════════════════════════════
 
-Produce the Retention Audit in the following exact markdown format.
-
 ${RESPONSE_FORMATTING_RULES}
 
 Include data visualisation markers exactly as specified below.
@@ -125,7 +123,9 @@ Include data visualisation markers exactly as specified below.
 
 ### Brand Snapshot
 
-[2–3 short sentences in their own paragraph. Be specific about products, DTC positioning, and visible retention signals. If research was limited, say so honestly. Never hallucinate.]
+- [Bullet: what the brand sells and DTC positioning]
+- [Bullet: visible retention signals from research — loyalty, app, reviews, social]
+- [Bullet: honest note if public research was limited]
 
 ---
 
@@ -133,13 +133,11 @@ Include data visualisation markers exactly as specified below.
 
 #### Score Overview
 
-Include a score bar for each area (one per line, score 0–100 where Gap=20–35, Partial=45–65, Strong=75–95):
-
-[bar:Zero-Party Data & Pop-ups|SCORE|STATUS]
-[bar:Loyalty Program|SCORE|STATUS]
-[bar:Ambassador & Referral|SCORE|STATUS]
-[bar:Feedback & UGC|SCORE|STATUS]
-[bar:Between-Purchase Connection|SCORE|STATUS]
+[bar:Purchase Frequency & Repeat Rate|SCORE|STATUS]
+[bar:VIP Identification & Revenue Concentration|SCORE|STATUS]
+[bar:Loyalty Program & VIP Perks|SCORE|STATUS]
+[bar:Communication & Milestones|SCORE|STATUS]
+[bar:Advocacy & Metrics|SCORE|STATUS]
 
 STATUS must be exactly one of: Gap, Partial, or Strong. Calculate these objectively based on the 10 quiz answers.
 
@@ -157,11 +155,9 @@ STATUS must be exactly one of: Gap, Partial, or Strong. Calculate these objectiv
 
 ### By the Numbers
 
-Include 3 playbook stats (one per line):
-
-[stat:VALUE|Label — brief context for this brand/category]
-
-Example: [stat:70%+|Revenue driven by top 25–30% of customers]
+[stat:VALUE|Label — context for this brand]
+[stat:VALUE|Label — context for this brand]
+[stat:VALUE|Label — context for this brand]
 
 ---
 
@@ -169,13 +165,14 @@ Example: [stat:70%+|Revenue driven by top 25–30% of customers]
 
 #### The Gap
 
-**[Name the single biggest gap — direct and specific]**
-
-[2–3 sentences explaining WHY. One paragraph only.]
+- **[Name the single biggest gap — bold lead bullet]**
+- [Why this is #1 — bullet]
+- [Supporting evidence from their quiz answers — bullet]
 
 #### Why It Matters
 
-> [One playbook stat or principle — earned, not forced]
+- [Playbook stat or principle as bullet]
+- [Category-specific implication — bullet]
 
 ---
 
@@ -183,45 +180,43 @@ Example: [stat:70%+|Revenue driven by top 25–30% of customers]
 
 #### Week 1–2: [Priority Area #1]
 
-- [Specific actionable step for their brand]
-- [Second step tied to a playbook framework]
-- [Third step achievable within 7 days]
+- [Action step 1]
+- [Action step 2]
+- [Action step 3]
 
 #### Week 3–4: [Priority Area #2]
 
-- [Specific step]
-- [Specific step]
-- [Specific step]
+- [Action step 1]
+- [Action step 2]
+- [Action step 3]
 
 ---
 
 ### Tools That Will Move the Needle
 
-*Based on your gaps:*
-
 #### [Tool 1 Name]
 
-**Why it fits:** [One sentence]
-
-[1–2 sentences on what it solves. Include CTA link naturally.]
+- **Why it fits:** [One bullet]
+- [What it solves — bullet]
+- [CTA link naturally included — bullet]
 
 #### [Tool 2 Name]
 
-**Why it fits:** [One sentence]
-
-[1–2 sentences.]
+- **Why it fits:** [One bullet]
+- [What it solves — bullet]
 
 #### [Tool 3 Name — if relevant]
 
-**Why it fits:** [One sentence]
-
-[1–2 sentences.]
+- **Why it fits:** [One bullet]
+- [What it solves — bullet]
 
 ---
 
 ### For [Brand Name]
 
-[2–3 sentences of honest, brand-specific consultant insight. One or two short paragraphs max.]
+- [Honest brand-specific insight — bullet]
+- [Constructive direction — bullet]
+- [Energising next step — bullet]
 
 ---
 
@@ -246,15 +241,11 @@ OUTPUT FORMAT — follow this exact structure every time:
 
 ---
 
-## [Short, direct headline answering their question]
+## [Short headline answering their question]
 
-[Opening paragraph — max 2 sentences. Set up the answer clearly.]
-
----
-
-### Key Insight
-
-[1 short paragraph — max 3 sentences. The core answer to their question.]
+- [Core answer bullet 1]
+- [Core answer bullet 2]
+- [Core answer bullet 3]
 
 ---
 
@@ -274,7 +265,9 @@ Include 2–3 relevant playbook stats (one per line):
 
 ### Recommended Next Steps
 
-#### Immediate Actions
+- [Action 1]
+- [Action 2]
+- [Action 3]
 
 - [Specific action 1]
 - [Specific action 2]
