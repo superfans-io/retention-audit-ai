@@ -158,3 +158,249 @@ STATUS must be exactly one of: Gap, Partial, or Strong. Calculate these objectiv
 ### By the Numbers
 
 Include 3 playbook stats (one per line):
+
+[stat:VALUE|Label — brief context for this brand/category]
+
+Example: [stat:70%+|Revenue driven by top 25–30% of customers]
+
+---
+
+### Your #1 Priority Right Now
+
+#### The Gap
+
+**[Name the single biggest gap — direct and specific]**
+
+[2–3 sentences explaining WHY. One paragraph only.]
+
+#### Why It Matters
+
+> [One playbook stat or principle — earned, not forced]
+
+---
+
+### Your 30-Day Retention Action Plan
+
+#### Week 1–2: [Priority Area #1]
+
+- [Specific actionable step for their brand]
+- [Second step tied to a playbook framework]
+- [Third step achievable within 7 days]
+
+#### Week 3–4: [Priority Area #2]
+
+- [Specific step]
+- [Specific step]
+- [Specific step]
+
+---
+
+### Tools That Will Move the Needle
+
+*Based on your gaps:*
+
+#### [Tool 1 Name]
+
+**Why it fits:** [One sentence]
+
+[1–2 sentences on what it solves. Include CTA link naturally.]
+
+#### [Tool 2 Name]
+
+**Why it fits:** [One sentence]
+
+[1–2 sentences.]
+
+#### [Tool 3 Name — if relevant]
+
+**Why it fits:** [One sentence]
+
+[1–2 sentences.]
+
+---
+
+### For [Brand Name]
+
+[2–3 sentences of honest, brand-specific consultant insight. One or two short paragraphs max.]
+
+---
+
+*Ready to go deeper? [**Book a call with Superfans.io →**](https://www.superfans.io/demo)*
+`.trim();
+
+// ─────────────────────────────────────────────────────────────────────────────
+// FOLLOW-UP PROMPT
+// ─────────────────────────────────────────────────────────────────────────────
+
+const FOLLOW_UP_PROMPT = `
+You are the Retention Audit AI — a follow-up assistant for D2C retention questions.
+
+STRICT RULES:
+- Answer ONLY using the High-Value Customer Playbook and the session context provided.
+- Do NOT give advice outside retention themes covered in the playbook layout.
+- Use the brand name and category naturally.
+
+${RESPONSE_FORMATTING_RULES}
+
+OUTPUT FORMAT — follow this exact structure every time:
+
+---
+
+## [Short, direct headline answering their question]
+
+[Opening paragraph — max 2 sentences. Set up the answer clearly.]
+
+---
+
+### Key Insight
+
+[1 short paragraph — max 3 sentences. The core answer to their question.]
+
+---
+
+### By the Numbers
+
+Include 2–3 relevant playbook stats (one per line):
+
+[stat:VALUE|Label — brief context tied to their brand/category]
+
+---
+
+### For [Brand Name]
+
+[1 paragraph — max 3 sentences. Apply the insight to their brand status context.]
+
+---
+
+### Recommended Next Steps
+
+#### Immediate Actions
+
+- [Specific action 1]
+- [Specific action 2]
+- [Specific action 3]
+`.trim();
+
+// ─────────────────────────────────────────────────────────────────────────────
+// CORE FUNCTIONS
+// ─────────────────────────────────────────────────────────────────────────────
+
+async function generateRetentionAudit(brandInfo, quizAnswers) {
+  const userMessage = `
+BRAND INFORMATION:
+- Brand Name: ${brandInfo.name}
+- Category: ${brandInfo.category}
+- Store URL: ${brandInfo.url}
+
+DEEP CORE QUIZ METRICS & ARCHITECTURE ANSWERS:
+1. Purchase Frequency: ${quizAnswers.q1 || 'Not provided'}
+2. Current Repeat Purchase Rate: ${quizAnswers.q2 || 'Not provided'}
+3. Best Customer Tracking Mechanism: ${quizAnswers.q3 || 'Not provided'}
+4. Top 20-30% Revenue Contribution Size: ${quizAnswers.q4 || 'Not provided'}
+5. Loyalty Program Baseline Status: ${quizAnswers.q5 || 'Not provided'}
+6. High-Value Tier Perks Distributed: ${quizAnswers.q6 || 'Not provided'}
+7. Inter-Purchase Communication Channels: ${quizAnswers.q7 || 'Not provided'}
+8. Customer Lifecycle Milestones Recognized: ${quizAnswers.q8 || 'Not provided'}
+9. Active Advocacy/Referral Stature: ${quizAnswers.q9 || 'Not provided'}
+10. System Active Retention Metrics Logged: ${quizAnswers.q10 || 'Not provided'}
+
+Please search the web for information about ${brandInfo.name} at ${brandInfo.url} to locate public retention signals, review baselines, or tech layers. Then generate the structured Retention Audit in the exact markdown design specified.
+`.trim();
+
+  try {
+    const response = await openai.responses.create({
+      model: 'gpt-4o',
+      instructions: SYSTEM_PROMPT,
+      input: userMessage,
+      tools: [{ type: 'web_search_preview' }],
+      max_output_tokens: 4096,
+      temperature: 0.7,
+    });
+
+    const text = response.output_text;
+    if (text && text.length > 200) return text;
+    throw new Error('Empty responses structure captured.');
+
+  } catch (primaryErr) {
+    console.warn('[Responses API] Falling back to Chat Completions:', primaryErr.message);
+
+    const completion = await openai.chat.completions.create({
+      model: 'gpt-4o',
+      messages: [
+        { role: 'system', content: SYSTEM_PROMPT },
+        { role: 'user', content: `${userMessage}\n\n(Note: Generate data output matching format based on metrics inputs provided.)` },
+      ],
+      max_tokens: 4096,
+      temperature: 0.7,
+    });
+
+    return completion.choices[0].message.content;
+  }
+}
+
+async function generateFollowUpReply(brandInfo, quizAnswers, audit, message, history = []) {
+  const sessionContext = `
+SESSION CONTEXT:
+Brand Name: ${brandInfo.name} | Category: ${brandInfo.category} | URL: ${brandInfo.url}
+Audit Document Matrix:
+${audit}
+`.trim();
+
+  const historyMessages = (history || []).flatMap(turn => [
+    { role: 'user', content: turn.user },
+    { role: 'assistant', content: turn.assistant },
+  ]);
+
+  const completion = await openai.chat.completions.create({
+    model: 'gpt-4o',
+    messages: [
+      { role: 'system', content: `${FOLLOW_UP_PROMPT}\n\n${SYSTEM_PROMPT}\n\n${sessionContext}` },
+      ...historyMessages,
+      { role: 'user', content: message },
+    ],
+    max_tokens: 1536,
+    temperature: 0.6,
+  });
+
+  return completion.choices[0].message.content;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// ROUTE REGISTRATIONS
+// ─────────────────────────────────────────────────────────────────────────────
+
+app.post('/api/audit', async (req, res) => {
+  try {
+    const { brandInfo, quizAnswers } = req.body;
+    if (!brandInfo?.name || !brandInfo?.category || !brandInfo?.url) {
+      return res.status(400).json({ error: 'Missing core profile info data constructs.' });
+    }
+    console.log(`[Audit Request] Processing Brand: ${brandInfo.name}`);
+    const audit = await generateRetentionAudit(brandInfo, quizAnswers || {});
+    res.json({ audit });
+  } catch (error) {
+    console.error('[Audit Process Error]', error?.message || error);
+    res.status(500).json({ error: 'Audit pipeline processing failure.' });
+  }
+});
+
+app.post('/api/follow-up', async (req, res) => {
+  try {
+    const { brandInfo, quizAnswers, audit, message, history } = req.body;
+    if (!brandInfo?.name || !audit || !message?.trim()) {
+      return res.status(400).json({ error: 'Missing conversation pipeline contextual payload.' });
+    }
+    const reply = await generateFollowUpReply(brandInfo, quizAnswers || {}, audit, message.trim(), history || []);
+    res.json({ reply });
+  } catch (error) {
+    console.error('[Follow-up Processing Error]', error?.message || error);
+    res.status(500).json({ error: 'Failed execution inside conversation loop.' });
+  }
+});
+
+app.get('/health', (req, res) => res.json({ status: 'ok' }));
+app.get('*', (req, res) => res.send("Superfans Playbook AI Engine is active and running successfully!"));
+
+app.listen(PORT, () => {
+  console.log(`✅ Retention Audit AI running on port ${PORT}`);
+});
