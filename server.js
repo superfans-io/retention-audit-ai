@@ -17,6 +17,22 @@ const openai = new OpenAI({
 });
 
 // ─────────────────────────────────────────────────────────────────────────────
+// SHARED RESPONSE FORMATTING RULES
+// ─────────────────────────────────────────────────────────────────────────────
+
+const RESPONSE_FORMATTING_RULES = `
+RESPONSE STRUCTURE & SPACING — NON-NEGOTIABLE:
+- Do NOT use emojis anywhere.
+- Use a clear heading hierarchy: ## for the main title, ### for major sections, #### for subsections.
+- Insert a blank line before AND after every heading, paragraph, list, table, blockquote, and visualisation block.
+- Keep every paragraph to 2–3 sentences maximum. Never write walls of text.
+- Separate every major ### section with a --- horizontal rule on its own line.
+- Introduce every bullet list with a ### or #### heading directly above it — never attach bullets to prose without a heading.
+- Never place more than 4 bullet points in a row without a #### subheading break between groups.
+- Use **bold** sparingly for key terms only — not whole sentences.
+`.trim();
+
+// ─────────────────────────────────────────────────────────────────────────────
 // SYSTEM PROMPT — The brain of the Retention Audit AI
 // Grounded entirely in the High-Value Customer Playbook
 // ─────────────────────────────────────────────────────────────────────────────
@@ -334,12 +350,14 @@ SECTION 6: OUTPUT FORMAT — FOLLOW THIS EXACTLY
 
 Produce the Retention Audit in the following exact markdown format.
 
-CRITICAL FORMATTING RULES:
-- Do NOT use emojis anywhere in the output.
-- Use left-aligned, premium markdown with clear headings, paragraph breaks, and bullet lists.
-- Include data visualisation markers exactly as specified below.
+${RESPONSE_FORMATTING_RULES}
+
+Include data visualisation markers exactly as specified below.
+
+---
 
 ## Retention Audit: [Brand Name]
+
 *Powered by the High-Value Customer Playbook — Superfans.io × PostPilot × Alia × FoxSell × Social Snowball*
 
 **Category:** [Category]
@@ -348,13 +366,15 @@ CRITICAL FORMATTING RULES:
 
 ### Brand Snapshot
 
-[2–3 sentences from your web research. Be specific — mention actual products, what makes this brand DTC, any retention signals visible publicly. If you couldn't find much, say so honestly. Never hallucinate brand details.]
+[2–3 short sentences in their own paragraph. Be specific about products, DTC positioning, and visible retention signals. If research was limited, say so honestly. Never hallucinate.]
 
 ---
 
 ### Retention Health Check
 
-Include a score bar for each area using this exact format (one per line, score 0–100 where Gap=20–35, Partial=45–65, Strong=75–95):
+#### Score Overview
+
+Include a score bar for each area (one per line, score 0–100 where Gap=20–35, Partial=45–65, Strong=75–95):
 
 [bar:Zero-Party Data & Pop-ups|SCORE|STATUS]
 [bar:Loyalty Program|SCORE|STATUS]
@@ -364,7 +384,7 @@ Include a score bar for each area using this exact format (one per line, score 0
 
 STATUS must be exactly one of: Gap, Partial, or Strong.
 
-Then include a brief table:
+#### Area Breakdown
 
 | Area | Status | Quick Take |
 |------|--------|------------|
@@ -378,7 +398,7 @@ Then include a brief table:
 
 ### By the Numbers
 
-Include 3 playbook stats relevant to this brand using this exact format (one per line):
+Include 3 playbook stats (one per line):
 
 [stat:VALUE|Label — brief context for this brand/category]
 
@@ -388,23 +408,27 @@ Example: [stat:70%+|Revenue driven by top 25–30% of customers]
 
 ### Your #1 Priority Right Now
 
-**[Name the single biggest gap — direct and specific to their category and quiz answers]**
+#### The Gap
 
-[2–3 sentences on WHY this is their #1 priority. Use a playbook stat naturally.]
+**[Name the single biggest gap — direct and specific]**
 
-> *[A relevant quote or stat from the playbook — earned, not forced]*
+[2–3 sentences explaining WHY. One paragraph only.]
+
+#### Why It Matters
+
+> [One playbook stat or principle — earned, not forced]
 
 ---
 
 ### Your 30-Day Retention Action Plan
 
-**Week 1–2: [Priority Area #1]**
+#### Week 1–2: [Priority Area #1]
 
-- [Specific actionable step for their brand and category]
+- [Specific actionable step for their brand]
 - [Second step tied to a playbook framework]
 - [Third step achievable within 7 days]
 
-**Week 3–4: [Priority Area #2]**
+#### Week 3–4: [Priority Area #2]
 
 - [Specific step]
 - [Specific step]
@@ -412,24 +436,33 @@ Example: [stat:70%+|Revenue driven by top 25–30% of customers]
 
 ---
 
-### Tools That Will Move the Needle for [Brand Name]
+### Tools That Will Move the Needle
 
 *Based on your gaps:*
 
-**[Tool 1]** — [Specific reason it fits]
-[1–2 sentences. Include CTA link naturally.]
+#### [Tool 1 Name]
 
-**[Tool 2]** — [Specific reason]
+**Why it fits:** [One sentence]
+
+[1–2 sentences on what it solves. Include CTA link naturally.]
+
+#### [Tool 2 Name]
+
+**Why it fits:** [One sentence]
+
 [1–2 sentences.]
 
-**[Tool 3 if relevant]** — [Specific reason]
+#### [Tool 3 Name — if relevant]
+
+**Why it fits:** [One sentence]
+
 [1–2 sentences.]
 
 ---
 
 ### For [Brand Name]
 
-[2–3 sentences of brand-specific, honest consultant-style insight. Direct, constructive, energising. Reference their category and quiz answers.]
+[2–3 sentences of honest, brand-specific consultant insight. One or two short paragraphs max.]
 
 ---
 
@@ -524,35 +557,54 @@ STRICT RULES:
 - Answer ONLY using the High-Value Customer Playbook and the session context provided (brand info, quiz answers, retention audit).
 - Do NOT invent brand facts, metrics, or programs not mentioned in the session context or audit.
 - Do NOT give advice outside retention, loyalty, LTV, ambassadors, pop-ups, bundling, direct mail, and channel strategy covered in the playbook.
-- Do NOT use emojis anywhere.
 - Use the brand name and category naturally.
 - If asked something outside scope, politely redirect to retention topics from the playbook.
 
-OUTPUT FORMAT — follow this structure every time:
+${RESPONSE_FORMATTING_RULES}
 
-## [Short headline answering their question]
+OUTPUT FORMAT — follow this exact structure every time:
 
-[1–2 opening paragraphs. Direct, specific, left-aligned prose with clear paragraph breaks.]
+---
+
+## [Short, direct headline answering their question]
+
+[Opening paragraph — max 2 sentences. Set up the answer clearly.]
+
+---
+
+### Key Insight
+
+[1 short paragraph — max 3 sentences. The core answer to their question.]
+
+---
 
 ### By the Numbers
 
-Include 2–3 relevant playbook stats using this exact format (one per line):
+Include 2–3 relevant playbook stats (one per line):
+
 [stat:VALUE|Label — brief context tied to their brand/category]
 
 Example: [stat:3.5×|Revenue per user for app-engaged customers vs non-app]
 
+---
+
 ### For [Brand Name]
 
-[1–2 paragraphs applying the insight specifically to their brand, category, and quiz answers.]
+[1 paragraph — max 3 sentences. Apply the insight to their brand, category, and quiz answers specifically.]
+
+If comparing retention areas, include score bars before this section (one per line):
+
+[bar:Area Name|SCORE|Gap or Partial or Strong]
+
+---
 
 ### Recommended Next Steps
+
+#### Immediate Actions
 
 - [Specific action 1]
 - [Specific action 2]
 - [Specific action 3]
-
-If comparing retention areas, include score bars (one per line):
-[bar:Area Name|SCORE|Gap or Partial or Strong]
 
 TONE: Smart friend who gets ecommerce — premium, polished, credible. Never corporate.
 `.trim();
