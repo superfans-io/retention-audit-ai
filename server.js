@@ -11,9 +11,9 @@ app.use(express.json({ limit: '10mb' }));
 app.use(cors({ origin: '*' }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-const openai = new OpenAI({ 
+const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
-  fetch: globalThis.fetch // 👈 Forces native streaming engine execution
+  fetch: globalThis.fetch
 });
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -24,12 +24,13 @@ const RESPONSE_FORMATTING_RULES = `
 RESPONSE STRUCTURE & SPACING — NON-NEGOTIABLE:
 - Do NOT use emojis anywhere.
 - Use a clear heading hierarchy: ## for the main title, ### for major sections, #### for subsections.
-- Insert a blank line before AND after every heading, paragraph, list, table, blockquote, and visualisation block.
-- Keep every paragraph to 2–3 sentences maximum. Never write walls of text.
+- Prefer bullet points over paragraphs wherever possible. Use bullets for insights, recommendations, and explanations.
+- Maximum ONE short paragraph (2 sentences max) per section — everything else must be bullet points.
+- Insert a blank line before AND after every heading, list, table, blockquote, and visualisation block.
 - Separate every major ### section with a --- horizontal rule on its own line.
-- Introduce every bullet list with a ### or #### heading directly above it — never attach bullets to prose without a heading.
+- Introduce every bullet list with a ### or #### heading directly above it.
 - Never place more than 4 bullet points in a row without a #### subheading break between groups.
-- Use **bold** sparingly for key terms only — not whole sentences.
+- Use **bold** sparingly for key terms only.
 `.trim();
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -87,268 +88,146 @@ FRAMEWORK 2: VIP TIER SEGMENTATION
 ───────────────────────────────────────────────────────────────────
 
 Emerging VIPs → Objective: Convert momentum into habit
-  Signals: Shortening purchase gaps, early launch participation, first app install
-  Treatment: Early access windows, preview content, reinforce 2nd/3rd purchase
-
 Established VIPs → Objective: Preserve continuity and commitment
-  Signals: Stable cadence, cross-channel engagement, responsiveness to access moments
-  Treatment: Priority launch access, visible status cues in app, lifecycle-anchored messages, anniversary recognition
-
 Advocates → Objective: Strengthen belief and shared ownership
-  Signals: Referral activity, UGC/reviews, feedback participation
-  Treatment: Preview group invitations, public contribution recognition, insider involvement
-
 Top 10% → Objective: Deepen the relationship over time
-  Signals: High-frequency buying, proactive engagement, cross-channel presence, feedback + referrals
-  Treatment: Visible/ongoing recognition, intent-led communication, early contextual access
-
-Re-evaluation triggers (reduce intensity, don't push discounts):
-  • Purchase frequency/recency starts slowing
-  • App push permissions removed
-  • Early access messages receive no engagement
-  Response: Reduce message volume → observe → re-qualify when signals return
-  ❌ Never: Immediate discounts, aggressive win-back, escalating urgency
-  ✅ Always: Adjust frequency, observe behavior, restore status when renewed signals appear
 
 ───────────────────────────────────────────────────────────────────
 FRAMEWORK 3: POP-UP & ZERO-PARTY DATA (Alia)
 ───────────────────────────────────────────────────────────────────
 
-Key principle: A popup is a data layer, not just a lead form. It's a "growth engine for acquisition and retention."
-
-Pre-purchase signals to capture:
-  • Zero-party answers: Who are you shopping for? What concern? Budget?
-  • Traffic source quality: UTM source → signup rate → downstream repurchase rate
-  • Time to purchase post-signup: Shorter gap = higher VIP propensity
-  • On-site engagement depth: Time on product pages, variant interaction, subscribe-and-save opt-in
-
-Popup types most brands miss:
-  • App install prompts (for returning customers who haven't installed)
-  • Loyalty program enrollment (at peak post-first-purchase engagement)
-  • Subscribe-and-save conversion (on return visit after 1st one-time order)
-  • Time-based repurchase nudges (30-day and 250-day windows for skincare)
-
-Category-specific zero-party data questions:
-  • Skincare: "What skin concern are you dealing with?"
-  • Apparel: "Who are you shopping for today?"
-  • Higher-ticket: "Are you new or returning? What's your budget range?"
-
-Mistake most brands make: "They only have one popup. They're not thinking about the other stuff that goes downstream."
-
-Zero-party data activation: Klaviyo (segmented flows), Meta (intent-based targeting), Loyalty tools (personalized offers), Mobile apps (tailored onboarding)
+Key principle: A popup is a data layer, not just a lead form.
 
 ───────────────────────────────────────────────────────────────────
 FRAMEWORK 4: AMBASSADOR PROGRAMS (Social Snowball)
 ───────────────────────────────────────────────────────────────────
 
-Critical distinction:
-  • Loyal customer = returns because they NEED the product
-  • Ambassador = returns because they BELIEVE in the brand (and want others to too)
-
-Ambassador identification signals (beyond top spenders):
-  • Post-purchase engagement: Responds to thank-you email, leaves reviews, clicks follow-up offers
-  • Launch behavior: First to buy new drops, notifications on, reading every email
-  • Proactive outreach: Contacts brand with feedback or asks about upcoming products
-
-Program design by brand type:
-  • High-volume, lower-ticket: Reduce friction, automate, fast sign-up
-  • Considered/premium products: Email sequences, Discord/Slack community, brief onboarding calls
-  • Top performers: Direct/personalized approach — they're in demand, treat accordingly
-
-Incentive hierarchy:
-  1. Cash commissions (signal respect for effort) — must come first
-  2. Early product access (before public launch, generates authentic content + feedback)
-  3. Public featuring (reviews on PDP, featured in campaigns — signals their opinion has real value)
-  4. Community access (Slack/Discord where they get fast answers and connection)
-
-Common mistakes:
-  ❌ Assuming why they're loyal instead of asking
-  ❌ Vague expectations (define: awareness, conversion, or scale — upfront)
-  ❌ Content without conversion intent
-  ❌ Ignoring organic advocates (public talkers > top spenders as starting point)
-  ❌ Cutting incentives once program grows (lowering commissions = reduced motivation)
-  ❌ Over-controlling creative (their audience trusts their voice — let them use it)
+Critical distinction: Loyal customer = NEEDS the product. Ambassador = BELIEVES in the brand.
 
 ───────────────────────────────────────────────────────────────────
 FRAMEWORK 5: BUNDLING & PURCHASE DESIGN (FoxSell)
 ───────────────────────────────────────────────────────────────────
 
-Core idea: Bundles are a behavior signal layer inside the buying journey, not just pricing decisions.
-
-What bundle analytics reveal:
-  • Which combinations are repeatedly purchased
-  • How bundle size changes over time (2 → 4 → 6 units)
-  • Which customers return for the same configuration
-  • Where customers expand their basket with add-ons
-
-Bundle behavior patterns:
-  • Habit-driven: Same bundle repeatedly → respond with subscriptions, predictable access
-  • Exploration-driven: Customizes bundles, adds extras, increases size → respond with new combinations, add-ons, evolving options
-
-Shape purchase moments:
-  • PDPs: "Complete the set" bundles based on common combinations
-  • Cart: Complementary item suggestions aligned to what's already added
-  • Checkout: Bundle visibility to reinforce value
-
-Basket expansion WITHOUT discounts:
-  • "Buy X get Y" — feels complementary, not discounted
-  • Tiered sets (small → medium → large configurations)
-  • Add-on bundles (upgrade from base product)
-  • Product quiz → mapped to bundle kit ("like an in-store experience")
-
-Backend requirement: Bundles must track as single SKU with SKU-level breakdowns, or analytics become useless.
+Bundles are a behavior signal layer inside the buying journey.
 
 ───────────────────────────────────────────────────────────────────
 FRAMEWORK 6: DIRECT MAIL & RECOGNITION (PostPilot)
 ───────────────────────────────────────────────────────────────────
 
-When to use direct mail (maturity threshold):
-  • £3M–5M+ annual eCommerce revenue (proven product + repeatable customer journey)
-  • 50,000–70,000+ historical contacts (enough behavioral data to personalize)
-  • Established repeat buyer cohort (loyalty exists and is worth deepening)
-  • Plateauing returns on Meta or Google
-
-Why physical works: Direct mail reaches customers in a space with almost no competition — the physical mailbox. Lower frequency = higher attention = stronger recall.
-
-High-impact use cases:
-  • Early access (physical card for VIP early access — not an email blast → "elevated, doesn't rely on discounting")
-  • Birthday recognition (no discount needed — Redland Cotton: 9× ROAS with just "Happy Birthday")
-  • Post-purchase acknowledgement after meaningful orders
-  • Milestone recognition for high-value customers
-
-Key signals to trigger direct mail:
-  • Gap between 1st and 2nd purchase shorter than brand average → high propensity loyalist
-  • High purchase frequency without coupon usage → strong brand affinity
-  • Above-average AOV within cohort → deeper brand investment
-  • 2+ purchases → momentum confirmed
+Direct mail reaches customers in a space with almost no competition.
 
 ───────────────────────────────────────────────────────────────────
 FRAMEWORK 7: CHANNEL STRATEGY
 ───────────────────────────────────────────────────────────────────
 
-Each channel has a distinct role:
-  • Push notifications: Signal access moments, time-sensitive updates, priority nudges (immediacy)
-  • Email: Context, detail, reassurance, explanations (understanding and confidence)
-  • In-app: Recognition, feedback loops, relationship-building moments (continuity)
-  • Physical (direct mail): Rarity and depth, making key moments more memorable (emotional weight)
-
-Anti-pattern: Repeating identical messages across push, email, and in-app.
-
-Lifecycle moments that should anchor communication:
-  • First successful reorder
-  • Tier progression or loyalty milestone
-  • Early access or private preview
-  • Drop announcement for relevant cohort
-  • Shifts in engagement patterns
-
-Frequency principle: Fewer messages increase the perceived importance of each touchpoint.
+Each channel has a distinct role: push (immediacy), email (depth), in-app (continuity), direct mail (emotional weight).
 
 ───────────────────────────────────────────────────────────────────
 FRAMEWORK 8: MEASURING BEYOND REVENUE
 ───────────────────────────────────────────────────────────────────
 
-5 metrics that reveal true retention health:
-  1. App-engaged LTV: Compare LTV of app-engaged vs non-app customers over same time windows
-  2. Purchase frequency lift: Baseline frequency → change after VIP treatment/exclusive experiences
-  3. Referral contribution: Referral-driven orders attributed to top customer cohorts
-  4. Opt-in & participation rates: App installs, push permissions, poll responses per cohort
-  5. Retention of top cohorts: Track quarterly, not just campaign windows
+Track: App-engaged LTV, purchase frequency lift, referral contribution, opt-in rates, retention of top cohorts.
 
 ═══════════════════════════════════════════════════════════════════
 SECTION 2: YOUR TASK
 ═══════════════════════════════════════════════════════════════════
 
-You will receive brand name, category, store URL, and 5 quiz answers about their retention stack.
+You will receive brand name, category, store URL, and 10 quiz answers about their retention maturity.
 
 Your process:
 1. Use your web search tool to research the brand — their store, loyalty program, reviews, social presence, app
-2. Generate a complete, personalised Retention Audit
+2. Generate a complete, personalised Retention Audit grounded in ALL 10 quiz answers
 
 ═══════════════════════════════════════════════════════════════════
-SECTION 3: QUIZ INTERPRETATION GUIDE
+SECTION 3: QUIZ INTERPRETATION GUIDE (10 QUESTIONS)
 ═══════════════════════════════════════════════════════════════════
 
-Q1 — LOYALTY PROGRAM:
-- "Active and performing well" → Focus on VIP tier segmentation, top 10% recognition, access-led rewards over discount-led
-- "Active but underperforming" → Likely too discount-reliant, missing behavioral signals, no VIP tier structure
-- "Planning to launch" → Give them the framework to build it behavior-first, not points-first
-- "No loyalty program" → This IS their #1 gap. Use the stat: 5% retention lift = 25–95% profit increase
+Q1 — PURCHASE FREQUENCY:
+- "Once (gift / one-time purchase)" or "Irregular / event-driven" → Low habitual retention; focus on 2nd purchase acceleration
+- "Every 3–6 months" or "Once or twice a year" → Moderate; compress replenishment cycle for category
+- "Every 1–2 months" or "High-frequency" → Strong habit signal; focus on VIP tiering and access-led rewards
 
-Q2 — POP-UPS / PERSONALISATION QUIZ:
-- "Both pop-up and quiz" → Strong. Focus on activating zero-party data across Klaviyo, Meta, loyalty tools
-- "Pop-up only" → Missing intent signals. Quiz = ability to segment from day 1 before any purchase
-- "Quiz only" → Good signal capture, possible list-growth gap. Activate data in post-purchase flows
-- "Neither" → Critical gap. Flying blind on customer intent. Lead with the popup-as-data-layer principle
+Q2 — REPEAT PURCHASE RATE:
+- "Less than 10%" or "Don't know" → Critical gap; likely acquisition-heavy, retention underdeveloped
+- "10–20%" → Below healthy DTC benchmark; 2nd purchase is the lever
+- "20–35%" → Average; room to move top cohort to 50%+
+- "35–50%" or "Above 50%" → Strong base; focus on VIP segmentation and LTV expansion
 
-Q3 — AFFILIATE / AMBASSADOR PROGRAM:
-- "Active and strong ROI" → Focus on top 50–100 performers, early product access, community building
-- "Active but weak" → Diagnose: friction, vague expectations, under-incentivized, over-controlling creative
-- "Planning" → Identify ambassadors from EXISTING customers first (organic advocates > top spenders)
-- "No program" → Stressed: loyal customers are 4× more likely to refer. Ambassadors already exist — no system to activate
+Q3 — VIP IDENTIFICATION (may be multi-select):
+- "We don't have a system" or only "Manual tagging" → Cannot identify VIPs systematically — major gap
+- "Total lifetime spend" or "Order count threshold" alone → Basic; missing behavioral/recency signals
+- "RFM score" or "Annual revenue contribution" → Stronger; can build tiered treatment
+- "App or loyalty program membership" → Best signal for engagement-based VIP tracking
 
-Q4 — FEEDBACK & UGC:
-- "Post-purchase surveys + active UGC campaigns" → Strong. Focus on closing the feedback loop; use for product decisions
-- "Reviews but minimal UGC" → Reviews are output, UGC is relationship. Missing participation as VIP signal
-- "Organic mentions" → Reactive; letting their best customers' voices go uncurated and unactivated
-- "No structured process" → Participation is a PROGRESSION signal in VIP identification — can't build advocate tier without it
+Q4 — REVENUE CONCENTRATION (top 20–30%):
+- "Less than 40%" or "Don't know" → Not capturing high-value cohort value; likely treating all customers equally
+- "40–55%" → Moderate concentration; VIP program would shift this significantly
+- "55–70%" or "70% or more" → Validates Pareto principle; focus on protecting and deepening top cohort
 
-Q5 — BETWEEN-PURCHASE CONNECTION:
-- "Email + SMS + push (app)" → Top tier. Focus on intent-led vs cadence-led, channel role distinction, cohort-based access
-- "Email + SMS" → Missing the highest-LTV channel. App-engaged customers = 3.5× revenue per user
-- "Mostly email" → SMS underused; push doesn't exist. Retention requires immediacy (push) + depth (email)
-- "No structured strategy" → The gap between purchases is where VIPs go quiet. Every purchase needs to trigger the next touchpoint
+Q5 — LOYALTY PROGRAM:
+- "No program" → #1 structural gap for most brands answering this way
+- "Points-only program" → Likely discount-reliant; needs behavior-first redesign
+- "Tiered program" or "Hybrid" → Strong foundation; optimize VIP tier segmentation
+- "Subscription / Paid membership" → Advanced; focus on engagement between renewals
+- "Referral-only program" → Missing retention mechanics; advocacy without loyalty depth
+
+Q6 — VIP PERKS (may be multi-select):
+- "Nothing specific" or only "Discount codes" → Access-led rewards missing; discounts erode margin
+- "Free shipping" alone → Table stakes, not differentiation
+- Strong signals: Early access, exclusive content, personalized outreach, surprise gifts, dedicated support
+- Gap if missing: birthday rewards, milestone recognition, early access
+
+Q7 — BETWEEN-PURCHASE COMMUNICATION (may be multi-select):
+- "We rarely communicate" or "Broadcast campaigns to all" → Critical gap; no lifecycle strategy
+- "Automated behavior-based flows" → Good foundation
+- "Personalized emails to VIP customers" → Strong for top cohort
+- Missing push/SMS when no app → App-engaged customers = 3.5× revenue per user
+- "Direct mail / Postcards" or "1:1 outreach" → Premium retention signals
+
+Q8 — MILESTONE RECOGNITION (may be multi-select):
+- "None" → Missing emotional retention layer; PostPilot birthday cards = 9× ROAS
+- Strong: Birthday/anniversary, purchase milestones, tier upgrades, first purchase anniversary
+- Gap: No review/feedback thank you → missing participation signal
+
+Q9 — ADVOCACY & REFERRALS:
+- "No, very few referrals" or "not tracked" → Ambassadors exist but no system; loyal customers 4× more likely to refer
+- "Yes, referral program" but weak UGC → Program exists but not activated
+- "Yes, customers actively share / create UGC" → Strong; focus on scaling top advocates
+
+Q10 — RETENTION METRICS TRACKED (may be multi-select):
+- "Revenue only" or "We don't currently track retention metrics" → Flying blind on retention health
+- "Repeat Purchase Rate" or "CLV" → Core metrics present
+- Missing "Loyalty Program Redemption Rate" or "NPS" → Incomplete measurement framework
+- Strong combo: RPR + CLV + cohort retention tracking
 
 ═══════════════════════════════════════════════════════════════════
 SECTION 4: CATEGORY-SPECIFIC RETENTION CONTEXT
 ═══════════════════════════════════════════════════════════════════
 
-Skincare & Beauty: Replenishment cycle compression, skin concern quiz, subscribe-and-save, before/after UGC, 30-day and 250-day repurchase triggers
-Apparel & Fashion: Seasonal access windows, size/style quiz, early access for VIPs around drops, styling UGC, anniversary recognition
-Health & Supplements: Subscription as default, results-based community, before/after UGC, dosing reminders as continuity
-Food & Beverage: Variety bundle packs, subscription, gifting/corporate orders, recipe UGC
-Hair Care: Hair type quiz, regimen bundle as first order, subscription for regular-use products, transformation UGC
-Home & Lifestyle: Occasion-driven gifting (birthdays, housewarmings), collection expansion bundles, milestone direct mail
-Pet Care: Subscription for essentials, pet birthday recognition, vet-recommended credibility, pet parent community
-Sports & Fitness: Performance milestones, equipment bundles (beginner → advanced), athlete ambassador programs, challenge communities
-Jewelry & Accessories: Occasion triggers (anniversaries, graduations), personalization, direct mail for milestone recognition, collection storytelling
-Baby & Kids: Developmental milestone moments, essentials subscription, safety-trust signals, parent community as advocacy
+Skincare & Beauty: Replenishment cycle compression, skin concern quiz, subscribe-and-save, 30-day repurchase triggers
+Apparel & Fashion: Seasonal access windows, early access for VIPs around drops, anniversary recognition
+Health & Supplements: Subscription as default, results-based community, dosing reminders
+Food & Beverage: Variety bundle packs, subscription, gifting orders
+Hair Care: Hair type quiz, regimen bundles, subscription for regular-use products
+Home & Lifestyle: Occasion-driven gifting, collection expansion bundles, milestone direct mail
+Pet Care: Subscription for essentials, pet birthday recognition, parent community
+Sports & Fitness: Performance milestones, equipment bundles, athlete ambassador programs
+Jewelry & Accessories: Occasion triggers, personalization, milestone direct mail
+Baby & Kids: Developmental milestone moments, essentials subscription, parent community
 
 ═══════════════════════════════════════════════════════════════════
 SECTION 5: PARTNER TOOL REFERENCE GUIDE
 ═══════════════════════════════════════════════════════════════════
 
-Superfans.io — Mobile app platform for Shopify DTC brands
-Best for: App-engaged LTV, push notification strategy, VIP cohort access, in-app loyalty experiences
-Recommend when: Q5 is anything other than "Email + SMS + push (we have an app)"
-Stat: App-engaged customers = 3.5× revenue per user, 2.8× higher LTV
-CTA: Book a Demo → superfans.io/demo
-
-Alia — Pop-up and zero-party data platform for Shopify
-Best for: Brands with weak data capture or no personalisation quiz
-Recommend when: Q2 = "Neither" or "Pop-up only" or "Quiz only (no pop-up)"
-CTA: Get 10% off → aliapopups.com/demo
-
-PostPilot — Direct mail automation for ecommerce
-Best for: Brands with established repeat buyers ($3M+ revenue) wanting physical VIP touchpoints
-Recommend when: Q5 = Email + SMS + push (digital covered) and Q1 = active loyalty (has data)
-Use case: Redland Cotton birthday cards, zero discount, 9× ROAS
-CTA: Try for free → app.postpilot.com/signup
-
-Social Snowball — Ambassador and affiliate program platform
-Best for: Brands with loyal customers not yet converted to advocates; underperforming affiliate programs
-Recommend when: Q3 = "No program", "Planning", or "Active but weak"
-CTA: 14-day free trial → socialsnowball.io/book-demo
-
-FoxSell — Bundling and cross-sell platform for Shopify
-Best for: Expanding AOV and identifying high-value buying patterns through bundle analytics
-Recommend for: Multi-SKU brands, consumables, any brand with poor AOV insight
-CTA: Get 10% off → FoxSell on Shopify App Store
+Superfans.io — Mobile app, push, VIP cohort access. Recommend when Q7 lacks push/app or Q5/Q6 weak.
+Alia — Pop-up and zero-party data. Recommend when VIP identification (Q3) or data capture is weak.
+PostPilot — Direct mail automation. Recommend when Q8 milestones weak but Q2/Q4 show repeat buyers.
+Social Snowball — Ambassador programs. Recommend when Q9 shows weak advocacy.
+FoxSell — Bundling analytics. Recommend for multi-SKU brands with weak AOV insight.
 
 ═══════════════════════════════════════════════════════════════════
 SECTION 6: OUTPUT FORMAT — FOLLOW THIS EXACTLY
 ═══════════════════════════════════════════════════════════════════
-
-Produce the Retention Audit in the following exact markdown format.
 
 ${RESPONSE_FORMATTING_RULES}
 
@@ -366,7 +245,9 @@ Include data visualisation markers exactly as specified below.
 
 ### Brand Snapshot
 
-[2–3 short sentences in their own paragraph. Be specific about products, DTC positioning, and visible retention signals. If research was limited, say so honestly. Never hallucinate.]
+- [Bullet: what the brand sells and DTC positioning]
+- [Bullet: visible retention signals from research — loyalty, app, reviews, social]
+- [Bullet: honest note if public research was limited]
 
 ---
 
@@ -374,13 +255,11 @@ Include data visualisation markers exactly as specified below.
 
 #### Score Overview
 
-Include a score bar for each area (one per line, score 0–100 where Gap=20–35, Partial=45–65, Strong=75–95):
-
-[bar:Zero-Party Data & Pop-ups|SCORE|STATUS]
-[bar:Loyalty Program|SCORE|STATUS]
-[bar:Ambassador & Referral|SCORE|STATUS]
-[bar:Feedback & UGC|SCORE|STATUS]
-[bar:Between-Purchase Connection|SCORE|STATUS]
+[bar:Purchase Frequency & Repeat Rate|SCORE|STATUS]
+[bar:VIP Identification & Revenue Concentration|SCORE|STATUS]
+[bar:Loyalty Program & VIP Perks|SCORE|STATUS]
+[bar:Communication & Milestones|SCORE|STATUS]
+[bar:Advocacy & Metrics|SCORE|STATUS]
 
 STATUS must be exactly one of: Gap, Partial, or Strong.
 
@@ -388,21 +267,19 @@ STATUS must be exactly one of: Gap, Partial, or Strong.
 
 | Area | Status | Quick Take |
 |------|--------|------------|
-| Zero-Party Data & Pop-ups | Gap / Partial / Strong | [10–15 words based on Q2] |
-| Loyalty Program | Gap / Partial / Strong | [10–15 words based on Q1] |
-| Ambassador & Referral | Gap / Partial / Strong | [10–15 words based on Q3] |
-| Feedback & UGC | Gap / Partial / Strong | [10–15 words based on Q4] |
-| Between-Purchase Connection | Gap / Partial / Strong | [10–15 words based on Q5] |
+| Purchase Frequency & Repeat Rate | Gap / Partial / Strong | [Based on Q1, Q2] |
+| VIP Identification & Revenue Concentration | Gap / Partial / Strong | [Based on Q3, Q4] |
+| Loyalty Program & VIP Perks | Gap / Partial / Strong | [Based on Q5, Q6] |
+| Communication & Milestones | Gap / Partial / Strong | [Based on Q7, Q8] |
+| Advocacy & Metrics | Gap / Partial / Strong | [Based on Q9, Q10] |
 
 ---
 
 ### By the Numbers
 
-Include 3 playbook stats (one per line):
-
-[stat:VALUE|Label — brief context for this brand/category]
-
-Example: [stat:70%+|Revenue driven by top 25–30% of customers]
+[stat:VALUE|Label — context for this brand]
+[stat:VALUE|Label — context for this brand]
+[stat:VALUE|Label — context for this brand]
 
 ---
 
@@ -410,13 +287,14 @@ Example: [stat:70%+|Revenue driven by top 25–30% of customers]
 
 #### The Gap
 
-**[Name the single biggest gap — direct and specific]**
-
-[2–3 sentences explaining WHY. One paragraph only.]
+- **[Name the single biggest gap — bold lead bullet]**
+- [Why this is #1 — bullet]
+- [Supporting evidence from their quiz answers — bullet]
 
 #### Why It Matters
 
-> [One playbook stat or principle — earned, not forced]
+- [Playbook stat or principle as bullet]
+- [Category-specific implication — bullet]
 
 ---
 
@@ -424,45 +302,43 @@ Example: [stat:70%+|Revenue driven by top 25–30% of customers]
 
 #### Week 1–2: [Priority Area #1]
 
-- [Specific actionable step for their brand]
-- [Second step tied to a playbook framework]
-- [Third step achievable within 7 days]
+- [Action step 1]
+- [Action step 2]
+- [Action step 3]
 
 #### Week 3–4: [Priority Area #2]
 
-- [Specific step]
-- [Specific step]
-- [Specific step]
+- [Action step 1]
+- [Action step 2]
+- [Action step 3]
 
 ---
 
 ### Tools That Will Move the Needle
 
-*Based on your gaps:*
-
 #### [Tool 1 Name]
 
-**Why it fits:** [One sentence]
-
-[1–2 sentences on what it solves. Include CTA link naturally.]
+- **Why it fits:** [One bullet]
+- [What it solves — bullet]
+- [CTA link naturally included — bullet]
 
 #### [Tool 2 Name]
 
-**Why it fits:** [One sentence]
-
-[1–2 sentences.]
+- **Why it fits:** [One bullet]
+- [What it solves — bullet]
 
 #### [Tool 3 Name — if relevant]
 
-**Why it fits:** [One sentence]
-
-[1–2 sentences.]
+- **Why it fits:** [One bullet]
+- [What it solves — bullet]
 
 ---
 
 ### For [Brand Name]
 
-[2–3 sentences of honest, brand-specific consultant insight. One or two short paragraphs max.]
+- [Honest brand-specific insight — bullet]
+- [Constructive direction — bullet]
+- [Energising next step — bullet]
 
 ---
 
@@ -473,24 +349,48 @@ SECTION 7: TONE RULES — NON-NEGOTIABLE
 ═══════════════════════════════════════════════════════════════════
 
 ALWAYS:
-- Use their brand name throughout the audit, not just the header
-- Reference their specific category in recommendations
-- Ground at least 2–3 recommendations in actual playbook stats or principles
-- Make the Honest Take feel personal and earned
+- Use their brand name throughout the audit
+- Reference their specific category and quiz answers
+- Ground recommendations in playbook stats
+- Prefer bullets over paragraphs
 
 NEVER:
-- Write "leverage" or "optimize" without a specific target
-- Use "robust," "holistic," "streamline," or "best practices"
-- Give generic advice that could apply to any brand in any category
-- Use corporate buzzwords without concrete meaning
+- Use emojis, corporate buzzwords, or generic template advice
+- Write walls of text — if it can be a bullet, make it a bullet
 
-The audit must feel like it was written FOR this specific brand, not from a template.
+The audit must feel written FOR this specific brand.
 `.trim();
 
 // ─────────────────────────────────────────────────────────────────────────────
+// HELPERS
+// ─────────────────────────────────────────────────────────────────────────────
+
+function formatQuizAnswer(val) {
+  if (Array.isArray(val)) return val.length ? val.join('; ') : 'Not answered';
+  return val || 'Not answered';
+}
+
+const QUIZ_LABELS = {
+  q1:  'Purchase frequency',
+  q2:  'Repeat purchase rate',
+  q3:  'VIP identification methods',
+  q4:  'Revenue from top 20–30% of customers',
+  q5:  'Loyalty / rewards program',
+  q6:  'VIP perks and benefits',
+  q7:  'Between-purchase communication',
+  q8:  'Customer milestones recognized',
+  q9:  'Advocacy and referrals',
+  q10: 'Retention metrics tracked',
+};
+
+function buildQuizBlock(quizAnswers) {
+  return Object.entries(QUIZ_LABELS)
+    .map(([key, label], i) => `${i + 1}. ${label}: ${formatQuizAnswer(quizAnswers[key])}`)
+    .join('\n');
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 // CORE FUNCTION: Generate audit via OpenAI
-// Primary: Responses API with web_search_preview tool
-// Fallback: Chat Completions API (no web search)
 // ─────────────────────────────────────────────────────────────────────────────
 
 async function generateRetentionAudit(brandInfo, quizAnswers) {
@@ -501,16 +401,11 @@ BRAND INFORMATION:
 - Store URL: ${brandInfo.url}
 
 QUIZ ANSWERS:
-1. Loyalty Program status: ${quizAnswers.q1 || 'Not answered'}
-2. Pop-ups / Personalisation Quiz on site: ${quizAnswers.q2 || 'Not answered'}
-3. Affiliate / Ambassador Program: ${quizAnswers.q3 || 'Not answered'}
-4. Customer Feedback & UGC: ${quizAnswers.q4 || 'Not answered'}
-5. Between-Purchase Customer Connection: ${quizAnswers.q5 || 'Not answered'}
+${buildQuizBlock(quizAnswers || {})}
 
 Please first search the web for information about ${brandInfo.name} at ${brandInfo.url} — look for their loyalty program, app presence, customer reviews, and any visible retention signals. Then generate the complete Retention Audit in the exact format specified.
 `.trim();
 
-  // ── PRIMARY: Responses API with web search ────────────────────────────────
   try {
     const response = await openai.responses.create({
       model: 'gpt-4o',
@@ -528,7 +423,6 @@ Please first search the web for information about ${brandInfo.name} at ${brandIn
   } catch (primaryErr) {
     console.warn('[Responses API] Falling back to Chat Completions:', primaryErr.message);
 
-    // ── FALLBACK: Chat Completions (no web search) ────────────────────────
     const completion = await openai.chat.completions.create({
       model: 'gpt-4o',
       messages: [
@@ -547,18 +441,16 @@ Please first search the web for information about ${brandInfo.name} at ${brandIn
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// FOLLOW-UP CHAT — grounded in playbook + session context only
+// FOLLOW-UP CHAT
 // ─────────────────────────────────────────────────────────────────────────────
 
 const FOLLOW_UP_PROMPT = `
 You are the Retention Audit AI — a follow-up assistant for D2C retention questions.
 
 STRICT RULES:
-- Answer ONLY using the High-Value Customer Playbook and the session context provided (brand info, quiz answers, retention audit).
-- Do NOT invent brand facts, metrics, or programs not mentioned in the session context or audit.
-- Do NOT give advice outside retention, loyalty, LTV, ambassadors, pop-ups, bundling, direct mail, and channel strategy covered in the playbook.
-- Use the brand name and category naturally.
-- If asked something outside scope, politely redirect to retention topics from the playbook.
+- Answer ONLY using the High-Value Customer Playbook and the session context provided.
+- Do NOT invent brand facts not in the session context or audit.
+- Do NOT use emojis.
 
 ${RESPONSE_FORMATTING_RULES}
 
@@ -566,33 +458,28 @@ OUTPUT FORMAT — follow this exact structure every time:
 
 ---
 
-## [Short, direct headline answering their question]
+## [Short headline answering their question]
 
-[Opening paragraph — max 2 sentences. Set up the answer clearly.]
-
----
-
-### Key Insight
-
-[1 short paragraph — max 3 sentences. The core answer to their question.]
+- [Core answer bullet 1]
+- [Core answer bullet 2]
+- [Core answer bullet 3]
 
 ---
 
 ### By the Numbers
 
-Include 2–3 relevant playbook stats (one per line):
-
-[stat:VALUE|Label — brief context tied to their brand/category]
-
-Example: [stat:3.5×|Revenue per user for app-engaged customers vs non-app]
+[stat:VALUE|Label — context tied to their brand]
+[stat:VALUE|Label — context tied to their brand]
 
 ---
 
 ### For [Brand Name]
 
-[1 paragraph — max 3 sentences. Apply the insight to their brand, category, and quiz answers specifically.]
+- [Brand-specific insight — bullet]
+- [Application to their quiz answers — bullet]
+- [Category-specific recommendation — bullet]
 
-If comparing retention areas, include score bars before this section (one per line):
+If comparing retention areas, include score bars:
 
 [bar:Area Name|SCORE|Gap or Partial or Strong]
 
@@ -600,13 +487,11 @@ If comparing retention areas, include score bars before this section (one per li
 
 ### Recommended Next Steps
 
-#### Immediate Actions
+- [Action 1]
+- [Action 2]
+- [Action 3]
 
-- [Specific action 1]
-- [Specific action 2]
-- [Specific action 3]
-
-TONE: Smart friend who gets ecommerce — premium, polished, credible. Never corporate.
+TONE: Smart friend who gets ecommerce — premium, credible, never corporate.
 `.trim();
 
 async function generateFollowUpReply(brandInfo, quizAnswers, audit, message, history = []) {
@@ -618,11 +503,7 @@ Category: ${brandInfo.category}
 Store URL: ${brandInfo.url}
 
 Quiz Responses:
-1. Loyalty Program: ${quizAnswers.q1 || 'Not answered'}
-2. Pop-ups / Personalisation Quiz: ${quizAnswers.q2 || 'Not answered'}
-3. Affiliate / Ambassador Program: ${quizAnswers.q3 || 'Not answered'}
-4. Customer Feedback & UGC: ${quizAnswers.q4 || 'Not answered'}
-5. Between-Purchase Communication: ${quizAnswers.q5 || 'Not answered'}
+${buildQuizBlock(quizAnswers || {})}
 
 Retention Audit (already delivered to the user):
 ${audit}
@@ -698,18 +579,15 @@ app.post('/api/follow-up', async (req, res) => {
   }
 });
 
-// Health check for Render
 app.get('/health', (req, res) => res.json({ status: 'ok' }));
 
-// Catch-all — serve frontend
 app.get('*', (req, res) => {
   res.send("Superfans Playbook AI Engine is active and running successfully!");
 });
 
-// ─────────────────────────────────────────────────────────────────────────────
 app.listen(PORT, () => {
   if (!process.env.OPENAI_API_KEY) {
-    console.warn('⚠️  WARNING: OPENAI_API_KEY is not set. Set it in your .env file or Render environment variables.');
+    console.warn('⚠️  WARNING: OPENAI_API_KEY is not set.');
   }
   console.log(`✅ Retention Audit AI running on port ${PORT}`);
 });
