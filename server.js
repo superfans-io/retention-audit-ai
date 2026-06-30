@@ -13,7 +13,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 const openai = new OpenAI({ 
   apiKey: process.env.OPENAI_API_KEY,
-  fetch: globalThis.fetch // 👈 Forces native streaming engine execution
+  fetch: globalThis.fetch // Forces native streaming engine execution
 });
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -24,12 +24,13 @@ const RESPONSE_FORMATTING_RULES = `
 RESPONSE STRUCTURE & SPACING — NON-NEGOTIABLE:
 - Do NOT use emojis anywhere.
 - Use a clear heading hierarchy: ## for the main title, ### for major sections, #### for subsections.
-- Insert a blank line before AND after every heading, paragraph, list, table, blockquote, and visualisation block.
-- Keep every paragraph to 2–3 sentences maximum. Never write walls of text.
-- Separate every major ### section with a --- horizontal rule on its own line.
-- Introduce every bullet list with a ### or #### heading directly above it — never attach bullets to prose without a heading.
-- Never place more than 4 bullet points in a row without a #### subheading break between groups.
-- Use **bold** sparingly for key terms only — not whole sentences.
+- Every independent block (heading, paragraph, list item, table, blockquote, or layout tag) MUST sit on its own dedicated line.
+- Absolutely NEVER chain structural elements together on the same line. For example, never output "--- ### Heading" or "### Title #### Subtitle".
+- You MUST insert a full, empty carriage return line (double newline) before AND after every heading, paragraph, list, table, blockquote, and custom layout element.
+- Keep every paragraph concise, maxing out at 2–3 sentences. Avoid walls of text.
+- Introduce every list with a clear heading directly above it — never attach bullet formatting to unspaced prose text blocks.
+- Limit sequential lists to a maximum of 4 consecutive bullet items before forcing a new #### subheading break to organize the points.
+- Apply **bold text** selectively to isolate core terms — never wrap entire sentences or bullet sequences in bold markers.
 `.trim();
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -162,12 +163,12 @@ Incentive hierarchy:
   4. Community access (Slack/Discord where they get fast answers and connection)
 
 Common mistakes:
-  ❌ Assuming why they're loyal instead of asking
-  ❌ Vague expectations (define: awareness, conversion, or scale — upfront)
-  ❌ Content without conversion intent
-  ❌ Ignoring organic advocates (public talkers > top spenders as starting point)
-  ❌ Cutting incentives once program grows (lowering commissions = reduced motivation)
-  ❌ Over-controlling creative (their audience trusts their voice — let them use it)
+  • Assuming why they're loyal instead of asking
+  • Vague expectations (define: awareness, conversion, or scale — upfront)
+  • Content without conversion intent
+  • Ignoring organic advocates (public talkers > top spenders as starting point)
+  • Cutting incentives once program grows (lowering commissions = reduced motivation)
+  • Over-controlling creative (their audience trusts their voice — let them use it)
 
 ───────────────────────────────────────────────────────────────────
 FRAMEWORK 5: BUNDLING & PURCHASE DESIGN (FoxSell)
@@ -258,94 +259,14 @@ FRAMEWORK 8: MEASURING BEYOND REVENUE
 SECTION 2: YOUR TASK
 ═══════════════════════════════════════════════════════════════════
 
-You will receive brand name, category, store URL, and 5 quiz answers about their retention stack.
+You will receive brand name, category, store URL, and 10 quiz answers about their retention stack.
 
 Your process:
 1. Use your web search tool to research the brand — their store, loyalty program, reviews, social presence, app
 2. Generate a complete, personalised Retention Audit
 
 ═══════════════════════════════════════════════════════════════════
-SECTION 3: QUIZ INTERPRETATION GUIDE
-═══════════════════════════════════════════════════════════════════
-
-Q1 — LOYALTY PROGRAM:
-- "Active and performing well" → Focus on VIP tier segmentation, top 10% recognition, access-led rewards over discount-led
-- "Active but underperforming" → Likely too discount-reliant, missing behavioral signals, no VIP tier structure
-- "Planning to launch" → Give them the framework to build it behavior-first, not points-first
-- "No loyalty program" → This IS their #1 gap. Use the stat: 5% retention lift = 25–95% profit increase
-
-Q2 — POP-UPS / PERSONALISATION QUIZ:
-- "Both pop-up and quiz" → Strong. Focus on activating zero-party data across Klaviyo, Meta, loyalty tools
-- "Pop-up only" → Missing intent signals. Quiz = ability to segment from day 1 before any purchase
-- "Quiz only" → Good signal capture, possible list-growth gap. Activate data in post-purchase flows
-- "Neither" → Critical gap. Flying blind on customer intent. Lead with the popup-as-data-layer principle
-
-Q3 — AFFILIATE / AMBASSADOR PROGRAM:
-- "Active and strong ROI" → Focus on top 50–100 performers, early product access, community building
-- "Active but weak" → Diagnose: friction, vague expectations, under-incentivized, over-controlling creative
-- "Planning" → Identify ambassadors from EXISTING customers first (organic advocates > top spenders)
-- "No program" → Stressed: loyal customers are 4× more likely to refer. Ambassadors already exist — no system to activate
-
-Q4 — FEEDBACK & UGC:
-- "Post-purchase surveys + active UGC campaigns" → Strong. Focus on closing the feedback loop; use for product decisions
-- "Reviews but minimal UGC" → Reviews are output, UGC is relationship. Missing participation as VIP signal
-- "Organic mentions" → Reactive; letting their best customers' voices go uncurated and unactivated
-- "No structured process" → Participation is a PROGRESSION signal in VIP identification — can't build advocate tier without it
-
-Q5 — BETWEEN-PURCHASE CONNECTION:
-- "Email + SMS + push (app)" → Top tier. Focus on intent-led vs cadence-led, channel role distinction, cohort-based access
-- "Email + SMS" → Missing the highest-LTV channel. App-engaged customers = 3.5× revenue per user
-- "Mostly email" → SMS underused; push doesn't exist. Retention requires immediacy (push) + depth (email)
-- "No structured strategy" → The gap between purchases is where VIPs go quiet. Every purchase needs to trigger the next touchpoint
-
-═══════════════════════════════════════════════════════════════════
-SECTION 4: CATEGORY-SPECIFIC RETENTION CONTEXT
-═══════════════════════════════════════════════════════════════════
-
-Skincare & Beauty: Replenishment cycle compression, skin concern quiz, subscribe-and-save, before/after UGC, 30-day and 250-day repurchase triggers
-Apparel & Fashion: Seasonal access windows, size/style quiz, early access for VIPs around drops, styling UGC, anniversary recognition
-Health & Supplements: Subscription as default, results-based community, before/after UGC, dosing reminders as continuity
-Food & Beverage: Variety bundle packs, subscription, gifting/corporate orders, recipe UGC
-Hair Care: Hair type quiz, regimen bundle as first order, subscription for regular-use products, transformation UGC
-Home & Lifestyle: Occasion-driven gifting (birthdays, housewarmings), collection expansion bundles, milestone direct mail
-Pet Care: Subscription for essentials, pet birthday recognition, vet-recommended credibility, pet parent community
-Sports & Fitness: Performance milestones, equipment bundles (beginner → advanced), athlete ambassador programs, challenge communities
-Jewelry & Accessories: Occasion triggers (anniversaries, graduations), personalization, direct mail for milestone recognition, collection storytelling
-Baby & Kids: Developmental milestone moments, essentials subscription, safety-trust signals, parent community as advocacy
-
-═══════════════════════════════════════════════════════════════════
-SECTION 5: PARTNER TOOL REFERENCE GUIDE
-═══════════════════════════════════════════════════════════════════
-
-Superfans.io — Mobile app platform for Shopify DTC brands
-Best for: App-engaged LTV, push notification strategy, VIP cohort access, in-app loyalty experiences
-Recommend when: Q5 is anything other than "Email + SMS + push (we have an app)"
-Stat: App-engaged customers = 3.5× revenue per user, 2.8× higher LTV
-CTA: Book a Demo → superfans.io/demo
-
-Alia — Pop-up and zero-party data platform for Shopify
-Best for: Brands with weak data capture or no personalisation quiz
-Recommend when: Q2 = "Neither" or "Pop-up only" or "Quiz only (no pop-up)"
-CTA: Get 10% off → aliapopups.com/demo
-
-PostPilot — Direct mail automation for ecommerce
-Best for: Brands with established repeat buyers ($3M+ revenue) wanting physical VIP touchpoints
-Recommend when: Q5 = Email + SMS + push (digital covered) and Q1 = active loyalty (has data)
-Use case: Redland Cotton birthday cards, zero discount, 9× ROAS
-CTA: Try for free → app.postpilot.com/signup
-
-Social Snowball — Ambassador and affiliate program platform
-Best for: Brands with loyal customers not yet converted to advocates; underperforming affiliate programs
-Recommend when: Q3 = "No program", "Planning", or "Active but weak"
-CTA: 14-day free trial → socialsnowball.io/book-demo
-
-FoxSell — Bundling and cross-sell platform for Shopify
-Best for: Expanding AOV and identifying high-value buying patterns through bundle analytics
-Recommend for: Multi-SKU brands, consumables, any brand with poor AOV insight
-CTA: Get 10% off → FoxSell on Shopify App Store
-
-═══════════════════════════════════════════════════════════════════
-SECTION 6: OUTPUT FORMAT — FOLLOW THIS EXACTLY
+SECTION 3: OUTPUT FORMAT — FOLLOW THIS EXACTLY
 ═══════════════════════════════════════════════════════════════════
 
 Produce the Retention Audit in the following exact markdown format.
@@ -388,11 +309,11 @@ STATUS must be exactly one of: Gap, Partial, or Strong.
 
 | Area | Status | Quick Take |
 |------|--------|------------|
-| Zero-Party Data & Pop-ups | Gap / Partial / Strong | [10–15 words based on Q2] |
-| Loyalty Program | Gap / Partial / Strong | [10–15 words based on Q1] |
-| Ambassador & Referral | Gap / Partial / Strong | [10–15 words based on Q3] |
-| Feedback & UGC | Gap / Partial / Strong | [10–15 words based on Q4] |
-| Between-Purchase Connection | Gap / Partial / Strong | [10–15 words based on Q5] |
+| Zero-Party Data & Pop-ups | Gap / Partial / Strong | [10–15 words assessment] |
+| Loyalty Program | Gap / Partial / Strong | [10–15 words assessment] |
+| Ambassador & Referral | Gap / Partial / Strong | [10–15 words assessment] |
+| Feedback & UGC | Gap / Partial / Strong | [10–15 words assessment] |
+| Between-Purchase Connection | Gap / Partial / Strong | [10–15 words assessment] |
 
 ---
 
@@ -489,8 +410,6 @@ The audit must feel like it was written FOR this specific brand, not from a temp
 
 // ─────────────────────────────────────────────────────────────────────────────
 // CORE FUNCTION: Generate audit via OpenAI
-// Primary: Responses API with web_search_preview tool
-// Fallback: Chat Completions API (no web search)
 // ─────────────────────────────────────────────────────────────────────────────
 
 async function generateRetentionAudit(brandInfo, quizAnswers) {
@@ -501,16 +420,20 @@ BRAND INFORMATION:
 - Store URL: ${brandInfo.url}
 
 QUIZ ANSWERS:
-1. Loyalty Program status: ${quizAnswers.q1 || 'Not answered'}
-2. Pop-ups / Personalisation Quiz on site: ${quizAnswers.q2 || 'Not answered'}
-3. Affiliate / Ambassador Program: ${quizAnswers.q3 || 'Not answered'}
-4. Customer Feedback & UGC: ${quizAnswers.q4 || 'Not answered'}
-5. Between-Purchase Customer Connection: ${quizAnswers.q5 || 'Not answered'}
+1. Customer Purchase Frequency: ${quizAnswers.q1 || 'Not answered'}
+2. Current Repeat Purchase Rate: ${quizAnswers.q2 || 'Not answered'}
+3. Best Customer Identification Method: ${quizAnswers.q3 || 'Not answered'}
+4. Revenue % from Top 20-30% Customers: ${quizAnswers.q4 || 'Not answered'}
+5. Loyalty/Rewards Program Setup: ${quizAnswers.q5 || 'Not answered'}
+6. Best Customer Perks/Benefits: ${quizAnswers.q6 || 'Not answered'}
+7. Between-Purchase Communication Channels: ${quizAnswers.q7 || 'Not answered'}
+8. Recognized Customer Milestones: ${quizAnswers.q8 || 'Not answered'}
+9. Best Customer Referrals & Advocacy Activity: ${quizAnswers.q9 || 'Not answered'}
+10. Actively Tracked Retention Metrics: ${quizAnswers.q10 || 'Not answered'}
 
 Please first search the web for information about ${brandInfo.name} at ${brandInfo.url} — look for their loyalty program, app presence, customer reviews, and any visible retention signals. Then generate the complete Retention Audit in the exact format specified.
 `.trim();
 
-  // ── PRIMARY: Responses API with web search ────────────────────────────────
   try {
     const response = await openai.responses.create({
       model: 'gpt-4o',
@@ -528,14 +451,13 @@ Please first search the web for information about ${brandInfo.name} at ${brandIn
   } catch (primaryErr) {
     console.warn('[Responses API] Falling back to Chat Completions:', primaryErr.message);
 
-    // ── FALLBACK: Chat Completions (no web search) ────────────────────────
     const completion = await openai.chat.completions.create({
       model: 'gpt-4o',
       messages: [
         { role: 'system', content: SYSTEM_PROMPT },
         {
           role: 'user',
-          content: `${userMessage}\n\n(Note: Web search is unavailable. Generate the audit based on the brand info and quiz answers provided. For the Brand Snapshot, note that you could not search the web and base your observations on the brand name, category, and URL provided.)`,
+          content: `${userMessage}\n\n(Note: Web search is unavailable. Generate the audit based on the brand info and quiz answers provided.)`,
         },
       ],
       max_tokens: 4096,
@@ -547,7 +469,7 @@ Please first search the web for information about ${brandInfo.name} at ${brandIn
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// FOLLOW-UP CHAT — grounded in playbook + session context only
+// FOLLOW-UP CHAT PROMPT LAYOUT
 // ─────────────────────────────────────────────────────────────────────────────
 
 const FOLLOW_UP_PROMPT = `
@@ -556,9 +478,7 @@ You are the Retention Audit AI — a follow-up assistant for D2C retention quest
 STRICT RULES:
 - Answer ONLY using the High-Value Customer Playbook and the session context provided (brand info, quiz answers, retention audit).
 - Do NOT invent brand facts, metrics, or programs not mentioned in the session context or audit.
-- Do NOT give advice outside retention, loyalty, LTV, ambassadors, pop-ups, bundling, direct mail, and channel strategy covered in the playbook.
 - Use the brand name and category naturally.
-- If asked something outside scope, politely redirect to retention topics from the playbook.
 
 ${RESPONSE_FORMATTING_RULES}
 
@@ -568,13 +488,13 @@ OUTPUT FORMAT — follow this exact structure every time:
 
 ## [Short, direct headline answering their question]
 
-[Opening paragraph — max 2 sentences. Set up the answer clearly.]
+[Opening paragraph — max 2 sentences.]
 
 ---
 
 ### Key Insight
 
-[1 short paragraph — max 3 sentences. The core answer to their question.]
+[1 short paragraph — max 3 sentences.]
 
 ---
 
@@ -584,17 +504,11 @@ Include 2–3 relevant playbook stats (one per line):
 
 [stat:VALUE|Label — brief context tied to their brand/category]
 
-Example: [stat:3.5×|Revenue per user for app-engaged customers vs non-app]
-
 ---
 
 ### For [Brand Name]
 
-[1 paragraph — max 3 sentences. Apply the insight to their brand, category, and quiz answers specifically.]
-
-If comparing retention areas, include score bars before this section (one per line):
-
-[bar:Area Name|SCORE|Gap or Partial or Strong]
+[1 paragraph — max 3 sentences.]
 
 ---
 
@@ -605,26 +519,16 @@ If comparing retention areas, include score bars before this section (one per li
 - [Specific action 1]
 - [Specific action 2]
 - [Specific action 3]
-
-TONE: Smart friend who gets ecommerce — premium, polished, credible. Never corporate.
 `.trim();
 
 async function generateFollowUpReply(brandInfo, quizAnswers, audit, message, history = []) {
   const sessionContext = `
-SESSION CONTEXT — DO NOT GO BEYOND THIS:
-
+SESSION CONTEXT:
 Brand Name: ${brandInfo.name}
 Category: ${brandInfo.category}
 Store URL: ${brandInfo.url}
-
-Quiz Responses:
-1. Loyalty Program: ${quizAnswers.q1 || 'Not answered'}
-2. Pop-ups / Personalisation Quiz: ${quizAnswers.q2 || 'Not answered'}
-3. Affiliate / Ambassador Program: ${quizAnswers.q3 || 'Not answered'}
-4. Customer Feedback & UGC: ${quizAnswers.q4 || 'Not answered'}
-5. Between-Purchase Communication: ${quizAnswers.q5 || 'Not answered'}
-
-Retention Audit (already delivered to the user):
+Quiz Answers Mapping: Q1 to Q10 are stored as context.
+Audit:
 ${audit}
 `.trim();
 
@@ -634,6 +538,7 @@ ${audit}
   ]);
 
   const completion = await openai.chat.completions.create({
+    box: 'true',
     model: 'gpt-4o',
     messages: [
       { role: 'system', content: `${FOLLOW_UP_PROMPT}\n\n${SYSTEM_PROMPT}\n\n${sessionContext}` },
@@ -648,24 +553,19 @@ ${audit}
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// ROUTES
+// ROUTES RESOURCE PIPELINE
 // ─────────────────────────────────────────────────────────────────────────────
 
 app.post('/api/audit', async (req, res) => {
   try {
     const { brandInfo, quizAnswers } = req.body;
-
     if (!brandInfo?.name || !brandInfo?.category || !brandInfo?.url) {
       return res.status(400).json({ error: 'Missing required brand information.' });
     }
-
     console.log(`[Audit Request] Brand: ${brandInfo.name} | Category: ${brandInfo.category}`);
-
     const audit = await generateRetentionAudit(brandInfo, quizAnswers || {});
-
     console.log(`[Audit Complete] Brand: ${brandInfo.name}`);
     res.json({ audit });
-
   } catch (error) {
     console.error('[Audit Error]', error?.message || error);
     res.status(500).json({ error: 'Failed to generate audit. Please try again in a moment.' });
@@ -675,41 +575,23 @@ app.post('/api/audit', async (req, res) => {
 app.post('/api/follow-up', async (req, res) => {
   try {
     const { brandInfo, quizAnswers, audit, message, history } = req.body;
-
     if (!brandInfo?.name || !audit || !message?.trim()) {
       return res.status(400).json({ error: 'Missing required follow-up context or message.' });
     }
-
-    console.log(`[Follow-up] Brand: ${brandInfo.name} | Message: ${message.slice(0, 80)}`);
-
-    const reply = await generateFollowUpReply(
-      brandInfo,
-      quizAnswers || {},
-      audit,
-      message.trim(),
-      history || []
-    );
-
+    const reply = await generateFollowUpReply(brandInfo, quizAnswers || {}, audit, message.trim(), history || []);
     res.json({ reply });
-
   } catch (error) {
     console.error('[Follow-up Error]', error?.message || error);
     res.status(500).json({ error: 'Failed to generate a reply. Please try again in a moment.' });
   }
 });
 
-// Health check for Render
 app.get('/health', (req, res) => res.json({ status: 'ok' }));
 
-// Catch-all — serve frontend
 app.get('*', (req, res) => {
   res.send("Superfans Playbook AI Engine is active and running successfully!");
 });
 
-// ─────────────────────────────────────────────────────────────────────────────
 app.listen(PORT, () => {
-  if (!process.env.OPENAI_API_KEY) {
-    console.warn('⚠️  WARNING: OPENAI_API_KEY is not set. Set it in your .env file or Render environment variables.');
-  }
   console.log(`✅ Retention Audit AI running on port ${PORT}`);
 });
