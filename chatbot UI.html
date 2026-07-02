@@ -862,7 +862,6 @@ function raStartQuiz() {
   raState.quizStep = 0;
   raShowComposer(false);
   document.getElementById('ra-main-title').textContent = '';
-  raSaveState();
 
   raUpdateProgress(1);
   setTimeout(() => raAskQuiz(0), 500);
