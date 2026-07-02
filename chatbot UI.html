@@ -8,12 +8,16 @@
     padding: 28px 24px 24px !important;
     font-family: -apple-system, 'Inter', BlinkMacSystemFont, sans-serif !important;
     -webkit-font-smoothing: antialiased !important;
-    color: #FAF6FF !important; background: rgba(13, 9, 21, 0.92) !important;
+    color: #FAF6FF !important;
+    background:
+      radial-gradient(140% 100% at 100% -10%, rgba(145,94,233,0.32) 0%, rgba(145,94,233,0.10) 35%, rgba(13,9,21,0) 62%) ,
+      radial-gradient(90% 60% at 0% 110%, rgba(145,94,233,0.16) 0%, rgba(13,9,21,0) 55%) ,
+      rgba(13, 9, 21, 0.94) !important;
     display: flex !important; flex-direction: column !important; align-items: stretch !important;
     text-align: left !important; position: relative !important; overflow: hidden !important;
-    border-radius: 24px !important; border: 1px solid rgba(145, 94, 233, 0.2) !important;
+    border-radius: 24px !important; border: 1px solid rgba(145, 94, 233, 0.25) !important;
     backdrop-filter: blur(20px) !important;
-    box-shadow: 0 24px 80px rgba(0,0,0,0.45) !important;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.05) !important;
   }
   #ra-engine-section *, #ra-engine-section *::before, #ra-engine-section *::after {
     box-sizing: border-box !important;
@@ -24,8 +28,22 @@
   #ra-engine-section #ra-main-title {
     font-size: 15pt !important; font-weight: 700 !important; color: #FAF6FF !important;
     font-family: inherit !important; line-height: 1.35 !important; letter-spacing: -0.02em !important;
-    margin: 0 0 20px !important; padding: 0 !important; text-align: left !important;
+    margin: 0 0 20px !important; padding: 0 44px 0 0 !important; text-align: left !important;
     text-transform: none !important; border: none !important; background: none !important;
+  }
+
+  /* ── End session button ── */
+  #ra-end-session {
+    position: absolute !important; top: 20px !important; right: 20px !important;
+    width: 32px !important; height: 32px !important; border-radius: 50% !important;
+    background: rgba(238,224,254,0.08) !important; border: 1px solid rgba(238,224,254,0.15) !important;
+    color: rgba(238,224,254,0.7) !important; font-size: 16pt !important; font-weight: 400 !important;
+    line-height: 1 !important; display: flex !important; align-items: center !important; justify-content: center !important;
+    cursor: pointer !important; z-index: 2 !important; padding: 0 !important; margin: 0 !important;
+    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease !important;
+  }
+  #ra-end-session:hover {
+    background: rgba(239,68,68,0.15) !important; border-color: rgba(239,68,68,0.4) !important; color: #FCA5A5 !important;
   }
 
   /* ── H2 / Accordion titles: 13pt bold #915EE9 uppercase ── */
@@ -109,7 +127,7 @@
   }
   #ra-engine-section li,
   #ra-engine-section .ra-content li {
-    margin-bottom: 10px !important; padding-left: 4px !important;
+    margin-bottom: 10px !important; padding-left: 10px !important;
   }
   #ra-engine-section li::marker { color: #915EE9 !important; }
 
@@ -158,6 +176,7 @@
   #ra-progress-fill {
     height: 100%; width: 0; border-radius: 3px;
     background: linear-gradient(90deg, #915EE9, #B794F6);
+    box-shadow: 0 0 12px rgba(145,94,233,0.55);
     transition: width 0.5s cubic-bezier(0.22,1,0.36,1);
   }
 
@@ -199,8 +218,13 @@
     color: #FAF6FF !important; font-size: 11pt !important; font-weight: 600 !important;
     cursor: pointer; font-family: inherit !important; text-decoration: none !important;
     display: inline-block; white-space: nowrap;
+    box-shadow: 0 8px 24px rgba(145,94,233,0.35) !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease !important;
   }
-  #ra-send:disabled, .ra-continue:disabled { opacity: 0.4; cursor: not-allowed; }
+  #ra-send:hover:not(:disabled), .ra-continue:hover:not(:disabled), #ra-cta a:hover {
+    transform: translateY(-1px) !important; box-shadow: 0 12px 32px rgba(145,94,233,0.5) !important;
+  }
+  #ra-send:disabled, .ra-continue:disabled { opacity: 0.4; cursor: not-allowed; box-shadow: none !important; }
 
   .ra-m {
     padding: 22px 24px !important; border-radius: 16px !important; width: 100% !important;
@@ -209,11 +233,15 @@
   @keyframes raSlideUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
 
   .ra-m.bot {
-    background: rgba(13,9,21,0.75) !important; border: 1px solid rgba(238,224,254,0.12) !important;
+    background: linear-gradient(165deg, rgba(145,94,233,0.07), rgba(13,9,21,0.85)) !important;
+    border: 1px solid rgba(238,224,254,0.12) !important;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.25) !important;
   }
   .ra-m.usr {
-    background: rgba(145,94,233,0.12) !important; border: 1px solid rgba(145,94,233,0.35) !important;
+    background: linear-gradient(135deg, rgba(145,94,233,0.24), rgba(145,94,233,0.08)) !important;
+    border: 1px solid rgba(145,94,233,0.4) !important;
     color: #FAF6FF !important; align-self: flex-end; max-width: 92%; margin-left: auto !important;
+    box-shadow: 0 8px 24px rgba(145,94,233,0.15) !important;
   }
 
   .ra-summary-row {
@@ -227,7 +255,16 @@
   #ra-engine-section .ra-accordion-group { margin-top: 8px; }
   #ra-engine-section details.ra-accordion {
     border: 1px solid rgba(238,224,254,0.12) !important; border-radius: 12px !important;
-    margin-bottom: 10px !important; background: rgba(13,9,21,0.55) !important; overflow: hidden;
+    margin-bottom: 10px !important;
+    background: linear-gradient(165deg, rgba(145,94,233,0.05), rgba(13,9,21,0.55)) !important;
+    overflow: hidden; transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+  }
+  #ra-engine-section details.ra-accordion:hover {
+    border-color: rgba(145,94,233,0.4) !important;
+  }
+  #ra-engine-section details.ra-accordion[open] {
+    border-color: rgba(145,94,233,0.45) !important;
+    box-shadow: 0 0 0 1px rgba(145,94,233,0.12), 0 12px 32px rgba(145,94,233,0.1) !important;
   }
   #ra-engine-section details.ra-accordion summary.ra-accordion-summary {
     list-style: none !important; cursor: pointer !important;
@@ -270,8 +307,13 @@
     gap: 12px !important; margin: 14px 0 24px !important;
   }
   #ra-engine-section .ra-stat-card {
-    background: rgba(145,94,233,0.1) !important; border: 1px solid rgba(145,94,233,0.28) !important;
+    background: linear-gradient(165deg, rgba(145,94,233,0.20), rgba(145,94,233,0.04)) !important;
+    border: 1px solid rgba(145,94,233,0.28) !important;
     border-radius: 12px !important; padding: 16px !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+  }
+  #ra-engine-section .ra-stat-card:hover {
+    transform: translateY(-2px) !important; box-shadow: 0 12px 28px rgba(145,94,233,0.2) !important;
   }
   #ra-engine-section .ra-stat-value {
     display: block !important; font-size: 18pt !important; font-weight: 700 !important;
@@ -292,9 +334,9 @@
   #ra-engine-section .ra-bar-badge.strong { background: rgba(34,197,94,0.2) !important; color: #86EFAC !important; }
   #ra-engine-section .ra-bar-track { height: 8px; background: rgba(238,224,254,0.08); border-radius: 4px; overflow: hidden; }
   #ra-engine-section .ra-bar-fill { height: 100%; width: 0; border-radius: 4px; transition: width 1s cubic-bezier(0.22,1,0.36,1); }
-  #ra-engine-section .ra-bar-fill.gap { background: linear-gradient(90deg, #EF4444, #F87171) !important; }
-  #ra-engine-section .ra-bar-fill.partial { background: linear-gradient(90deg, #EAB308, #FACC15) !important; }
-  #ra-engine-section .ra-bar-fill.strong { background: linear-gradient(90deg, #22C55E, #4ADE80) !important; }
+  #ra-engine-section .ra-bar-fill.gap { background: linear-gradient(90deg, #EF4444, #F87171) !important; box-shadow: 0 0 10px rgba(239,68,68,0.5) !important; }
+  #ra-engine-section .ra-bar-fill.partial { background: linear-gradient(90deg, #EAB308, #FACC15) !important; box-shadow: 0 0 10px rgba(234,179,8,0.5) !important; }
+  #ra-engine-section .ra-bar-fill.strong { background: linear-gradient(90deg, #22C55E, #4ADE80) !important; box-shadow: 0 0 10px rgba(34,197,94,0.5) !important; }
 
   /* ── Quiz choices ── */
   #ra-choices { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
@@ -319,8 +361,7 @@
   #ra-quiz-actions { display: none; margin-bottom: 14px; }
   #ra-suggestions { display: none; flex-direction: column; gap: 8px; margin-bottom: 12px; }
   #ra-suggestions-label {
-    font-size: 10pt !important; font-weight: 700 !important; color: rgba(238,224,254,0.55) !important;
-    text-transform: uppercase !important; letter-spacing: 0.06em !important;
+    display: none !important;
   }
   .ra-suggest {
     background: rgba(145,94,233,0.06) !important; border: 1px solid rgba(145,94,233,0.25) !important;
@@ -340,7 +381,7 @@
     color: rgba(238,224,254,0.5) !important; font-size: 10pt !important; cursor: pointer; padding: 0 !important;
   }
   #ra-restart:hover { color: #FAF6FF !important; }
-  .ra-followup-counter { font-size: 10pt !important; color: rgba(238,224,254,0.45) !important; margin-bottom: 8px !important; }
+  .ra-followup-counter { display: none !important; }
 
   @media (max-width: 520px) {
     #ra-engine-section .ra-summary-row { grid-template-columns: 1fr !important; }
@@ -353,6 +394,8 @@
     <div class="ra-orb ra-orb-2"></div>
     <div class="ra-orb ra-orb-3"></div>
   </div>
+
+  <button type="button" id="ra-end-session" onclick="raEndSession()" aria-label="End session">×</button>
 
   <h1 id="ra-main-title">What brand are we auditing today?</h1>
 
@@ -456,7 +499,83 @@ let raState = {
   phase:'brand', multiSelected:new Set()
 };
 
-window.addEventListener('DOMContentLoaded', () => raShowInput('Enter your brand name...', 'name'));
+/* ═══ SESSION PERSISTENCE (localStorage) ═══ */
+const RA_STORAGE_KEY = 'ra_session_v1';
+
+function raSaveState() {
+  try {
+    localStorage.setItem(RA_STORAGE_KEY, JSON.stringify({ ...raState, multiSelected: [...raState.multiSelected] }));
+  } catch (e) { /* storage unavailable — fail silently */ }
+}
+
+function raLoadState() {
+  try {
+    const raw = localStorage.getItem(RA_STORAGE_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    parsed.multiSelected = new Set(parsed.multiSelected || []);
+    return parsed;
+  } catch (e) { return null; }
+}
+
+function raClearState() {
+  try { localStorage.removeItem(RA_STORAGE_KEY); } catch (e) { /* ignore */ }
+}
+
+function raEndSession() {
+  raClearState();
+  location.reload();
+}
+
+function raInit() {
+  const saved = raLoadState();
+  if (!saved) { raShowInput('Enter your brand name...', 'name'); return; }
+  raState = saved;
+  raRestoreUI();
+}
+
+function raRestoreUI() {
+  if (raState.brand.name || raState.brand.category || raState.brand.url) raRenderBrandSummary();
+
+  if (raState.phase === 'chat' && raState.audit) {
+    document.getElementById('ra-main-title').textContent = 'Ask a follow-up question';
+    raAudit(raState.audit);
+    raState.chatHistory.forEach(turn => { raUser(turn.user); raBotMarkdown(turn.assistant, false); });
+    document.getElementById('ra-cta').style.display = 'block';
+    if (raState.sessionEnded) {
+      raShowSessionEnd();
+    } else {
+      raShowInput(raState.followUpCount ? 'Ask another question...' : 'Ask about your retention strategy...', 'followup');
+      raShowSuggestions();
+    }
+    raScrollToComposer();
+    return;
+  }
+
+  if (raState.phase === 'quiz') {
+    raShowComposer(false);
+    raAskQuiz(raState.quizStep);
+    return;
+  }
+
+  if (!raState.brand.name) {
+    raShowInput('Enter your brand name...', 'name');
+  } else if (!raState.brand.category) {
+    document.getElementById('ra-main-title').textContent = "Select your store's category";
+    raShowChoices(CATEGORIES, (i, text) => {
+      raState.brand.category = text;
+      raRenderBrandSummary();
+      raSaveState();
+      document.getElementById('ra-main-title').textContent = "What is your store's domain URL?";
+      raShowInput('https://yourbrand.com', 'url');
+      raScrollToComposer();
+    });
+  } else {
+    raStartQuiz();
+  }
+}
+
+window.addEventListener('DOMContentLoaded', raInit);
 
 /* ═══ MARKDOWN PARSER ENGINE ═══ */
 function raEscapeHtml(s) {
@@ -482,11 +601,15 @@ function raInjectWidgets(md) {
       `<div class="ra-stat-card"><span class="ra-stat-value">${raEscapeHtml(s[1].trim())}</span><span class="ra-stat-label">${raEscapeHtml(s[2].trim())}</span></div>`
     ).join('') + '</div>\n\n';
   });
-  md = md.replace(/(?:\[bar:([^|\]]+)\|(\d+)\|([^\]]+)\]\s*)+/g, (block) => {
-    const bars = [...block.matchAll(/\[bar:([^|\]]+)\|(\d+)\|([^\]]+)\]/g)];
+  md = md.replace(/(?:\[bar:([^|\]]+)\|([^|\]]+)\|([^\]]+)\]\s*)+/g, (block) => {
+    const bars = [...block.matchAll(/\[bar:([^|\]]+)\|([^|\]]+)\|([^\]]+)\]/g)];
     return '<div class="ra-bar-chart">' + bars.map(b => {
       const label = raEscapeHtml(b[1].trim());
-      const score = Math.min(100, Math.max(0, parseInt(b[2], 10)));
+      const rawScore = b[2].trim();
+      const frac = rawScore.match(/^(\d+(?:\.\d+)?)\s*\/\s*(\d+(?:\.\d+)?)$/);
+      const score = Math.min(100, Math.max(0, frac
+        ? Math.round((parseFloat(frac[1]) / parseFloat(frac[2])) * 100)
+        : parseInt(rawScore, 10) || 0));
       const status = b[3].trim();
       const cls = /strong/i.test(status) ? 'strong' : /partial/i.test(status) ? 'partial' : 'gap';
       return `<div class="ra-bar-row"><div class="ra-bar-header"><span class="ra-bar-label">${label}</span><span class="ra-bar-badge ${cls}">${raEscapeHtml(status)}</span></div><div class="ra-bar-track"><div class="ra-bar-fill ${cls}" data-width="${score}"></div></div></div>`;
@@ -675,10 +798,12 @@ function raHandleBrandInput(mode, val) {
   if (mode === 'name') {
     raState.brand.name = val;
     raRenderBrandSummary();
+    raSaveState();
     document.getElementById('ra-main-title').textContent = "Select your store's category";
     raShowChoices(CATEGORIES, (i, text) => {
       raState.brand.category = text;
       raRenderBrandSummary();
+      raSaveState();
       document.getElementById('ra-main-title').textContent = "What is your store's domain URL?";
       raShowInput('https://yourbrand.com', 'url');
       raScrollToComposer();
@@ -686,6 +811,7 @@ function raHandleBrandInput(mode, val) {
   } else if (mode === 'url') {
     raState.brand.url = val.startsWith('http') ? val : 'https://' + val;
     raRenderBrandSummary();
+    raSaveState();
     raStartQuiz();
   }
 }
@@ -697,17 +823,7 @@ function raStartQuiz() {
   raState.quizStep = 0;
   raShowComposer(false);
   document.getElementById('ra-main-title').textContent = '';
-
-  let intro = document.getElementById('ra-quiz-intro');
-  if (!intro) {
-    intro = document.createElement('div');
-    intro.id = 'ra-quiz-intro';
-    intro.className = 'ra-m bot';
-    const summary = document.getElementById('ra-summary');
-    const pane = document.getElementById('ra-display-pane');
-    summary ? pane.insertBefore(intro, summary.nextSibling) : pane.appendChild(intro);
-  }
-  intro.innerHTML = '<p>Tell us a little about your brand <span style="color:rgba(238,224,254,0.6)">(It\'ll only take a minute, we promise!)</span></p>';
+  raSaveState();
 
   raUpdateProgress(1);
   setTimeout(() => raAskQuiz(0), 500);
@@ -719,6 +835,7 @@ function raAskQuiz(step) {
   raUpdateProgress(step + 1);
   document.getElementById('ra-main-title').textContent = q.q;
   q.multi ? raShowMultiChoices(q) : raShowSingleChoices(q);
+  raSaveState();
 }
 
 function raShowSingleChoices(q) {
@@ -733,6 +850,7 @@ function raPickSingle(i) {
   const el = document.getElementById('ra-choices'), q = el._q;
   raState.answers[q.key] = q.opts[i];
   el.innerHTML = ''; el.style.display = 'none';
+  raSaveState();
   raAfterQuizAnswer();
 }
 
@@ -760,6 +878,7 @@ function raSubmitMulti() {
   raState.answers[q.key] = [...raState.multiSelected].sort((a,b) => a-b).map(i => q.opts[i]);
   el.innerHTML = ''; el.style.display = 'none';
   document.getElementById('ra-quiz-actions').style.display = 'none';
+  raSaveState();
   raAfterQuizAnswer();
 }
 
@@ -785,6 +904,7 @@ async function raGenerate() {
     raHideAnalysisProgress();
     raState.audit = data.audit;
     raState.phase = 'chat';
+    raSaveState();
     raAudit(data.audit);
     document.getElementById('ra-cta').style.display = 'block';
     document.getElementById('ra-main-title').textContent = 'Ask a follow-up question';
@@ -859,6 +979,7 @@ async function raSendFollowUp(message) {
     if (!res.ok) throw new Error('HTTP ' + res.status);
     const data = await res.json();
     raState.chatHistory.push({ user:message, assistant:data.reply });
+    raSaveState();
     raBotMarkdown(data.reply, false);
     if (raState.followUpCount >= MAX_FOLLOWUPS) raShowSessionEnd();
     else { raShowInput('Ask another question...', 'followup'); raShowSuggestions(); raScrollToComposer(); }
@@ -881,6 +1002,7 @@ function raShowSessionEnd() {
   el.innerHTML = '<p><strong>Session complete.</strong> You\'ve explored 5 follow-up questions.</p><p>Book a demo or request a callback — Superfans experts will get in touch with you.</p><a href="https://www.superfans.io/demo" target="_blank" rel="noopener">Book a Demo / Request a Callback</a>';
   document.getElementById('ra-display-pane').appendChild(el);
   document.getElementById('ra-cta').style.display = 'block';
+  raSaveState();
 }
 
 /* ═══ MESSAGE RENDERING ═══ */
@@ -927,6 +1049,7 @@ function raTyping() {
 function raRemoveDots(el) { if (el && el.parentNode) el.parentNode.removeChild(el); }
 
 function raRestart() {
+  raClearState();
   raState = { brand:{}, answers:{}, quizStep:0, audit:null, followUpCount:0, chatHistory:[], sessionEnded:false, phase:'brand', multiSelected:new Set() };
   document.getElementById('ra-main-title').textContent = 'What brand are we auditing today?';
   document.getElementById('ra-display-pane').innerHTML = '';
