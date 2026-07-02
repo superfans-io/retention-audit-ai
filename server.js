@@ -140,6 +140,7 @@ Include data visualisation markers exactly as specified below.
 [bar:Communication & Milestones|SCORE|STATUS]
 [bar:Advocacy & Metrics|SCORE|STATUS]
 
+SCORE must be a fraction out of 5 formatted exactly as "X/5" (e.g. "3/5"), reflecting this area's maturity based on the quiz answers.
 STATUS must be exactly one of: Gap, Partial, or Strong. Calculate these objectively based on the 10 quiz answers.
 
 #### Area Breakdown
@@ -172,7 +173,7 @@ STATUS must be exactly one of: Gap, Partial, or Strong. Calculate these objectiv
 
 #### Why It Matters
 
-- **Core Playbook Stat:** [Relevant stat or behavioral framework from the playbook knowledge base]
+- **Key Stat:** [Relevant stat or behavioral pattern that supports this priority]
 - **Category Implication:** [Vertical-specific retention risks if this performance loop remains unoptimized]
 
 ---
@@ -246,7 +247,7 @@ OUTPUT FORMAT — follow this exact structure every time:
 
 - **Core Resolution:** [Primary tactical answer to the submitted query]
 - **Operational Method:** [How to deploy this recommendation inside their current pipeline]
-- **Playbook Blueprint:** [Supporting framework or lifecycle parameter from the knowledge base]
+- **Supporting Framework:** [Supporting framework or lifecycle parameter behind this recommendation]
 
 ---
 

@@ -8,12 +8,16 @@
     padding: 28px 24px 24px !important;
     font-family: -apple-system, 'Inter', BlinkMacSystemFont, sans-serif !important;
     -webkit-font-smoothing: antialiased !important;
-    color: #FAF6FF !important; background: rgba(13, 9, 21, 0.92) !important;
+    color: #FAF6FF !important;
+    background:
+      radial-gradient(140% 100% at 100% -10%, rgba(145,94,233,0.32) 0%, rgba(145,94,233,0.10) 35%, rgba(13,9,21,0) 62%) ,
+      radial-gradient(90% 60% at 0% 110%, rgba(145,94,233,0.16) 0%, rgba(13,9,21,0) 55%) ,
+      rgba(13, 9, 21, 0.94) !important;
     display: flex !important; flex-direction: column !important; align-items: stretch !important;
     text-align: left !important; position: relative !important; overflow: hidden !important;
-    border-radius: 24px !important; border: 1px solid rgba(145, 94, 233, 0.2) !important;
+    border-radius: 24px !important; border: 1px solid rgba(145, 94, 233, 0.25) !important;
     backdrop-filter: blur(20px) !important;
-    box-shadow: 0 24px 80px rgba(0,0,0,0.45) !important;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.05) !important;
   }
   #ra-engine-section *, #ra-engine-section *::before, #ra-engine-section *::after {
     box-sizing: border-box !important;
@@ -24,8 +28,32 @@
   #ra-engine-section #ra-main-title {
     font-size: 15pt !important; font-weight: 700 !important; color: #FAF6FF !important;
     font-family: inherit !important; line-height: 1.35 !important; letter-spacing: -0.02em !important;
-    margin: 0 0 20px !important; padding: 0 !important; text-align: left !important;
+    margin: 0 0 20px !important; padding: 0 44px 0 0 !important; text-align: left !important;
     text-transform: none !important; border: none !important; background: none !important;
+  }
+
+  /* ── Brand eyebrow tag ── */
+  #ra-engine-section .ra-brand-tag {
+    display: inline-flex !important; align-items: center !important; align-self: flex-start !important; gap: 7px !important;
+    background: rgba(145,94,233,0.12) !important; border: 1px solid rgba(145,94,233,0.35) !important;
+    border-radius: 999px !important; padding: 6px 14px 6px 10px !important; margin: 0 0 16px !important;
+    color: #EEE0FE !important; font-size: 9pt !important; font-weight: 700 !important;
+    text-transform: uppercase !important; letter-spacing: 0.08em !important; line-height: 1 !important;
+  }
+  #ra-engine-section .ra-brand-tag svg { width: 14px !important; height: 13px !important; color: #915EE9 !important; flex-shrink: 0; }
+
+  /* ── End session button ── */
+  #ra-end-session {
+    position: absolute !important; top: 20px !important; right: 20px !important;
+    width: 32px !important; height: 32px !important; border-radius: 50% !important;
+    background: rgba(238,224,254,0.08) !important; border: 1px solid rgba(238,224,254,0.15) !important;
+    color: rgba(238,224,254,0.7) !important; font-size: 16pt !important; font-weight: 400 !important;
+    line-height: 1 !important; display: flex !important; align-items: center !important; justify-content: center !important;
+    cursor: pointer !important; z-index: 2 !important; padding: 0 !important; margin: 0 !important;
+    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease !important;
+  }
+  #ra-end-session:hover {
+    background: rgba(239,68,68,0.15) !important; border-color: rgba(239,68,68,0.4) !important; color: #FCA5A5 !important;
   }
 
   /* ── H2 / Accordion titles: 13pt bold #915EE9 uppercase ── */
@@ -143,6 +171,10 @@
   .ra-orb-2 { width: 200px; height: 200px; background: rgba(238,224,254,0.35); bottom: 20%; left: -40px; animation-delay: -4s; }
   .ra-orb-3 { width: 160px; height: 160px; background: rgba(145,94,233,0.45); bottom: -40px; right: 20%; animation-delay: -8s; }
   @keyframes raOrbFloat { 0%,100%{transform:translate(0,0)} 50%{transform:translate(10px,-12px)} }
+  .ra-bg-orbs .ra-brand-watermark {
+    position: absolute; width: 340px; height: auto; right: -60px; bottom: -60px;
+    color: #915EE9; opacity: 0.06; transform: rotate(-8deg);
+  }
 
   #ra-main-title, #ra-progress-wrap, #ra-halfway-msg, #ra-choices, #ra-quiz-actions,
   #ra-chat-zone, #ra-cta, #ra-analysis-progress { position: relative; z-index: 1; }
@@ -158,6 +190,7 @@
   #ra-progress-fill {
     height: 100%; width: 0; border-radius: 3px;
     background: linear-gradient(90deg, #915EE9, #B794F6);
+    box-shadow: 0 0 12px rgba(145,94,233,0.55);
     transition: width 0.5s cubic-bezier(0.22,1,0.36,1);
   }
 
@@ -195,12 +228,17 @@
 
   #ra-send, .ra-continue, #ra-cta a {
     background: linear-gradient(135deg, #915EE9, #7B4FD4) !important;
-    border: none !important; border-radius: 14px !important; padding: 11px 20px !important;
+    border: none !important; border-radius: 999px !important; padding: 11px 22px !important;
     color: #FAF6FF !important; font-size: 11pt !important; font-weight: 600 !important;
     cursor: pointer; font-family: inherit !important; text-decoration: none !important;
     display: inline-block; white-space: nowrap;
+    box-shadow: 0 8px 24px rgba(145,94,233,0.35) !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease !important;
   }
-  #ra-send:disabled, .ra-continue:disabled { opacity: 0.4; cursor: not-allowed; }
+  #ra-send:hover:not(:disabled), .ra-continue:hover:not(:disabled), #ra-cta a:hover {
+    transform: translateY(-1px) !important; box-shadow: 0 12px 32px rgba(145,94,233,0.5) !important;
+  }
+  #ra-send:disabled, .ra-continue:disabled { opacity: 0.4; cursor: not-allowed; box-shadow: none !important; }
 
   .ra-m {
     padding: 22px 24px !important; border-radius: 16px !important; width: 100% !important;
@@ -209,12 +247,28 @@
   @keyframes raSlideUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
 
   .ra-m.bot {
-    background: rgba(13,9,21,0.75) !important; border: 1px solid rgba(238,224,254,0.12) !important;
+    background: linear-gradient(165deg, rgba(145,94,233,0.07), rgba(13,9,21,0.85)) !important;
+    border: 1px solid rgba(238,224,254,0.12) !important;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.25) !important;
+    position: relative !important; margin-top: 14px !important;
   }
   .ra-m.usr {
-    background: rgba(145,94,233,0.12) !important; border: 1px solid rgba(145,94,233,0.35) !important;
+    background: linear-gradient(135deg, rgba(145,94,233,0.24), rgba(145,94,233,0.08)) !important;
+    border: 1px solid rgba(145,94,233,0.4) !important;
     color: #FAF6FF !important; align-self: flex-end; max-width: 92%; margin-left: auto !important;
+    box-shadow: 0 8px 24px rgba(145,94,233,0.15) !important;
   }
+
+  /* ── Bot avatar badge ── */
+  .ra-bot-avatar {
+    position: absolute !important; top: -14px !important; left: 20px !important;
+    width: 30px !important; height: 30px !important; border-radius: 50% !important;
+    background: linear-gradient(135deg, #915EE9, #7B4FD4) !important;
+    display: flex !important; align-items: center !important; justify-content: center !important;
+    box-shadow: 0 4px 14px rgba(145,94,233,0.55), 0 0 0 3px #0D0915 !important; z-index: 2;
+  }
+  .ra-bot-avatar svg { width: 13px !important; height: 12px !important; color: #FAF6FF !important; }
+  .ra-m.bot.ra-summary { margin-top: 0 !important; }
 
   .ra-summary-row {
     display: grid; grid-template-columns: 120px 1fr; gap: 8px 14px;
@@ -227,7 +281,16 @@
   #ra-engine-section .ra-accordion-group { margin-top: 8px; }
   #ra-engine-section details.ra-accordion {
     border: 1px solid rgba(238,224,254,0.12) !important; border-radius: 12px !important;
-    margin-bottom: 10px !important; background: rgba(13,9,21,0.55) !important; overflow: hidden;
+    margin-bottom: 10px !important;
+    background: linear-gradient(165deg, rgba(145,94,233,0.05), rgba(13,9,21,0.55)) !important;
+    overflow: hidden; transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+  }
+  #ra-engine-section details.ra-accordion:hover {
+    border-color: rgba(145,94,233,0.4) !important;
+  }
+  #ra-engine-section details.ra-accordion[open] {
+    border-color: rgba(145,94,233,0.45) !important;
+    box-shadow: 0 0 0 1px rgba(145,94,233,0.12), 0 12px 32px rgba(145,94,233,0.1) !important;
   }
   #ra-engine-section details.ra-accordion summary.ra-accordion-summary {
     list-style: none !important; cursor: pointer !important;
@@ -270,8 +333,13 @@
     gap: 12px !important; margin: 14px 0 24px !important;
   }
   #ra-engine-section .ra-stat-card {
-    background: rgba(145,94,233,0.1) !important; border: 1px solid rgba(145,94,233,0.28) !important;
+    background: linear-gradient(165deg, rgba(145,94,233,0.20), rgba(145,94,233,0.04)) !important;
+    border: 1px solid rgba(145,94,233,0.28) !important;
     border-radius: 12px !important; padding: 16px !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+  }
+  #ra-engine-section .ra-stat-card:hover {
+    transform: translateY(-2px) !important; box-shadow: 0 12px 28px rgba(145,94,233,0.2) !important;
   }
   #ra-engine-section .ra-stat-value {
     display: block !important; font-size: 18pt !important; font-weight: 700 !important;
@@ -292,9 +360,9 @@
   #ra-engine-section .ra-bar-badge.strong { background: rgba(34,197,94,0.2) !important; color: #86EFAC !important; }
   #ra-engine-section .ra-bar-track { height: 8px; background: rgba(238,224,254,0.08); border-radius: 4px; overflow: hidden; }
   #ra-engine-section .ra-bar-fill { height: 100%; width: 0; border-radius: 4px; transition: width 1s cubic-bezier(0.22,1,0.36,1); }
-  #ra-engine-section .ra-bar-fill.gap { background: linear-gradient(90deg, #EF4444, #F87171) !important; }
-  #ra-engine-section .ra-bar-fill.partial { background: linear-gradient(90deg, #EAB308, #FACC15) !important; }
-  #ra-engine-section .ra-bar-fill.strong { background: linear-gradient(90deg, #22C55E, #4ADE80) !important; }
+  #ra-engine-section .ra-bar-fill.gap { background: linear-gradient(90deg, #EF4444, #F87171) !important; box-shadow: 0 0 10px rgba(239,68,68,0.5) !important; }
+  #ra-engine-section .ra-bar-fill.partial { background: linear-gradient(90deg, #EAB308, #FACC15) !important; box-shadow: 0 0 10px rgba(234,179,8,0.5) !important; }
+  #ra-engine-section .ra-bar-fill.strong { background: linear-gradient(90deg, #22C55E, #4ADE80) !important; box-shadow: 0 0 10px rgba(34,197,94,0.5) !important; }
 
   /* ── Quiz choices ── */
   #ra-choices { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
@@ -327,7 +395,12 @@
   }
   .ra-suggest:hover { border-color: #915EE9 !important; color: #FAF6FF !important; background: rgba(145,94,233,0.14) !important; }
 
-  .ra-dots { display: flex; gap: 8px; padding: 14px; }
+  .ra-dots {
+    display: flex; align-items: center; gap: 8px; padding: 16px 20px; width: fit-content;
+    position: relative; margin-top: 14px;
+    background: linear-gradient(165deg, rgba(145,94,233,0.07), rgba(13,9,21,0.85));
+    border: 1px solid rgba(238,224,254,0.12); border-radius: 16px;
+  }
   .ra-dots span { width: 8px; height: 8px; border-radius: 50%; background: #915EE9; animation: raSpread 1.2s infinite; }
   .ra-dots span:nth-child(2) { animation-delay: 0.2s; }
   .ra-dots span:nth-child(3) { animation-delay: 0.4s; }
@@ -351,6 +424,14 @@
     <div class="ra-orb ra-orb-1"></div>
     <div class="ra-orb ra-orb-2"></div>
     <div class="ra-orb ra-orb-3"></div>
+    <svg class="ra-brand-watermark" viewBox="0 0 300 280" xmlns="http://www.w3.org/2000/svg" fill="none"><path d="M133.363 112.41H246.584L170.536 223.596C161.284 237.129 141.533 237.129 132.271 223.596L101.475 178.565H135.28V178.583L132.593 188.079L140.323 182.791C143.691 180.479 148.107 180.479 151.484 182.791L159.214 188.079L156.635 179C155.506 175.037 156.868 170.783 160.083 168.253L167.437 162.439L158.113 162.121C154.046 161.976 150.472 159.346 149.084 155.473L145.904 146.594L142.715 155.473C142.715 155.473 142.706 155.51 142.697 155.528C141.73 158.167 139.141 159.836 136.355 159.836H88.8632L55.3717 119.004C47.8206 109.807 48.2774 96.3381 56.4107 87.6765L86.2835 55.9049C92.0789 49.7375 100.114 46.2456 108.525 46.2456H179.736C189.15 46.2456 198.251 49.6105 205.452 55.7417L249.997 93.6716H132.011C129.18 93.6716 126.556 91.9665 125.571 89.2818C125.571 89.2637 125.562 89.2455 125.553 89.2274L122.373 80.3481L119.193 89.2274C117.796 93.1002 114.222 95.7304 110.155 95.8756L100.839 96.193L108.193 102.007C111.4 104.537 112.761 108.791 111.642 112.754L109.062 121.833L116.792 116.546C120.16 114.233 124.576 114.233 127.953 116.546L135.683 121.833L133.104 112.754L133.363 112.41Z" fill="currentColor"/></svg>
+  </div>
+
+  <button type="button" id="ra-end-session" onclick="raEndSession()" aria-label="End session">×</button>
+
+  <div class="ra-brand-tag">
+    <svg viewBox="0 0 300 280" xmlns="http://www.w3.org/2000/svg" fill="none" aria-hidden="true"><path d="M133.363 112.41H246.584L170.536 223.596C161.284 237.129 141.533 237.129 132.271 223.596L101.475 178.565H135.28V178.583L132.593 188.079L140.323 182.791C143.691 180.479 148.107 180.479 151.484 182.791L159.214 188.079L156.635 179C155.506 175.037 156.868 170.783 160.083 168.253L167.437 162.439L158.113 162.121C154.046 161.976 150.472 159.346 149.084 155.473L145.904 146.594L142.715 155.473C142.715 155.473 142.706 155.51 142.697 155.528C141.73 158.167 139.141 159.836 136.355 159.836H88.8632L55.3717 119.004C47.8206 109.807 48.2774 96.3381 56.4107 87.6765L86.2835 55.9049C92.0789 49.7375 100.114 46.2456 108.525 46.2456H179.736C189.15 46.2456 198.251 49.6105 205.452 55.7417L249.997 93.6716H132.011C129.18 93.6716 126.556 91.9665 125.571 89.2818C125.571 89.2637 125.562 89.2455 125.553 89.2274L122.373 80.3481L119.193 89.2274C117.796 93.1002 114.222 95.7304 110.155 95.8756L100.839 96.193L108.193 102.007C111.4 104.537 112.761 108.791 111.642 112.754L109.062 121.833L116.792 116.546C120.16 114.233 124.576 114.233 127.953 116.546L135.683 121.833L133.104 112.754L133.363 112.41Z" fill="currentColor"/></svg>
+    <span>Superfans AI</span>
   </div>
 
   <h1 id="ra-main-title">What brand are we auditing today?</h1>
@@ -400,6 +481,8 @@ const RA_API = 'https://retention-audit-ai-8bve.onrender.com/api/audit';
 const RA_FOLLOWUP_API = 'https://retention-audit-ai-8bve.onrender.com/api/follow-up';
 const MAX_FOLLOWUPS = 5;
 const TOTAL_QUIZ = 10;
+
+const RA_AVATAR_HTML = '<div class="ra-bot-avatar" aria-hidden="true"><svg viewBox="0 0 300 280" xmlns="http://www.w3.org/2000/svg" fill="none"><path d="M133.363 112.41H246.584L170.536 223.596C161.284 237.129 141.533 237.129 132.271 223.596L101.475 178.565H135.28V178.583L132.593 188.079L140.323 182.791C143.691 180.479 148.107 180.479 151.484 182.791L159.214 188.079L156.635 179C155.506 175.037 156.868 170.783 160.083 168.253L167.437 162.439L158.113 162.121C154.046 161.976 150.472 159.346 149.084 155.473L145.904 146.594L142.715 155.473C142.715 155.473 142.706 155.51 142.697 155.528C141.73 158.167 139.141 159.836 136.355 159.836H88.8632L55.3717 119.004C47.8206 109.807 48.2774 96.3381 56.4107 87.6765L86.2835 55.9049C92.0789 49.7375 100.114 46.2456 108.525 46.2456H179.736C189.15 46.2456 198.251 49.6105 205.452 55.7417L249.997 93.6716H132.011C129.18 93.6716 126.556 91.9665 125.571 89.2818C125.571 89.2637 125.562 89.2455 125.553 89.2274L122.373 80.3481L119.193 89.2274C117.796 93.1002 114.222 95.7304 110.155 95.8756L100.839 96.193L108.193 102.007C111.4 104.537 112.761 108.791 111.642 112.754L109.062 121.833L116.792 116.546C120.16 114.233 124.576 114.233 127.953 116.546L135.683 121.833L133.104 112.754L133.363 112.41Z" fill="currentColor"/></svg></div>';
 
 const CATEGORIES = [
   'Skincare & Beauty','Apparel & Fashion','Health & Supplements',
@@ -455,7 +538,83 @@ let raState = {
   phase:'brand', multiSelected:new Set()
 };
 
-window.addEventListener('DOMContentLoaded', () => raShowInput('Enter your brand name...', 'name'));
+/* ═══ SESSION PERSISTENCE (localStorage) ═══ */
+const RA_STORAGE_KEY = 'ra_session_v1';
+
+function raSaveState() {
+  try {
+    localStorage.setItem(RA_STORAGE_KEY, JSON.stringify({ ...raState, multiSelected: [...raState.multiSelected] }));
+  } catch (e) { /* storage unavailable — fail silently */ }
+}
+
+function raLoadState() {
+  try {
+    const raw = localStorage.getItem(RA_STORAGE_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    parsed.multiSelected = new Set(parsed.multiSelected || []);
+    return parsed;
+  } catch (e) { return null; }
+}
+
+function raClearState() {
+  try { localStorage.removeItem(RA_STORAGE_KEY); } catch (e) { /* ignore */ }
+}
+
+function raEndSession() {
+  raClearState();
+  location.reload();
+}
+
+function raInit() {
+  const saved = raLoadState();
+  if (!saved) { raShowInput('Enter your brand name...', 'name'); return; }
+  raState = saved;
+  raRestoreUI();
+}
+
+function raRestoreUI() {
+  if (raState.brand.name || raState.brand.category || raState.brand.url) raRenderBrandSummary();
+
+  if (raState.phase === 'chat' && raState.audit) {
+    document.getElementById('ra-main-title').textContent = 'Ask a follow-up question';
+    raAudit(raState.audit);
+    raState.chatHistory.forEach(turn => { raUser(turn.user); raBotMarkdown(turn.assistant, false); });
+    document.getElementById('ra-cta').style.display = 'block';
+    if (raState.sessionEnded) {
+      raShowSessionEnd();
+    } else {
+      raShowInput(raState.followUpCount ? 'Ask another question...' : 'Ask about your retention strategy...', 'followup');
+      raShowSuggestions();
+    }
+    raScrollToComposer();
+    return;
+  }
+
+  if (raState.phase === 'quiz') {
+    raShowComposer(false);
+    raAskQuiz(raState.quizStep);
+    return;
+  }
+
+  if (!raState.brand.name) {
+    raShowInput('Enter your brand name...', 'name');
+  } else if (!raState.brand.category) {
+    document.getElementById('ra-main-title').textContent = "Select your store's category";
+    raShowChoices(CATEGORIES, (i, text) => {
+      raState.brand.category = text;
+      raRenderBrandSummary();
+      raSaveState();
+      document.getElementById('ra-main-title').textContent = "What is your store's domain URL?";
+      raShowInput('https://yourbrand.com', 'url');
+      raScrollToComposer();
+    });
+  } else {
+    raStartQuiz();
+  }
+}
+
+window.addEventListener('DOMContentLoaded', raInit);
 
 /* ═══ MARKDOWN PARSER ENGINE ═══ */
 function raEscapeHtml(s) {
@@ -481,11 +640,15 @@ function raInjectWidgets(md) {
       `<div class="ra-stat-card"><span class="ra-stat-value">${raEscapeHtml(s[1].trim())}</span><span class="ra-stat-label">${raEscapeHtml(s[2].trim())}</span></div>`
     ).join('') + '</div>\n\n';
   });
-  md = md.replace(/(?:\[bar:([^|\]]+)\|(\d+)\|([^\]]+)\]\s*)+/g, (block) => {
-    const bars = [...block.matchAll(/\[bar:([^|\]]+)\|(\d+)\|([^\]]+)\]/g)];
+  md = md.replace(/(?:\[bar:([^|\]]+)\|([^|\]]+)\|([^\]]+)\]\s*)+/g, (block) => {
+    const bars = [...block.matchAll(/\[bar:([^|\]]+)\|([^|\]]+)\|([^\]]+)\]/g)];
     return '<div class="ra-bar-chart">' + bars.map(b => {
       const label = raEscapeHtml(b[1].trim());
-      const score = Math.min(100, Math.max(0, parseInt(b[2], 10)));
+      const rawScore = b[2].trim();
+      const frac = rawScore.match(/^(\d+(?:\.\d+)?)\s*\/\s*(\d+(?:\.\d+)?)$/);
+      const score = Math.min(100, Math.max(0, frac
+        ? Math.round((parseFloat(frac[1]) / parseFloat(frac[2])) * 100)
+        : parseInt(rawScore, 10) || 0));
       const status = b[3].trim();
       const cls = /strong/i.test(status) ? 'strong' : /partial/i.test(status) ? 'partial' : 'gap';
       return `<div class="ra-bar-row"><div class="ra-bar-header"><span class="ra-bar-label">${label}</span><span class="ra-bar-badge ${cls}">${raEscapeHtml(status)}</span></div><div class="ra-bar-track"><div class="ra-bar-fill ${cls}" data-width="${score}"></div></div></div>`;
@@ -674,10 +837,12 @@ function raHandleBrandInput(mode, val) {
   if (mode === 'name') {
     raState.brand.name = val;
     raRenderBrandSummary();
+    raSaveState();
     document.getElementById('ra-main-title').textContent = "Select your store's category";
     raShowChoices(CATEGORIES, (i, text) => {
       raState.brand.category = text;
       raRenderBrandSummary();
+      raSaveState();
       document.getElementById('ra-main-title').textContent = "What is your store's domain URL?";
       raShowInput('https://yourbrand.com', 'url');
       raScrollToComposer();
@@ -685,6 +850,7 @@ function raHandleBrandInput(mode, val) {
   } else if (mode === 'url') {
     raState.brand.url = val.startsWith('http') ? val : 'https://' + val;
     raRenderBrandSummary();
+    raSaveState();
     raStartQuiz();
   }
 }
@@ -707,6 +873,7 @@ function raAskQuiz(step) {
   raUpdateProgress(step + 1);
   document.getElementById('ra-main-title').textContent = q.q;
   q.multi ? raShowMultiChoices(q) : raShowSingleChoices(q);
+  raSaveState();
 }
 
 function raShowSingleChoices(q) {
@@ -721,6 +888,7 @@ function raPickSingle(i) {
   const el = document.getElementById('ra-choices'), q = el._q;
   raState.answers[q.key] = q.opts[i];
   el.innerHTML = ''; el.style.display = 'none';
+  raSaveState();
   raAfterQuizAnswer();
 }
 
@@ -748,6 +916,7 @@ function raSubmitMulti() {
   raState.answers[q.key] = [...raState.multiSelected].sort((a,b) => a-b).map(i => q.opts[i]);
   el.innerHTML = ''; el.style.display = 'none';
   document.getElementById('ra-quiz-actions').style.display = 'none';
+  raSaveState();
   raAfterQuizAnswer();
 }
 
@@ -773,6 +942,7 @@ async function raGenerate() {
     raHideAnalysisProgress();
     raState.audit = data.audit;
     raState.phase = 'chat';
+    raSaveState();
     raAudit(data.audit);
     document.getElementById('ra-cta').style.display = 'block';
     document.getElementById('ra-main-title').textContent = 'Ask a follow-up question';
@@ -847,6 +1017,7 @@ async function raSendFollowUp(message) {
     if (!res.ok) throw new Error('HTTP ' + res.status);
     const data = await res.json();
     raState.chatHistory.push({ user:message, assistant:data.reply });
+    raSaveState();
     raBotMarkdown(data.reply, false);
     if (raState.followUpCount >= MAX_FOLLOWUPS) raShowSessionEnd();
     else { raShowInput('Ask another question...', 'followup'); raShowSuggestions(); raScrollToComposer(); }
@@ -866,16 +1037,17 @@ function raShowSessionEnd() {
   raUpdateFollowUpCounter();
   const el = document.createElement('div');
   el.className = 'ra-m bot ra-session-end';
-  el.innerHTML = '<p><strong>Session complete.</strong> You\'ve explored 5 follow-up questions.</p><p>Book a demo or request a callback — Superfans experts will get in touch with you.</p><a href="https://www.superfans.io/demo" target="_blank" rel="noopener">Book a Demo / Request a Callback</a>';
+  el.innerHTML = RA_AVATAR_HTML + '<p><strong>Session complete.</strong> You\'ve explored 5 follow-up questions.</p><p>Book a demo or request a callback — Superfans experts will get in touch with you.</p><a href="https://www.superfans.io/demo" target="_blank" rel="noopener">Book a Demo / Request a Callback</a>';
   document.getElementById('ra-display-pane').appendChild(el);
   document.getElementById('ra-cta').style.display = 'block';
+  raSaveState();
 }
 
 /* ═══ MESSAGE RENDERING ═══ */
 function raBot(html) {
   const el = document.createElement('div');
   el.className = 'ra-m bot';
-  el.innerHTML = html;
+  el.innerHTML = RA_AVATAR_HTML + html;
   document.getElementById('ra-display-pane').appendChild(el);
   return el;
 }
@@ -883,7 +1055,7 @@ function raBot(html) {
 function raBotMarkdown(md, isAudit) {
   const el = document.createElement('div');
   el.className = 'ra-m bot';
-  el.innerHTML = raRenderContent(md, isAudit);
+  el.innerHTML = RA_AVATAR_HTML + raRenderContent(md, isAudit);
   document.getElementById('ra-display-pane').appendChild(el);
   raAnimateBars(el);
   return el;
@@ -899,7 +1071,7 @@ function raUser(text) {
 function raAudit(md) {
   const el = document.createElement('div');
   el.className = 'ra-m bot ra-audit';
-  el.innerHTML = raRenderContent(md, true);
+  el.innerHTML = RA_AVATAR_HTML + raRenderContent(md, true);
   document.getElementById('ra-display-pane').appendChild(el);
   raAnimateBars(el);
 }
@@ -907,7 +1079,7 @@ function raAudit(md) {
 function raTyping() {
   const el = document.createElement('div');
   el.className = 'ra-dots';
-  el.innerHTML = '<span></span><span></span><span></span>';
+  el.innerHTML = RA_AVATAR_HTML + '<span></span><span></span><span></span>';
   document.getElementById('ra-display-pane').appendChild(el);
   return el;
 }
@@ -915,6 +1087,7 @@ function raTyping() {
 function raRemoveDots(el) { if (el && el.parentNode) el.parentNode.removeChild(el); }
 
 function raRestart() {
+  raClearState();
   raState = { brand:{}, answers:{}, quizStep:0, audit:null, followUpCount:0, chatHistory:[], sessionEnded:false, phase:'brand', multiSelected:new Set() };
   document.getElementById('ra-main-title').textContent = 'What brand are we auditing today?';
   document.getElementById('ra-display-pane').innerHTML = '';
