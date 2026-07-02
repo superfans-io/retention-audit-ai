@@ -1,269 +1,350 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
 
 <style>
-  /* Palette: #915EE9 | #0D0915 | #EEE0FE | #FAF6FF */
+  /* ═══ Webflow-safe scoped reset — palette: #915EE9 #0D0915 #EEE0FE #FAF6FF ═══ */
 
   #ra-engine-section {
-    width: 100%; max-width: 760px; margin: 40px auto;
-    padding: 28px 24px 24px;
-    font-family: -apple-system, 'Inter', BlinkMacSystemFont, sans-serif;
-    -webkit-font-smoothing: antialiased; color: #FAF6FF;
-    display: flex; flex-direction: column; align-items: stretch;
-    text-align: left; position: relative; overflow: hidden;
-    border-radius: 24px; border: 1px solid rgba(145, 94, 233, 0.2);
-    background: rgba(13, 9, 21, 0.92); backdrop-filter: blur(20px);
-    box-shadow: 0 24px 80px rgba(0,0,0,0.45), 0 0 0 1px rgba(238,224,254,0.04) inset;
+    width: 100% !important; max-width: 760px !important; margin: 40px auto !important;
+    padding: 28px 24px 24px !important;
+    font-family: -apple-system, 'Inter', BlinkMacSystemFont, sans-serif !important;
+    -webkit-font-smoothing: antialiased !important;
+    color: #FAF6FF !important; background: rgba(13, 9, 21, 0.92) !important;
+    display: flex !important; flex-direction: column !important; align-items: stretch !important;
+    text-align: left !important; position: relative !important; overflow: hidden !important;
+    border-radius: 24px !important; border: 1px solid rgba(145, 94, 233, 0.2) !important;
+    backdrop-filter: blur(20px) !important;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.45) !important;
+  }
+  #ra-engine-section *, #ra-engine-section *::before, #ra-engine-section *::after {
+    box-sizing: border-box !important;
   }
 
+  /* ── H1 / Main window titles: 15pt bold #FAF6FF ── */
+  #ra-engine-section h1,
+  #ra-engine-section #ra-main-title {
+    font-size: 15pt !important; font-weight: 700 !important; color: #FAF6FF !important;
+    font-family: inherit !important; line-height: 1.35 !important; letter-spacing: -0.02em !important;
+    margin: 0 0 20px !important; padding: 0 !important; text-align: left !important;
+    text-transform: none !important; border: none !important; background: none !important;
+  }
+
+  /* ── H2 / Accordion titles: 13pt bold #915EE9 uppercase ── */
+  #ra-engine-section .ra-acc-title,
+  #ra-engine-section .ra-accordion-summary {
+    font-size: 13pt !important; font-weight: 700 !important; color: #915EE9 !important;
+    text-transform: uppercase !important; letter-spacing: 0.05em !important;
+    font-family: inherit !important; line-height: 1.4 !important;
+  }
+
+  /* ── H3 / Subsection headers: 12pt bold #FAF6FF ── */
+  #ra-engine-section h3,
+  #ra-engine-section .ra-content h3,
+  #ra-engine-section .ra-timeline-badge,
+  #ra-engine-section .ra-summary-title {
+    font-size: 12pt !important; font-weight: 700 !important; color: #FAF6FF !important;
+    font-family: inherit !important; line-height: 1.45 !important;
+    margin: 20px 0 12px !important; padding: 0 !important;
+    text-transform: none !important; letter-spacing: normal !important;
+  }
+  #ra-engine-section .ra-summary-title {
+    color: #915EE9 !important; text-transform: uppercase !important; letter-spacing: 0.05em !important;
+    font-size: 11pt !important; margin-bottom: 16px !important;
+  }
+
+  /* ── Body: 11pt regular #EEE0FE line-height 1.75 ── */
+  #ra-engine-section p,
+  #ra-engine-section li,
+  #ra-engine-section span,
+  #ra-engine-section td,
+  #ra-engine-section th,
+  #ra-engine-section label,
+  #ra-engine-section .ra-content p,
+  #ra-engine-section .ra-content li,
+  #ra-engine-section .ra-content td,
+  #ra-engine-section .ra-content span,
+  #ra-engine-section .ra-opt,
+  #ra-engine-section .ra-suggest,
+  #ra-engine-section .ra-multi-hint,
+  #ra-engine-section .ra-analysis-step,
+  #ra-engine-section #ra-inp,
+  #ra-engine-section .ra-summary-label,
+  #ra-engine-section .ra-bar-label,
+  #ra-engine-section .ra-stat-label {
+    font-size: 11pt !important; font-weight: 400 !important; color: #EEE0FE !important;
+    line-height: 1.75 !important; font-family: inherit !important;
+  }
+
+  /* ── Bold in body: 11pt weight 600 #FAF6FF ── */
+  #ra-engine-section strong,
+  #ra-engine-section b,
+  #ra-engine-section .ra-content strong {
+    font-size: 11pt !important; font-weight: 600 !important; color: #FAF6FF !important;
+  }
+
+  /* ── Audit H2 title block ── */
+  #ra-engine-section .ra-audit-header h2,
+  #ra-engine-section .ra-content h2 {
+    font-size: 15pt !important; font-weight: 700 !important; color: #FAF6FF !important;
+    margin: 0 0 16px !important; padding: 0 0 14px !important;
+    border-bottom: 1px solid rgba(145,94,233,0.3) !important; line-height: 1.35 !important;
+  }
+
+  /* ── H4 inside accordions ── */
+  #ra-engine-section h4,
+  #ra-engine-section .ra-content h4 {
+    font-size: 12pt !important; font-weight: 700 !important; color: #FAF6FF !important;
+    margin: 18px 0 10px !important; padding: 0 !important;
+  }
+
+  /* ── Lists: disc markers #915EE9 ── */
+  #ra-engine-section ul,
+  #ra-engine-section .ra-content ul,
+  #ra-engine-section .ra-accordion-body ul {
+    list-style-type: disc !important; list-style-position: outside !important;
+    padding-left: 1.5em !important; margin: 8px 0 20px !important;
+  }
+  #ra-engine-section ol,
+  #ra-engine-section .ra-content ol {
+    list-style-type: decimal !important; padding-left: 1.5em !important; margin: 8px 0 20px !important;
+  }
+  #ra-engine-section li,
+  #ra-engine-section .ra-content li {
+    margin-bottom: 10px !important; padding-left: 4px !important;
+  }
+  #ra-engine-section li::marker { color: #915EE9 !important; }
+
+  /* ── Spacing: prevent clumping ── */
+  #ra-engine-section .ra-content > * + *,
+  #ra-engine-section .ra-accordion-body > * + * { margin-top: 0 !important; }
+  #ra-engine-section p { margin: 0 0 18px !important; }
+  #ra-engine-section hr {
+    border: none !important; border-top: 1px solid rgba(145,94,233,0.2) !important;
+    margin: 28px 0 !important;
+  }
+  #ra-engine-section blockquote {
+    margin: 18px 0 22px !important; padding: 14px 18px !important;
+    border-left: 3px solid #915EE9 !important; background: rgba(145,94,233,0.08) !important;
+    border-radius: 0 10px 10px 0 !important;
+  }
+  #ra-engine-section table {
+    width: 100% !important; border-collapse: collapse !important; margin: 14px 0 24px !important;
+  }
+  #ra-engine-section th {
+    background: rgba(145,94,233,0.15) !important; padding: 10px 12px !important;
+    text-transform: uppercase !important; font-size: 10pt !important; letter-spacing: 0.05em !important;
+  }
+  #ra-engine-section td { padding: 10px 12px !important; border-bottom: 1px solid rgba(238,224,254,0.08) !important; }
+  #ra-engine-section a { color: #915EE9 !important; text-decoration: underline !important; text-underline-offset: 2px !important; }
+
+  /* ── Background orbs ── */
   .ra-bg-orbs { position: absolute; inset: 0; pointer-events: none; overflow: hidden; z-index: 0; }
   .ra-orb { position: absolute; border-radius: 50%; filter: blur(60px); opacity: 0.35; animation: raOrbFloat 12s ease-in-out infinite; }
   .ra-orb-1 { width: 280px; height: 280px; background: #915EE9; top: -80px; right: -60px; }
-  .ra-orb-2 { width: 200px; height: 200px; background: rgba(238,224,254,0.4); bottom: 20%; left: -40px; animation-delay: -4s; }
-  .ra-orb-3 { width: 160px; height: 160px; background: rgba(145,94,233,0.5); bottom: -40px; right: 20%; animation-delay: -8s; }
-  @keyframes raOrbFloat {
-    0%,100%{transform:translate(0,0) scale(1)} 33%{transform:translate(12px,-16px) scale(1.05)} 66%{transform:translate(-8px,10px) scale(0.95)}
-  }
+  .ra-orb-2 { width: 200px; height: 200px; background: rgba(238,224,254,0.35); bottom: 20%; left: -40px; animation-delay: -4s; }
+  .ra-orb-3 { width: 160px; height: 160px; background: rgba(145,94,233,0.45); bottom: -40px; right: 20%; animation-delay: -8s; }
+  @keyframes raOrbFloat { 0%,100%{transform:translate(0,0)} 50%{transform:translate(10px,-12px)} }
 
   #ra-main-title, #ra-progress-wrap, #ra-halfway-msg, #ra-choices, #ra-quiz-actions,
-  #ra-chat-zone, #ra-cta { position: relative; z-index: 1; }
+  #ra-chat-zone, #ra-cta, #ra-analysis-progress { position: relative; z-index: 1; }
 
-  #ra-main-title {
-    font-size: 26px; font-weight: 600; color: #FAF6FF;
-    margin: 0 0 20px; text-align: left; letter-spacing: -0.5px; line-height: 1.35;
-    animation: raFadeIn 0.5s ease;
+  /* ── Progress bar ── */
+  #ra-progress-wrap { display: none; margin-bottom: 20px; }
+  #ra-progress-meta { display: flex; justify-content: space-between; margin-bottom: 8px; }
+  #ra-progress-label, #ra-progress-pct {
+    font-size: 10pt !important; font-weight: 600 !important; color: rgba(238,224,254,0.6) !important;
+    text-transform: uppercase !important; letter-spacing: 0.06em !important;
   }
-
-  #ra-progress-wrap { display: none; margin-bottom: 20px; animation: raFadeIn 0.4s ease; }
-  #ra-progress-meta {
-    display: flex; justify-content: space-between; align-items: center;
-    margin-bottom: 8px; font-size: 11px; font-weight: 600;
-    color: rgba(238,224,254,0.6); text-transform: uppercase; letter-spacing: 0.08em;
-  }
-  #ra-progress-track {
-    height: 6px; background: rgba(238,224,254,0.1); border-radius: 3px; overflow: hidden;
-  }
+  #ra-progress-track { height: 6px; background: rgba(238,224,254,0.1); border-radius: 3px; overflow: hidden; }
   #ra-progress-fill {
     height: 100%; width: 0; border-radius: 3px;
     background: linear-gradient(90deg, #915EE9, #B794F6);
-    transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    transition: width 0.5s cubic-bezier(0.22,1,0.36,1);
   }
 
   #ra-halfway-msg {
-    display: none; text-align: center; font-size: 18px; font-weight: 600;
-    color: #915EE9; padding: 24px 0; margin-bottom: 8px;
-    animation: raHalfwayPop 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    display: none; text-align: center; padding: 24px 0; margin-bottom: 8px;
+    font-size: 15pt !important; font-weight: 700 !important; color: #915EE9 !important;
+    animation: raHalfwayPop 0.6s ease;
   }
-  @keyframes raHalfwayPop {
-    0%{opacity:0;transform:scale(0.9)} 60%{opacity:1;transform:scale(1.03)} 100%{transform:scale(1)}
-  }
+  @keyframes raHalfwayPop { from{opacity:0;transform:scale(0.92)} to{opacity:1;transform:scale(1)} }
 
   #ra-analysis-progress { display: none; margin-bottom: 16px; }
-  .ra-analysis-step {
-    font-size: 13px; color: rgba(238,224,254,0.55); padding: 6px 0;
-    transition: color 0.3s; display: flex; align-items: center; gap: 10px;
-  }
-  .ra-analysis-step.active { color: #FAF6FF; }
-  .ra-analysis-step.done { color: #915EE9; }
-  .ra-analysis-step::before {
-    content: ''; width: 8px; height: 8px; border-radius: 50%;
-    background: rgba(238,224,254,0.2); flex-shrink: 0; transition: background 0.3s;
-  }
-  .ra-analysis-step.active::before { background: #915EE9; animation: raSpread 1s infinite; }
-  .ra-analysis-step.done::before { background: #915EE9; }
+  .ra-analysis-step { display: flex; align-items: center; gap: 10px; padding: 6px 0; }
+  .ra-analysis-step.active { color: #FAF6FF !important; }
+  .ra-analysis-step.done { color: #915EE9 !important; }
 
+  /* ── Chat zone ── */
   #ra-chat-zone { display: flex; flex-direction: column; min-height: 80px; }
-  #ra-display-pane { width: 100%; display: flex; flex-direction: column; gap: 20px; padding-bottom: 12px; }
-
+  #ra-display-pane { display: flex; flex-direction: column; gap: 18px; padding-bottom: 12px; }
   #ra-composer {
-    width: 100%; margin-top: auto; padding-top: 16px; position: sticky; bottom: 0; z-index: 5;
-    background: linear-gradient(to top, rgba(13,9,21,0.98) 70%, rgba(13,9,21,0));
+    margin-top: auto; padding-top: 16px; position: sticky; bottom: 0; z-index: 5;
+    background: linear-gradient(to top, rgba(13,9,21,0.98) 70%, transparent) !important;
   }
 
   #ra-input-container {
-    width: 100%; background: rgba(13,9,21,0.85);
-    border: 1px solid rgba(145,94,233,0.35); border-radius: 20px;
-    padding: 6px 8px 6px 18px; display: flex; align-items: center; gap: 12px;
-    transition: border-color 0.25s, box-shadow 0.25s;
+    display: flex; align-items: center; gap: 12px;
+    background: rgba(13,9,21,0.85) !important; border: 1px solid rgba(145,94,233,0.35) !important;
+    border-radius: 20px; padding: 6px 8px 6px 18px;
   }
-  #ra-input-container:focus-within {
-    border-color: #915EE9; box-shadow: 0 0 32px rgba(145,94,233,0.3);
-  }
-
-  .ra-leading-icon { color: #915EE9; font-size: 18px; opacity: 0.85; user-select: none; }
+  #ra-input-container:focus-within { border-color: #915EE9 !important; box-shadow: 0 0 24px rgba(145,94,233,0.25) !important; }
   #ra-inp {
-    flex: 1; background: transparent; border: none; outline: none;
-    color: #FAF6FF; font-size: 15px; padding: 12px 0; text-align: left;
+    flex: 1; background: transparent !important; border: none !important; outline: none !important;
+    color: #FAF6FF !important; padding: 12px 0 !important;
   }
-  #ra-inp::placeholder { color: rgba(238,224,254,0.45); }
-  #ra-inp:disabled { opacity: 0.4; cursor: not-allowed; }
+  #ra-inp::placeholder { color: rgba(238,224,254,0.45) !important; }
 
-  #ra-send, .ra-continue {
-    background: linear-gradient(135deg, #915EE9, #7B4FD4);
-    border: none; border-radius: 14px; padding: 11px 20px;
-    color: #FAF6FF; font-size: 14px; font-weight: 600; cursor: pointer;
-    transition: transform 0.15s, filter 0.15s, opacity 0.15s; white-space: nowrap;
-    font-family: inherit;
+  #ra-send, .ra-continue, #ra-cta a {
+    background: linear-gradient(135deg, #915EE9, #7B4FD4) !important;
+    border: none !important; border-radius: 14px !important; padding: 11px 20px !important;
+    color: #FAF6FF !important; font-size: 11pt !important; font-weight: 600 !important;
+    cursor: pointer; font-family: inherit !important; text-decoration: none !important;
+    display: inline-block; white-space: nowrap;
   }
-  #ra-send:hover:not(:disabled), .ra-continue:hover:not(:disabled) { filter: brightness(1.12); transform: scale(1.02); }
   #ra-send:disabled, .ra-continue:disabled { opacity: 0.4; cursor: not-allowed; }
 
   .ra-m {
-    font-size: 14px; line-height: 1.8; padding: 26px 28px; border-radius: 16px;
-    animation: raSlideUp 0.45s cubic-bezier(0.22, 1, 0.36, 1); width: 100%; text-align: left;
+    padding: 22px 24px !important; border-radius: 16px !important; width: 100% !important;
+    animation: raSlideUp 0.45s cubic-bezier(0.22,1,0.36,1);
   }
-  @keyframes raSlideUp { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:translateY(0)} }
-  @keyframes raFadeIn { from{opacity:0} to{opacity:1} }
+  @keyframes raSlideUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
 
   .ra-m.bot {
-    background: rgba(13,9,21,0.75); border: 1px solid rgba(238,224,254,0.12);
-    color: #EEE0FE; box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    background: rgba(13,9,21,0.75) !important; border: 1px solid rgba(238,224,254,0.12) !important;
   }
   .ra-m.usr {
-    background: rgba(145,94,233,0.12); border: 1px solid rgba(145,94,233,0.35);
-    color: #FAF6FF; font-weight: 500; align-self: flex-end; max-width: 92%; margin-left: auto;
+    background: rgba(145,94,233,0.12) !important; border: 1px solid rgba(145,94,233,0.35) !important;
+    color: #FAF6FF !important; align-self: flex-end; max-width: 92%; margin-left: auto !important;
   }
 
-  .ra-summary { padding: 20px 22px; }
-  .ra-summary-title {
-    font-size: 11px; font-weight: 700; color: #915EE9;
-    text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;
-  }
   .ra-summary-row {
-    display: grid; grid-template-columns: 130px 1fr; gap: 8px 16px;
-    padding: 10px 0; border-bottom: 1px solid rgba(238,224,254,0.08); align-items: baseline;
+    display: grid; grid-template-columns: 120px 1fr; gap: 8px 14px;
+    padding: 10px 0; border-bottom: 1px solid rgba(238,224,254,0.08);
   }
   .ra-summary-row:last-child { border-bottom: none; }
-  @media (max-width: 520px) { .ra-summary-row { grid-template-columns: 1fr; gap: 4px; } }
-  .ra-summary-label {
-    font-size: 11px; font-weight: 600; color: rgba(238,224,254,0.55);
-    text-transform: uppercase; letter-spacing: 0.05em;
-  }
-  .ra-summary-value { font-size: 14px; color: #FAF6FF; font-weight: 500; word-break: break-word; }
+  .ra-summary-value { color: #FAF6FF !important; font-weight: 500 !important; word-break: break-word; }
 
-  .ra-m.bot .ra-content { text-align: left; line-height: 1.8; }
-  .ra-m.bot .ra-content > *:first-child { margin-top: 0 !important; }
-  .ra-m.bot .ra-content > *:last-child { margin-bottom: 0 !important; }
-  .ra-m.bot h2 {
-    font-size: 22px; font-weight: 700; color: #FAF6FF; margin: 0 0 12px;
-    letter-spacing: -0.5px; line-height: 1.35; padding-bottom: 16px;
-    border-bottom: 1px solid rgba(145,94,233,0.3);
+  /* ── ACCORDION (default collapsed) ── */
+  #ra-engine-section .ra-accordion-group { margin-top: 8px; }
+  #ra-engine-section details.ra-accordion {
+    border: 1px solid rgba(238,224,254,0.12) !important; border-radius: 12px !important;
+    margin-bottom: 10px !important; background: rgba(13,9,21,0.55) !important; overflow: hidden;
   }
-  .ra-m.bot h3 {
-    font-size: 12px; font-weight: 700; color: #915EE9;
-    margin: 36px 0 14px; text-transform: uppercase; letter-spacing: 0.1em;
+  #ra-engine-section details.ra-accordion summary.ra-accordion-summary {
+    list-style: none !important; cursor: pointer !important;
+    padding: 16px 18px !important; display: flex !important; justify-content: space-between !important;
+    align-items: center !important; gap: 12px !important; user-select: none;
   }
-  .ra-m.bot h3:first-child { margin-top: 0; }
-  .ra-m.bot h4 { font-size: 15px; font-weight: 600; color: #FAF6FF; margin: 24px 0 12px; }
-  .ra-m.bot p { color: #EEE0FE; margin: 0 0 16px; line-height: 1.85; }
-  .ra-m.bot ul, .ra-m.bot ol { padding-left: 24px; margin: 6px 0 24px; }
-  .ra-m.bot li { color: #EEE0FE; margin-bottom: 12px; line-height: 1.7; }
-  .ra-m.bot li::marker { color: #915EE9; }
-  .ra-m.bot blockquote {
-    margin: 16px 0 24px; padding: 16px 20px; border-left: 3px solid #915EE9;
-    background: rgba(145,94,233,0.08); border-radius: 0 12px 12px 0; color: #EEE0FE;
+  #ra-engine-section details.ra-accordion summary::-webkit-details-marker { display: none !important; }
+  #ra-engine-section details.ra-accordion summary::marker { display: none !important; content: '' !important; }
+  #ra-engine-section .ra-acc-icon {
+    font-size: 14pt !important; color: #915EE9 !important; font-weight: 400 !important;
+    transition: transform 0.25s ease !important; flex-shrink: 0;
   }
-  .ra-m.bot hr { border: none; border-top: 1px solid rgba(145,94,233,0.2); margin: 32px 0; }
-  .ra-m.bot table { width: 100%; border-collapse: collapse; margin: 12px 0 28px; font-size: 13px; }
-  .ra-m.bot th {
-    background: rgba(145,94,233,0.15); color: #EEE0FE; padding: 12px 14px;
-    text-align: left; font-size: 10px; text-transform: uppercase; letter-spacing: 0.07em;
+  #ra-engine-section details.ra-accordion[open] .ra-acc-icon { transform: rotate(45deg) !important; }
+  #ra-engine-section .ra-accordion-body {
+    padding: 4px 18px 20px !important; border-top: 1px solid rgba(238,224,254,0.08) !important;
   }
-  .ra-m.bot td { padding: 12px 14px; border-bottom: 1px solid rgba(238,224,254,0.08); color: #EEE0FE; }
-  .ra-m.bot strong { color: #FAF6FF; font-weight: 600; }
-  .ra-m.bot a { color: #915EE9; text-decoration: none; border-bottom: 1px solid rgba(145,94,233,0.4); }
 
-  .ra-stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; margin: 16px 0 32px; }
-  .ra-stat-card {
-    background: linear-gradient(145deg, rgba(145,94,233,0.14), rgba(13,9,21,0.6));
-    border: 1px solid rgba(145,94,233,0.3); border-radius: 12px; padding: 16px;
-    animation: raStatPop 0.5s cubic-bezier(0.22,1,0.36,1) backwards;
+  /* ── ACTION PLAN TIMELINE ── */
+  #ra-engine-section .ra-timeline {
+    border-left: 2px solid rgba(145,94,233,0.35) !important;
+    margin: 12px 0 4px 6px !important; padding: 4px 0 4px 22px !important;
   }
-  @keyframes raStatPop { from{opacity:0;transform:scale(0.92)} to{opacity:1;transform:scale(1)} }
-  .ra-stat-value { display: block; font-size: 26px; font-weight: 700; color: #915EE9; margin-bottom: 6px; }
-  .ra-stat-label { display: block; font-size: 12px; color: rgba(238,224,254,0.75); line-height: 1.45; }
+  #ra-engine-section .ra-timeline-node {
+    position: relative !important; margin-bottom: 24px !important; padding-bottom: 4px !important;
+  }
+  #ra-engine-section .ra-timeline-node:last-child { margin-bottom: 0 !important; }
+  #ra-engine-section .ra-timeline-node::before {
+    content: '' !important; position: absolute !important; left: -29px !important; top: 6px !important;
+    width: 12px !important; height: 12px !important; border-radius: 50% !important;
+    background: #915EE9 !important; border: 2px solid #0D0915 !important; box-shadow: 0 0 0 2px rgba(145,94,233,0.3) !important;
+  }
+  #ra-engine-section .ra-timeline-badge {
+    margin: 0 0 10px !important; display: block !important;
+  }
+  #ra-engine-section .ra-timeline-body { padding-left: 0 !important; }
 
-  .ra-bar-chart { margin: 16px 0 32px; display: flex; flex-direction: column; gap: 16px; }
-  .ra-bar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; gap: 12px; }
-  .ra-bar-label { font-size: 13px; color: #FAF6FF; font-weight: 500; }
-  .ra-bar-badge { font-size: 10px; font-weight: 700; text-transform: uppercase; padding: 3px 8px; border-radius: 6px; }
-  .ra-bar-badge.gap { background: rgba(239,68,68,0.2); color: #FCA5A5; }
-  .ra-bar-badge.partial { background: rgba(234,179,8,0.2); color: #FDE047; }
-  .ra-bar-badge.strong { background: rgba(34,197,94,0.2); color: #86EFAC; }
-  .ra-bar-track { height: 8px; background: rgba(238,224,254,0.08); border-radius: 4px; overflow: hidden; }
-  .ra-bar-fill { height: 100%; border-radius: 4px; width: 0; transition: width 1s cubic-bezier(0.22,1,0.36,1); }
-  .ra-bar-fill.gap { background: linear-gradient(90deg, #EF4444, #F87171); }
-  .ra-bar-fill.partial { background: linear-gradient(90deg, #EAB308, #FACC15); }
-  .ra-bar-fill.strong { background: linear-gradient(90deg, #22C55E, #4ADE80); }
+  /* ── Stat cards ── */
+  #ra-engine-section .ra-stat-grid {
+    display: grid !important; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)) !important;
+    gap: 12px !important; margin: 14px 0 24px !important;
+  }
+  #ra-engine-section .ra-stat-card {
+    background: rgba(145,94,233,0.1) !important; border: 1px solid rgba(145,94,233,0.28) !important;
+    border-radius: 12px !important; padding: 16px !important;
+  }
+  #ra-engine-section .ra-stat-value {
+    display: block !important; font-size: 18pt !important; font-weight: 700 !important;
+    color: #915EE9 !important; margin-bottom: 6px !important; line-height: 1.2 !important;
+  }
+  #ra-engine-section .ra-stat-label { display: block !important; }
 
-  #ra-choices { width: 100%; display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
+  /* ── Bar charts ── */
+  #ra-engine-section .ra-bar-chart { margin: 14px 0 24px !important; display: flex !important; flex-direction: column !important; gap: 14px !important; }
+  #ra-engine-section .ra-bar-header { display: flex !important; justify-content: space-between !important; align-items: center !important; margin-bottom: 6px !important; gap: 10px !important; }
+  #ra-engine-section .ra-bar-label { color: #FAF6FF !important; font-weight: 500 !important; }
+  #ra-engine-section .ra-bar-badge {
+    font-size: 9pt !important; font-weight: 700 !important; text-transform: uppercase !important;
+    padding: 3px 8px !important; border-radius: 6px !important; flex-shrink: 0;
+  }
+  #ra-engine-section .ra-bar-badge.gap { background: rgba(239,68,68,0.2) !important; color: #FCA5A5 !important; }
+  #ra-engine-section .ra-bar-badge.partial { background: rgba(234,179,8,0.2) !important; color: #FDE047 !important; }
+  #ra-engine-section .ra-bar-badge.strong { background: rgba(34,197,94,0.2) !important; color: #86EFAC !important; }
+  #ra-engine-section .ra-bar-track { height: 8px; background: rgba(238,224,254,0.08); border-radius: 4px; overflow: hidden; }
+  #ra-engine-section .ra-bar-fill { height: 100%; width: 0; border-radius: 4px; transition: width 1s cubic-bezier(0.22,1,0.36,1); }
+  #ra-engine-section .ra-bar-fill.gap { background: linear-gradient(90deg, #EF4444, #F87171) !important; }
+  #ra-engine-section .ra-bar-fill.partial { background: linear-gradient(90deg, #EAB308, #FACC15) !important; }
+  #ra-engine-section .ra-bar-fill.strong { background: linear-gradient(90deg, #22C55E, #4ADE80) !important; }
 
+  /* ── Quiz choices ── */
+  #ra-choices { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
   .ra-opt {
-    background: rgba(13,9,21,0.6); border: 1px solid rgba(238,224,254,0.12);
-    border-radius: 12px; padding: 14px 18px; font-size: 14px; color: #EEE0FE;
-    cursor: pointer; text-align: left; font-family: inherit;
-    transition: all 0.25s cubic-bezier(0.22,1,0.36,1);
-    display: flex; align-items: center; gap: 12px;
+    background: rgba(13,9,21,0.6) !important; border: 1px solid rgba(238,224,254,0.12) !important;
+    border-radius: 12px !important; padding: 14px 18px !important; cursor: pointer !important;
+    text-align: left !important; display: flex !important; align-items: center !important; gap: 12px !important;
+    transition: all 0.2s ease !important; width: 100% !important;
   }
-  .ra-opt:hover { border-color: #915EE9; background: rgba(145,94,233,0.12); color: #FAF6FF; transform: translateX(4px); }
-  .ra-opt::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: #915EE9; flex-shrink: 0; }
-
-  .ra-opt.ra-multi {
-    cursor: pointer; user-select: none;
-  }
-  .ra-opt.ra-multi::before { display: none; }
+  .ra-opt:hover { border-color: #915EE9 !important; background: rgba(145,94,233,0.12) !important; color: #FAF6FF !important; }
+  .ra-opt:not(.ra-multi)::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #915EE9; flex-shrink: 0; }
   .ra-opt.ra-multi .ra-check {
     width: 18px; height: 18px; border-radius: 5px; flex-shrink: 0;
-    border: 1.5px solid rgba(145,94,233,0.5); background: transparent;
-    display: flex; align-items: center; justify-content: center; transition: all 0.2s;
+    border: 1.5px solid rgba(145,94,233,0.5); display: flex; align-items: center; justify-content: center;
   }
-  .ra-opt.ra-multi.selected { border-color: #915EE9; background: rgba(145,94,233,0.14); color: #FAF6FF; }
+  .ra-opt.ra-multi.selected { border-color: #915EE9 !important; background: rgba(145,94,233,0.14) !important; color: #FAF6FF !important; }
   .ra-opt.ra-multi.selected .ra-check { background: #915EE9; border-color: #915EE9; }
   .ra-opt.ra-multi.selected .ra-check::after {
-    content: ''; width: 5px; height: 9px;
-    border: solid #FAF6FF; border-width: 0 2px 2px 0; transform: rotate(45deg); margin-top: -2px;
+    content: ''; width: 5px; height: 9px; border: solid #FAF6FF; border-width: 0 2px 2px 0; transform: rotate(45deg); margin-top: -2px;
   }
 
-  #ra-quiz-actions { display: none; margin-bottom: 16px; }
-  .ra-multi-hint {
-    font-size: 12px; color: rgba(238,224,254,0.5); margin-bottom: 10px; font-style: italic;
-  }
-
-  #ra-suggestions { width: 100%; display: none; flex-direction: column; gap: 8px; margin-bottom: 12px; }
+  #ra-quiz-actions { display: none; margin-bottom: 14px; }
+  #ra-suggestions { display: none; flex-direction: column; gap: 8px; margin-bottom: 12px; }
   #ra-suggestions-label {
-    font-size: 11px; font-weight: 700; color: rgba(238,224,254,0.55);
-    text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 2px;
+    font-size: 10pt !important; font-weight: 700 !important; color: rgba(238,224,254,0.55) !important;
+    text-transform: uppercase !important; letter-spacing: 0.06em !important;
   }
   .ra-suggest {
-    background: rgba(145,94,233,0.06); border: 1px solid rgba(145,94,233,0.25);
-    border-radius: 12px; padding: 12px 16px; font-size: 13px; color: #EEE0FE;
-    cursor: pointer; text-align: left; font-family: inherit; transition: all 0.25s; line-height: 1.45;
+    background: rgba(145,94,233,0.06) !important; border: 1px solid rgba(145,94,233,0.25) !important;
+    border-radius: 12px !important; padding: 12px 16px !important; cursor: pointer !important; width: 100% !important;
   }
-  .ra-suggest:hover { border-color: #915EE9; color: #FAF6FF; background: rgba(145,94,233,0.14); transform: translateX(3px); }
+  .ra-suggest:hover { border-color: #915EE9 !important; color: #FAF6FF !important; background: rgba(145,94,233,0.14) !important; }
 
-  .ra-dots { display: flex; gap: 8px; padding: 16px; align-items: center; }
-  .ra-dots span {
-    width: 8px; height: 8px; border-radius: 50%; background: #915EE9;
-    animation: raSpread 1.2s infinite ease-in-out;
-  }
+  .ra-dots { display: flex; gap: 8px; padding: 14px; }
+  .ra-dots span { width: 8px; height: 8px; border-radius: 50%; background: #915EE9; animation: raSpread 1.2s infinite; }
   .ra-dots span:nth-child(2) { animation-delay: 0.2s; }
   .ra-dots span:nth-child(3) { animation-delay: 0.4s; }
-  @keyframes raSpread { 0%,60%,100%{transform:scale(0.7);opacity:0.3} 30%{transform:scale(1.15);opacity:1} }
+  @keyframes raSpread { 0%,60%,100%{transform:scale(0.7);opacity:0.3} 30%{transform:scale(1.1);opacity:1} }
 
-  #ra-cta { width: 100%; margin-top: 20px; display: none; text-align: left; z-index: 1; position: relative; }
-  #ra-cta a {
-    display: inline-block; background: linear-gradient(135deg, #915EE9, #7B4FD4);
-    color: #FAF6FF; padding: 14px 28px; border-radius: 14px;
-    font-size: 14px; font-weight: 700; text-decoration: none;
-  }
+  #ra-cta { display: none; margin-top: 18px; }
   #ra-restart {
-    display: block; margin: 14px 0 0; font-size: 12px; color: rgba(238,224,254,0.5);
-    cursor: pointer; background: none; border: none; font-family: inherit; padding: 0;
+    display: block; margin: 14px 0 0; background: none !important; border: none !important;
+    color: rgba(238,224,254,0.5) !important; font-size: 10pt !important; cursor: pointer; padding: 0 !important;
   }
-  #ra-restart:hover { color: #FAF6FF; }
+  #ra-restart:hover { color: #FAF6FF !important; }
+  .ra-followup-counter { font-size: 10pt !important; color: rgba(238,224,254,0.45) !important; margin-bottom: 8px !important; }
 
-  .ra-session-end { text-align: left; padding: 22px; }
-  .ra-session-end p { color: #EEE0FE; margin: 0 0 14px; line-height: 1.65; }
-  .ra-followup-counter { font-size: 11px; color: rgba(238,224,254,0.45); margin-bottom: 8px; }
+  @media (max-width: 520px) {
+    #ra-engine-section .ra-summary-row { grid-template-columns: 1fr !important; }
+  }
 </style>
 
 <div id="ra-engine-section">
@@ -273,7 +354,7 @@
     <div class="ra-orb ra-orb-3"></div>
   </div>
 
-  <h2 id="ra-main-title">What brand are we auditing today?</h2>
+  <h1 id="ra-main-title">What brand are we auditing today?</h1>
 
   <div id="ra-progress-wrap">
     <div id="ra-progress-meta">
@@ -293,7 +374,7 @@
 
   <div id="ra-choices"></div>
   <div id="ra-quiz-actions">
-    <button class="ra-continue" id="ra-continue-btn" onclick="raSubmitMulti()">Continue</button>
+    <button type="button" class="ra-continue" id="ra-continue-btn" onclick="raSubmitMulti()">Continue</button>
   </div>
 
   <div id="ra-chat-zone">
@@ -302,16 +383,16 @@
       <div id="ra-followup-counter" class="ra-followup-counter" style="display:none;"></div>
       <div id="ra-suggestions"><div id="ra-suggestions-label">Suggested questions</div></div>
       <div id="ra-input-container">
-        <span class="ra-leading-icon">→</span>
+        <span class="ra-leading-icon" aria-hidden="true">→</span>
         <input id="ra-inp" type="text" autocomplete="off" onkeydown="if(event.key==='Enter')raSend()" />
-        <button id="ra-send" onclick="raSend()">Continue</button>
+        <button type="button" id="ra-send" onclick="raSend()">Continue</button>
       </div>
     </div>
   </div>
 
   <div id="ra-cta">
     <a href="https://www.superfans.io/demo" target="_blank" rel="noopener">Book a Call with Superfans.io →</a>
-    <button id="ra-restart" onclick="raRestart()">Start a new audit</button>
+    <button type="button" id="ra-restart" onclick="raRestart()">Start a new audit</button>
   </div>
 </div>
 
@@ -328,173 +409,195 @@ const CATEGORIES = [
 ];
 
 const QUIZ = [
-  {
-    key: 'q1', multi: false,
-    q: 'How often does a typical customer buy from you?',
-    opts: ['Once (gift / one-time purchase)','Every 1–2 months','Every 3–6 months','Once or twice a year','High-frequency (weekly / monthly consumable)','Irregular / event-driven'],
-    weak: [0, 3, 5]
-  },
-  {
-    key: 'q2', multi: false,
-    q: 'What is your current repeat purchase rate (roughly)?',
-    opts: ['Less than 10%','10–20%','20–35%','35–50%','Above 50%','Don\'t know'],
-    weak: [0, 1, 5]
-  },
-  {
-    key: 'q3', multi: true,
-    q: 'How do you currently identify your best customers?',
-    opts: ['We don\'t have a system for this','Total lifetime spend','RFM score (Recency, Frequency & Monetary)','Order count threshold','Annual revenue contribution','Manual tagging by the team','App or loyalty program membership'],
-    weak: [0, 5]
-  },
-  {
-    key: 'q4', multi: false,
-    q: 'What percentage of your revenue comes from your top 20–30% of customers?',
-    opts: ['Less than 40%','40–55%','55–70%','70% or more','Don\'t know'],
-    weak: [0, 4]
-  },
-  {
-    key: 'q5', multi: false,
-    q: 'Do you currently run a loyalty or rewards program?',
-    opts: ['No program','Points-only program','Tiered program (Bronze / Silver / Gold)','Subscription / Paid membership','Hybrid (Points + Tiers + Perks)','Referral-only program'],
-    weak: [0, 1, 5]
-  },
-  {
-    key: 'q6', multi: true,
-    q: 'What perks or benefits do your best customers currently receive?',
-    opts: ['Nothing specific','Discount codes','Free shipping','Early access to new products','Exclusive events or content','Personalized outreach','Birthday rewards','Surprise gifts','Dedicated support'],
-    weak: [0, 1]
-  },
-  {
-    key: 'q7', multi: true,
-    q: 'How do you currently communicate with customers between purchases?',
-    opts: ['Broadcast campaigns to all customers','Automated behavior-based flows','Personalized emails to VIP customers','SMS / Push notifications','Direct mail / Postcards','1:1 outreach from our team','We rarely communicate between purchases'],
-    weak: [0, 6]
-  },
-  {
-    key: 'q8', multi: true,
-    q: 'Which customer milestones do you currently recognize?',
-    opts: ['None','Birthday / Anniversary','Purchase milestones (e.g. 5th order)','Tier upgrades','First purchase anniversary','Loyalty point milestones','Review / Feedback thank you'],
-    weak: [0]
-  },
-  {
-    key: 'q9', multi: false,
-    q: 'Do your best customers actively refer or advocate for your brand?',
-    opts: ['No, very few referrals','Some referrals, but not tracked','Yes, we have a referral program','Yes, customers actively share on social media / create UGC','We receive referrals but don\'t measure them'],
-    weak: [0, 1, 4]
-  },
-  {
-    key: 'q10', multi: true,
-    q: 'Which retention metrics do you actively track today?',
-    opts: ['Revenue only','Repeat Purchase Rate','Customer Lifetime Value (CLV)','Average Order Value (AOV)','Churn Rate','Loyalty Program Redemption Rate','Net Promoter Score (NPS)','We don\'t currently track retention metrics'],
-    weak: [0, 7]
-  }
+  { key:'q1', multi:false, q:'How often does a typical customer buy from you?',
+    opts:['Once (gift / one-time purchase)','Every 1–2 months','Every 3–6 months','Once or twice a year','High-frequency (weekly / monthly consumable)','Irregular / event-driven'], weak:[0,3,5] },
+  { key:'q2', multi:false, q:'What is your current repeat purchase rate (roughly)?',
+    opts:['Less than 10%','10–20%','20–35%','35–50%','Above 50%','Don\'t know'], weak:[0,1,5] },
+  { key:'q3', multi:true, q:'How do you currently identify your best customers?',
+    opts:['We don\'t have a system for this','Total lifetime spend','RFM score (Recency, Frequency & Monetary)','Order count threshold','Annual revenue contribution','Manual tagging by the team','App or loyalty program membership'], weak:[0,5] },
+  { key:'q4', multi:false, q:'What percentage of your revenue comes from your top 20–30% of customers?',
+    opts:['Less than 40%','40–55%','55–70%','70% or more','Don\'t know'], weak:[0,4] },
+  { key:'q5', multi:false, q:'Do you currently run a loyalty or rewards program?',
+    opts:['No program','Points-only program','Tiered program (Bronze / Silver / Gold)','Subscription / Paid membership','Hybrid (Points + Tiers + Perks)','Referral-only program'], weak:[0,1,5] },
+  { key:'q6', multi:true, q:'What perks or benefits do your best customers currently receive?',
+    opts:['Nothing specific','Discount codes','Free shipping','Early access to new products','Exclusive events or content','Personalized outreach','Birthday rewards','Surprise gifts','Dedicated support'], weak:[0,1] },
+  { key:'q7', multi:true, q:'How do you currently communicate with customers between purchases?',
+    opts:['Broadcast campaigns to all customers','Automated behavior-based flows','Personalized emails to VIP customers','SMS / Push notifications','Direct mail / Postcards','1:1 outreach from our team','We rarely communicate between purchases'], weak:[0,6] },
+  { key:'q8', multi:true, q:'Which customer milestones do you currently recognize?',
+    opts:['None','Birthday / Anniversary','Purchase milestones (e.g. 5th order)','Tier upgrades','First purchase anniversary','Loyalty point milestones','Review / Feedback thank you'], weak:[0] },
+  { key:'q9', multi:false, q:'Do your best customers actively refer or advocate for your brand?',
+    opts:['No, very few referrals','Some referrals, but not tracked','Yes, we have a referral program','Yes, customers actively share on social media / create UGC','We receive referrals but don\'t measure them'], weak:[0,1,4] },
+  { key:'q10', multi:true, q:'Which retention metrics do you actively track today?',
+    opts:['Revenue only','Repeat Purchase Rate','Customer Lifetime Value (CLV)','Average Order Value (AOV)','Churn Rate','Loyalty Program Redemption Rate','Net Promoter Score (NPS)','We don\'t currently track retention metrics'], weak:[0,7] }
 ];
 
 const SUGGESTED_BY_AREA = {
-  q1: ['How do we increase purchase frequency for irregular buyers?','What repurchase triggers work best for our category?'],
-  q2: ['What repeat purchase rate should we target in the next 90 days?','How do we measure repeat purchase rate accurately?'],
-  q3: ['How should we identify VIP customers using behavioral signals?','What is an RFM-based VIP tier structure?'],
-  q4: ['How do we grow revenue from our top 20–30% of customers?','Why does revenue concentration matter for retention strategy?'],
-  q5: ['How do we redesign our loyalty program to drive behaviour, not discounts?','What VIP tier structure fits our category?'],
-  q6: ['What access-led perks work better than discount codes?','How do birthday rewards drive retention without discounts?'],
-  q7: ['What should each channel (email, SMS, push) be responsible for?','How would a mobile app change our between-purchase strategy?'],
-  q8: ['Which customer milestones drive the highest repeat purchase lift?','How do PostPilot-style birthday cards work without discounts?'],
-  q9: ['How do we turn loyal customers into active advocates?','What incentive structure works for ambassador programs?'],
-  q10: ['Which retention metrics should we track first?','How do we build a retention dashboard from scratch?']
+  q1:['How do we increase purchase frequency for irregular buyers?','What repurchase triggers work best for our category?'],
+  q2:['What repeat purchase rate should we target in the next 90 days?','How do we measure repeat purchase rate accurately?'],
+  q3:['How should we identify VIP customers using behavioral signals?','What is an RFM-based VIP tier structure?'],
+  q4:['How do we grow revenue from our top 20–30% of customers?','Why does revenue concentration matter for retention?'],
+  q5:['How do we redesign our loyalty program to drive behaviour, not discounts?','What VIP tier structure fits our category?'],
+  q6:['What access-led perks work better than discount codes?','How do birthday rewards drive retention without discounts?'],
+  q7:['What should each channel (email, SMS, push) be responsible for?','How would a mobile app change our between-purchase strategy?'],
+  q8:['Which customer milestones drive the highest repeat purchase lift?','How do birthday cards work without discounts?'],
+  q9:['How do we turn loyal customers into active advocates?','What incentive structure works for ambassador programs?'],
+  q10:['Which retention metrics should we track first?','How do we build a retention dashboard from scratch?']
 };
 
 const BRAND_SUMMARY_FIELDS = [
-  { label: 'Brand Name', get: () => raState.brand.name },
-  { label: 'Category', get: () => raState.brand.category },
-  { label: 'Web URL', get: () => raState.brand.url }
+  { label:'Brand Name', get:() => raState.brand.name },
+  { label:'Category', get:() => raState.brand.category },
+  { label:'Web URL', get:() => raState.brand.url }
 ];
 
 let raState = {
-  brand: {}, answers: {}, quizStep: 0, audit: null,
-  followUpCount: 0, chatHistory: [], sessionEnded: false,
-  phase: 'brand', multiSelected: new Set()
+  brand:{}, answers:{}, quizStep:0, audit:null,
+  followUpCount:0, chatHistory:[], sessionEnded:false,
+  phase:'brand', multiSelected:new Set()
 };
 
-window.addEventListener('DOMContentLoaded', () => {
-  raShowInput('Enter your brand name...', 'name');
-});
+window.addEventListener('DOMContentLoaded', () => raShowInput('Enter your brand name...', 'name'));
 
-/* ── Markdown & visuals ─────────────────────────────────── */
-function raStripEmojis(text) {
-  return text.replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/gu, '').replace(/\s{2,}/g, ' ').trim();
+/* ═══ MARKDOWN PARSER ENGINE ═══ */
+function raEscapeHtml(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
-function raPreprocessMarkdown(md) {
-  md = raStripEmojis(md);
+function raStripEmojis(text) {
+  return text.replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/gu, '').trim();
+}
+
+function raFixClumping(md) {
+  md = md.replace(/\*\*([^*\n]+)\*\*\s*[-–—:]\s*/g, '**$1**\n\n');
+  md = md.replace(/^####\s*([^\n]+?)\s*[-–—:]\s*/gm, '#### $1\n\n');
+  md = md.replace(/^-\s*\*\*([^*]+)\*\*\s*[-–—:]\s*/gm, '- **$1**\n  ');
+  md = md.replace(/\n{3,}/g, '\n\n');
+  return md;
+}
+
+function raInjectWidgets(md) {
   md = md.replace(/(?:\[stat:([^|\]]+)\|([^\]]+)\]\s*)+/g, (block) => {
     const stats = [...block.matchAll(/\[stat:([^|\]]+)\|([^\]]+)\]/g)];
     return '<div class="ra-stat-grid">' + stats.map(s =>
-      `<div class="ra-stat-card"><span class="ra-stat-value">${s[1].trim()}</span><span class="ra-stat-label">${s[2].trim()}</span></div>`
+      `<div class="ra-stat-card"><span class="ra-stat-value">${raEscapeHtml(s[1].trim())}</span><span class="ra-stat-label">${raEscapeHtml(s[2].trim())}</span></div>`
     ).join('') + '</div>\n\n';
   });
   md = md.replace(/(?:\[bar:([^|\]]+)\|(\d+)\|([^\]]+)\]\s*)+/g, (block) => {
     const bars = [...block.matchAll(/\[bar:([^|\]]+)\|(\d+)\|([^\]]+)\]/g)];
     return '<div class="ra-bar-chart">' + bars.map(b => {
-      const label = b[1].trim(), score = Math.min(100, Math.max(0, parseInt(b[2], 10))), status = b[3].trim();
-      const cls = status.toLowerCase().includes('strong') ? 'strong' : status.toLowerCase().includes('partial') ? 'partial' : 'gap';
-      return `<div class="ra-bar-row"><div class="ra-bar-header"><span class="ra-bar-label">${label}</span><span class="ra-bar-badge ${cls}">${status}</span></div><div class="ra-bar-track"><div class="ra-bar-fill ${cls}" data-width="${score}"></div></div></div>`;
+      const label = raEscapeHtml(b[1].trim());
+      const score = Math.min(100, Math.max(0, parseInt(b[2], 10)));
+      const status = b[3].trim();
+      const cls = /strong/i.test(status) ? 'strong' : /partial/i.test(status) ? 'partial' : 'gap';
+      return `<div class="ra-bar-row"><div class="ra-bar-header"><span class="ra-bar-label">${label}</span><span class="ra-bar-badge ${cls}">${raEscapeHtml(status)}</span></div><div class="ra-bar-track"><div class="ra-bar-fill ${cls}" data-width="${score}"></div></div></div>`;
     }).join('') + '</div>\n\n';
   });
+  return md;
+}
+
+function raParseMdBlock(md) {
+  md = raFixClumping(raInjectWidgets(md));
   return (typeof marked !== 'undefined') ? marked.parse(md) : md.replace(/\n/g, '<br>');
+}
+
+function raIsActionPlan(title) {
+  return /30.day|action plan/i.test(title);
+}
+
+function raBuildTimeline(body) {
+  const chunks = body.split(/\n(?=####\s)/i).filter(c => c.trim());
+  const weekChunks = chunks.filter(c => /^####\s*Week/i.test(c.trim()));
+  if (!weekChunks.length) return raParseMdBlock(body);
+
+  let html = '<div class="ra-timeline">';
+  weekChunks.forEach(chunk => {
+    const m = chunk.match(/^####\s*(.+?)\s*\n([\s\S]*)/i);
+    if (m) {
+      html += `<div class="ra-timeline-node"><div class="ra-timeline-badge">${raEscapeHtml(m[1].trim())}</div><div class="ra-timeline-body">${raParseMdBlock(m[2].trim())}</div></div>`;
+    }
+  });
+  const intro = chunks.filter(c => !/^####\s*Week/i.test(c.trim())).join('\n').trim();
+  if (intro) html = raParseMdBlock(intro) + html;
+  html += '</div>';
+  return html;
+}
+
+function raRenderAuditMarkdown(md) {
+  md = raStripEmojis(md);
+  const splitIdx = md.search(/\n###\s+/);
+  let headerMd = '', sectionsRaw = md;
+  if (splitIdx !== -1) {
+    headerMd = md.slice(0, splitIdx).trim();
+    sectionsRaw = md.slice(splitIdx);
+  }
+
+  let html = '<div class="ra-audit-wrap">';
+  if (headerMd) {
+    html += `<div class="ra-audit-header">${raParseMdBlock(headerMd)}</div>`;
+  }
+
+  const sections = sectionsRaw.split(/\n(?=###\s+)/).filter(s => s.trim());
+  html += '<div class="ra-accordion-group">';
+  sections.forEach(section => {
+    const titleM = section.match(/^###\s+(.+?)(?:\n|$)/);
+    if (!titleM) return;
+    const title = titleM[1].trim();
+    let body = section.replace(/^###\s+.+\n?/, '').replace(/^---+\s*$/gm, '').trim();
+    const inner = raIsActionPlan(title) ? raBuildTimeline(body) : raParseMdBlock(body);
+    html += `<details class="ra-accordion"><summary class="ra-accordion-summary"><span class="ra-acc-title">${raEscapeHtml(title)}</span><span class="ra-acc-icon" aria-hidden="true">＋</span></summary><div class="ra-accordion-body">${inner}</div></details>`;
+  });
+  html += '</div></div>';
+  return html;
+}
+
+function raRenderContent(md, isAudit) {
+  if (isAudit || (md.includes('\n### ') && md.split('\n### ').length > 2)) {
+    return raRenderAuditMarkdown(md);
+  }
+  return `<div class="ra-content">${raParseMdBlock(raStripEmojis(md))}</div>`;
 }
 
 function raAnimateBars(container) {
   requestAnimationFrame(() => {
     container.querySelectorAll('.ra-bar-fill').forEach(bar => {
-      setTimeout(() => { bar.style.width = (bar.dataset.width || '0') + '%'; }, 80);
+      setTimeout(() => { bar.style.width = (bar.dataset.width || '0') + '%'; }, 100);
     });
   });
 }
 
-function raRenderBotContent(md) { return `<div class="ra-content">${raPreprocessMarkdown(md)}</div>`; }
-
-/* ── UI helpers ─────────────────────────────────────────── */
+/* ═══ UI HELPERS ═══ */
 function raScrollToComposer() {
   requestAnimationFrame(() => {
-    document.getElementById('ra-composer').scrollIntoView({ behavior: 'smooth', block: 'end' });
+    document.getElementById('ra-composer').scrollIntoView({ behavior:'smooth', block:'end' });
     const inp = document.getElementById('ra-inp');
-    if (inp && !inp.disabled) inp.focus({ preventScroll: true });
+    if (inp && !inp.disabled) inp.focus({ preventScroll:true });
   });
 }
 
-function raShowComposer(show) {
-  document.getElementById('ra-composer').style.display = show ? 'block' : 'none';
-}
+function raShowComposer(show) { document.getElementById('ra-composer').style.display = show ? 'block' : 'none'; }
 
 function raUpdateProgress(n) {
-  const wrap = document.getElementById('ra-progress-wrap');
-  wrap.style.display = 'block';
+  document.getElementById('ra-progress-wrap').style.display = 'block';
   const pct = Math.round((n / TOTAL_QUIZ) * 100);
   document.getElementById('ra-progress-label').textContent = `Question ${n} of ${TOTAL_QUIZ}`;
   document.getElementById('ra-progress-pct').textContent = pct + '%';
   document.getElementById('ra-progress-fill').style.width = pct + '%';
 }
 
-function raHideProgress() {
-  document.getElementById('ra-progress-wrap').style.display = 'none';
-}
+function raHideProgress() { document.getElementById('ra-progress-wrap').style.display = 'none'; }
 
 function raShowHalfway(cb) {
   document.getElementById('ra-choices').style.display = 'none';
   document.getElementById('ra-quiz-actions').style.display = 'none';
   const msg = document.getElementById('ra-halfway-msg');
   msg.style.display = 'block';
-  setTimeout(() => {
-    msg.style.display = 'none';
-    if (cb) cb();
-  }, 1800);
+  setTimeout(() => { msg.style.display = 'none'; if (cb) cb(); }, 1800);
 }
 
 function raShowAnalysisProgress() {
   raHideProgress();
   document.getElementById('ra-main-title').textContent = `Analyzing ${raState.brand.name}...`;
-  const el = document.getElementById('ra-analysis-progress');
-  el.style.display = 'block';
+  document.getElementById('ra-analysis-progress').style.display = 'block';
   ['ra-step-1','ra-step-2','ra-step-3'].forEach((id, i) => {
     setTimeout(() => {
       if (i > 0) document.getElementById(['ra-step-1','ra-step-2','ra-step-3'][i-1]).className = 'ra-analysis-step done';
@@ -505,9 +608,7 @@ function raShowAnalysisProgress() {
 
 function raHideAnalysisProgress() {
   document.getElementById('ra-analysis-progress').style.display = 'none';
-  ['ra-step-1','ra-step-2','ra-step-3'].forEach(id => {
-    document.getElementById(id).className = 'ra-analysis-step';
-  });
+  ['ra-step-1','ra-step-2','ra-step-3'].forEach(id => { document.getElementById(id).className = 'ra-analysis-step'; });
 }
 
 function raUpdateFollowUpCounter() {
@@ -522,19 +623,14 @@ function raShowInput(placeholder, mode) {
   document.getElementById('ra-choices').style.display = 'none';
   document.getElementById('ra-quiz-actions').style.display = 'none';
   raShowComposer(true);
-  const inp = document.getElementById('ra-inp');
-  const btn = document.getElementById('ra-send');
-  inp.placeholder = placeholder;
-  inp.dataset.mode = mode;
-  inp.value = '';
-  inp.disabled = raState.sessionEnded;
-  btn.disabled = raState.sessionEnded;
+  const inp = document.getElementById('ra-inp'), btn = document.getElementById('ra-send');
+  inp.placeholder = placeholder; inp.dataset.mode = mode; inp.value = '';
+  inp.disabled = raState.sessionEnded; btn.disabled = raState.sessionEnded;
   btn.textContent = mode === 'followup' ? 'Ask' : 'Continue';
   raUpdateFollowUpCounter();
-  if (!raState.sessionEnded) setTimeout(() => inp.focus({ preventScroll: true }), 100);
+  if (!raState.sessionEnded) setTimeout(() => inp.focus({ preventScroll:true }), 100);
 }
 
-/* ── Brand summary (persistent) ─────────────────────────── */
 function raRenderBrandSummary() {
   const pane = document.getElementById('ra-display-pane');
   let el = document.getElementById('ra-summary');
@@ -544,13 +640,13 @@ function raRenderBrandSummary() {
     el.className = 'ra-m bot ra-summary';
     pane.insertBefore(el, pane.firstChild);
   }
-  const rows = BRAND_SUMMARY_FIELDS.map(f => ({ label: f.label, value: f.get() })).filter(f => f.value);
+  const rows = BRAND_SUMMARY_FIELDS.map(f => ({ label:f.label, value:f.get() })).filter(f => f.value);
   if (!rows.length) return;
   el.innerHTML = '<div class="ra-summary-title">Your brand</div>' +
-    rows.map(r => `<div class="ra-summary-row"><span class="ra-summary-label">${r.label}</span><span class="ra-summary-value">${r.value}</span></div>`).join('');
+    rows.map(r => `<div class="ra-summary-row"><span class="ra-summary-label">${r.label}</span><span class="ra-summary-value">${raEscapeHtml(r.value)}</span></div>`).join('');
 }
 
-/* ── Phase 1: Brand info ────────────────────────────────── */
+/* ═══ PHASE 1: BRAND ONBOARDING ═══ */
 function raSend() {
   const inp = document.getElementById('ra-inp');
   const val = inp.value.trim();
@@ -558,6 +654,21 @@ function raSend() {
   if (inp.dataset.mode === 'followup') { inp.value = ''; raSendFollowUp(val); return; }
   raHandleBrandInput(inp.dataset.mode, val);
   inp.value = '';
+}
+
+function raShowChoices(options, onPick) {
+  raShowComposer(false);
+  const el = document.getElementById('ra-choices');
+  el.style.display = 'flex';
+  el._onPick = onPick;
+  el.innerHTML = options.map((opt, i) => `<button type="button" class="ra-opt" onclick="raPickChoice(${i})">${raEscapeHtml(opt)}</button>`).join('');
+}
+
+function raPickChoice(i) {
+  const el = document.getElementById('ra-choices');
+  const text = el.querySelectorAll('.ra-opt')[i].textContent;
+  el.innerHTML = ''; el.style.display = 'none';
+  if (el._onPick) el._onPick(i, text);
 }
 
 function raHandleBrandInput(mode, val) {
@@ -579,7 +690,7 @@ function raHandleBrandInput(mode, val) {
   }
 }
 
-/* ── Phase 2: 10-question quiz ─────────────────────────── */
+/* ═══ PHASE 2: 10-QUESTION QUIZ ═══ */
 function raStartQuiz() {
   raState.phase = 'quiz';
   raState.answers = {};
@@ -593,13 +704,10 @@ function raStartQuiz() {
     intro.id = 'ra-quiz-intro';
     intro.className = 'ra-m bot';
     const summary = document.getElementById('ra-summary');
-    if (summary && summary.nextSibling) {
-      document.getElementById('ra-display-pane').insertBefore(intro, summary.nextSibling);
-    } else {
-      document.getElementById('ra-display-pane').appendChild(intro);
-    }
+    const pane = document.getElementById('ra-display-pane');
+    summary ? pane.insertBefore(intro, summary.nextSibling) : pane.appendChild(intro);
   }
-  intro.innerHTML = '<p style="margin:0;font-size:16px;color:#FAF6FF;line-height:1.6;">Tell us a little about your brand <span style="color:rgba(238,224,254,0.6);font-size:14px;">(It\'ll only take a minute, we promise!)</span></p>';
+  intro.innerHTML = '<p>Tell us a little about your brand <span style="color:rgba(238,224,254,0.6)">(It\'ll only take a minute, we promise!)</span></p>';
 
   raUpdateProgress(1);
   setTimeout(() => raAskQuiz(0), 500);
@@ -610,29 +718,22 @@ function raAskQuiz(step) {
   raState.quizStep = step;
   raUpdateProgress(step + 1);
   document.getElementById('ra-main-title').textContent = q.q;
-
-  if (q.multi) raShowMultiChoices(q);
-  else raShowSingleChoices(q);
+  q.multi ? raShowMultiChoices(q) : raShowSingleChoices(q);
 }
 
 function raShowSingleChoices(q) {
   document.getElementById('ra-quiz-actions').style.display = 'none';
   const el = document.getElementById('ra-choices');
   el.style.display = 'flex';
-  el.innerHTML = q.opts.map((opt, i) =>
-    `<button class="ra-opt" onclick="raPickSingle(${i})">${opt}</button>`
-  ).join('');
+  el.innerHTML = q.opts.map((opt, i) => `<button type="button" class="ra-opt" onclick="raPickSingle(${i})">${raEscapeHtml(opt)}</button>`).join('');
   el._q = q;
 }
 
 function raPickSingle(i) {
-  const el = document.getElementById('ra-choices');
-  const q = el._q;
-  const text = q.opts[i];
-  el.innerHTML = '';
-  el.style.display = 'none';
-  raState.answers[q.key] = text;
-  raAfterQuizAnswer(q.key);
+  const el = document.getElementById('ra-choices'), q = el._q;
+  raState.answers[q.key] = q.opts[i];
+  el.innerHTML = ''; el.style.display = 'none';
+  raAfterQuizAnswer();
 }
 
 function raShowMultiChoices(q) {
@@ -640,73 +741,47 @@ function raShowMultiChoices(q) {
   const el = document.getElementById('ra-choices');
   el.style.display = 'flex';
   el.innerHTML = '<div class="ra-multi-hint">Select all that apply</div>' +
-    q.opts.map((opt, i) =>
-      `<div class="ra-opt ra-multi" data-idx="${i}" onclick="raToggleMulti(${i})">
-        <span class="ra-check"></span><span>${opt}</span>
-      </div>`
-    ).join('');
+    q.opts.map((opt, i) => `<div class="ra-opt ra-multi" data-idx="${i}" onclick="raToggleMulti(${i})"><span class="ra-check"></span><span>${raEscapeHtml(opt)}</span></div>`).join('');
   el._q = q;
   document.getElementById('ra-quiz-actions').style.display = 'block';
   document.getElementById('ra-continue-btn').disabled = true;
 }
 
 function raToggleMulti(i) {
-  const el = document.getElementById('ra-choices');
-  const optEl = el.querySelector(`[data-idx="${i}"]`);
-  if (raState.multiSelected.has(i)) {
-    raState.multiSelected.delete(i);
-    optEl.classList.remove('selected');
-  } else {
-    raState.multiSelected.add(i);
-    optEl.classList.add('selected');
-  }
+  const optEl = document.querySelector(`#ra-choices [data-idx="${i}"]`);
+  if (raState.multiSelected.has(i)) { raState.multiSelected.delete(i); optEl.classList.remove('selected'); }
+  else { raState.multiSelected.add(i); optEl.classList.add('selected'); }
   document.getElementById('ra-continue-btn').disabled = raState.multiSelected.size === 0;
 }
 
 function raSubmitMulti() {
-  const el = document.getElementById('ra-choices');
-  const q = el._q;
-  if (!q || raState.multiSelected.size === 0) return;
-  const selected = [...raState.multiSelected].sort((a, b) => a - b).map(i => q.opts[i]);
-  el.innerHTML = '';
-  el.style.display = 'none';
+  const el = document.getElementById('ra-choices'), q = el._q;
+  if (!q || !raState.multiSelected.size) return;
+  raState.answers[q.key] = [...raState.multiSelected].sort((a,b) => a-b).map(i => q.opts[i]);
+  el.innerHTML = ''; el.style.display = 'none';
   document.getElementById('ra-quiz-actions').style.display = 'none';
-  raState.answers[q.key] = selected;
-  raAfterQuizAnswer(q.key);
+  raAfterQuizAnswer();
 }
 
-function raAfterQuizAnswer(key) {
+function raAfterQuizAnswer() {
   const step = raState.quizStep;
-
-  if (step === 4) {
-    raShowHalfway(() => raAskQuiz(5));
-    return;
-  }
-
-  if (step === TOTAL_QUIZ - 1) {
-    raHideProgress();
-    raGenerate();
-    return;
-  }
-
+  if (step === 4) { raShowHalfway(() => raAskQuiz(5)); return; }
+  if (step === TOTAL_QUIZ - 1) { raHideProgress(); raGenerate(); return; }
   raAskQuiz(step + 1);
 }
 
-/* ── Audit generation ───────────────────────────────────── */
+/* ═══ AUDIT GENERATION ═══ */
 async function raGenerate() {
   raShowAnalysisProgress();
   const dots = raTyping();
-
   try {
     const res = await fetch(RA_API, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ brandInfo: raState.brand, quizAnswers: raState.answers })
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ brandInfo:raState.brand, quizAnswers:raState.answers })
     });
     raRemoveDots(dots);
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    if (!res.ok) throw new Error('HTTP ' + res.status);
     const data = await res.json();
-
     raHideAnalysisProgress();
     raState.audit = data.audit;
     raState.phase = 'chat';
@@ -719,38 +794,27 @@ async function raGenerate() {
   } catch (err) {
     raRemoveDots(dots);
     raHideAnalysisProgress();
-    raBot('Something went wrong — please try running your audit again in a moment.');
+    raBot('<p>Something went wrong — please try running your audit again in a moment.</p>');
     console.error('[RA Error]', err);
   }
 }
 
-/* ── Follow-up chat ─────────────────────────────────────── */
+/* ═══ FOLLOW-UP CHAT (max 5) ═══ */
 function getWeakAreas() {
   return QUIZ.map(q => {
     const ans = raState.answers[q.key];
     let isWeak = false;
-    if (q.multi && Array.isArray(ans)) {
-      isWeak = ans.some(a => {
-        const idx = q.opts.indexOf(a);
-        return q.weak.includes(idx);
-      }) || ans.length === 0;
-    } else {
-      isWeak = q.weak.includes(q.opts.indexOf(ans));
-    }
-    return { key: q.key, isWeak, severity: isWeak ? 1 : 0 };
+    if (q.multi && Array.isArray(ans)) isWeak = ans.some(a => q.weak.includes(q.opts.indexOf(a))) || !ans.length;
+    else isWeak = q.weak.includes(q.opts.indexOf(ans));
+    return { key:q.key, isWeak };
   }).filter(a => a.isWeak);
 }
 
 function raBuildSuggestionPool() {
   const asked = new Set(raState.chatHistory.map(h => h.user.toLowerCase().trim()));
-  const weakKeys = getWeakAreas().map(w => w.key);
-  const keyOrder = [...new Set([...weakKeys, ...QUIZ.map(q => q.key)])];
+  const keys = [...new Set([...getWeakAreas().map(w => w.key), ...QUIZ.map(q => q.key)])];
   const pool = [];
-  keyOrder.forEach(key => {
-    (SUGGESTED_BY_AREA[key] || []).forEach(q => {
-      if (!pool.includes(q) && !asked.has(q.toLowerCase())) pool.push(q);
-    });
-  });
+  keys.forEach(k => (SUGGESTED_BY_AREA[k] || []).forEach(q => { if (!pool.includes(q) && !asked.has(q.toLowerCase())) pool.push(q); }));
   return pool;
 }
 
@@ -766,7 +830,7 @@ function raShowSuggestions() {
   if (!picked.length) { el.style.display = 'none'; return; }
   el.style.display = 'flex';
   el.innerHTML = '<div id="ra-suggestions-label">Suggested questions</div>' +
-    picked.map((q, i) => `<button class="ra-suggest" onclick="raAskSuggested(${i})">${q}</button>`).join('');
+    picked.map((q, i) => `<button type="button" class="ra-suggest" onclick="raAskSuggested(${i})">${raEscapeHtml(q)}</button>`).join('');
   el._questions = picked;
   raScrollToComposer();
 }
@@ -780,34 +844,27 @@ function raAskSuggested(i) {
 
 async function raSendFollowUp(message) {
   if (raState.sessionEnded || raState.followUpCount >= MAX_FOLLOWUPS) { raShowSessionEnd(); return; }
-
   document.getElementById('ra-suggestions').style.display = 'none';
   raUser(message);
   raState.followUpCount++;
   raUpdateFollowUpCounter();
   raShowComposer(false);
   const dots = raTyping();
-
   try {
     const res = await fetch(RA_FOLLOWUP_API, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        brandInfo: raState.brand, quizAnswers: raState.answers,
-        audit: raState.audit, message, history: raState.chatHistory
-      })
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ brandInfo:raState.brand, quizAnswers:raState.answers, audit:raState.audit, message, history:raState.chatHistory })
     });
     raRemoveDots(dots);
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    if (!res.ok) throw new Error('HTTP ' + res.status);
     const data = await res.json();
-    raState.chatHistory.push({ user: message, assistant: data.reply });
-    raBotMarkdown(data.reply);
-
+    raState.chatHistory.push({ user:message, assistant:data.reply });
+    raBotMarkdown(data.reply, false);
     if (raState.followUpCount >= MAX_FOLLOWUPS) raShowSessionEnd();
     else { raShowInput('Ask another question...', 'followup'); raShowSuggestions(); raScrollToComposer(); }
   } catch (err) {
     raRemoveDots(dots);
-    raBot('Something went wrong — please try your question again.');
+    raBot('<p>Something went wrong — please try your question again.</p>');
     raShowInput('Ask about your retention strategy...', 'followup');
     raShowSuggestions();
     console.error('[RA Follow-up Error]', err);
@@ -818,17 +875,15 @@ function raShowSessionEnd() {
   raState.sessionEnded = true;
   document.getElementById('ra-suggestions').style.display = 'none';
   raShowComposer(false);
+  raUpdateFollowUpCounter();
   const el = document.createElement('div');
   el.className = 'ra-m bot ra-session-end';
-  el.innerHTML =
-    '<p><strong>Session complete.</strong> You\'ve explored 5 follow-up questions.</p>' +
-    '<p>Book a demo or request a callback — Superfans experts will get in touch with you.</p>' +
-    '<a href="https://www.superfans.io/demo" target="_blank" rel="noopener" style="display:inline-block;background:linear-gradient(135deg,#915EE9,#7B4FD4);color:#FAF6FF;padding:14px 28px;border-radius:14px;font-size:14px;font-weight:700;text-decoration:none;">Book a Demo / Request a Callback</a>';
+  el.innerHTML = '<p><strong>Session complete.</strong> You\'ve explored 5 follow-up questions.</p><p>Book a demo or request a callback — Superfans experts will get in touch with you.</p><a href="https://www.superfans.io/demo" target="_blank" rel="noopener">Book a Demo / Request a Callback</a>';
   document.getElementById('ra-display-pane').appendChild(el);
   document.getElementById('ra-cta').style.display = 'block';
 }
 
-/* ── Message rendering ──────────────────────────────────── */
+/* ═══ MESSAGE RENDERING ═══ */
 function raBot(html) {
   const el = document.createElement('div');
   el.className = 'ra-m bot';
@@ -837,10 +892,10 @@ function raBot(html) {
   return el;
 }
 
-function raBotMarkdown(md) {
+function raBotMarkdown(md, isAudit) {
   const el = document.createElement('div');
   el.className = 'ra-m bot';
-  el.innerHTML = raRenderBotContent(md);
+  el.innerHTML = raRenderContent(md, isAudit);
   document.getElementById('ra-display-pane').appendChild(el);
   raAnimateBars(el);
   return el;
@@ -856,7 +911,7 @@ function raUser(text) {
 function raAudit(md) {
   const el = document.createElement('div');
   el.className = 'ra-m bot ra-audit';
-  el.innerHTML = raRenderBotContent(md);
+  el.innerHTML = raRenderContent(md, true);
   document.getElementById('ra-display-pane').appendChild(el);
   raAnimateBars(el);
 }
@@ -869,16 +924,10 @@ function raTyping() {
   return el;
 }
 
-function raRemoveDots(el) {
-  if (el && el.parentNode) el.parentNode.removeChild(el);
-}
+function raRemoveDots(el) { if (el && el.parentNode) el.parentNode.removeChild(el); }
 
 function raRestart() {
-  raState = {
-    brand: {}, answers: {}, quizStep: 0, audit: null,
-    followUpCount: 0, chatHistory: [], sessionEnded: false,
-    phase: 'brand', multiSelected: new Set()
-  };
+  raState = { brand:{}, answers:{}, quizStep:0, audit:null, followUpCount:0, chatHistory:[], sessionEnded:false, phase:'brand', multiSelected:new Set() };
   document.getElementById('ra-main-title').textContent = 'What brand are we auditing today?';
   document.getElementById('ra-display-pane').innerHTML = '';
   document.getElementById('ra-choices').innerHTML = '';
