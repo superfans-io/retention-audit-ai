@@ -27,8 +27,9 @@ RESPONSE STRUCTURE & SPACING — NON-NEGOTIABLE:
 - Every independent block (heading, paragraph, list item, table, blockquote, or layout tag) MUST sit on its own dedicated line.
 - Absolutely NEVER chain structural elements together on the same line. For example, never output "--- ### Heading" or "### Title #### Subtitle".
 - You MUST insert a full, empty carriage return line (double newline) before AND after every heading, paragraph, list, table, blockquote, and custom layout element.
-- Keep every paragraph concise, maxing out at 2–3 sentences. Avoid walls of text.
-- Introduce every list with a clear heading directly above it — never attach bullet formatting to unspaced prose text blocks.
+- Avoid block paragraphs or long prose. Deliver insights exclusively via clear bullet points with explicit bold lead-ins.
+- Separate every major ### section with a --- horizontal rule on its own line.
+- Introduce every bullet list with a ### or #### heading directly above it — never attach bullets to prose without a heading.
 - Limit sequential lists to a maximum of 4 consecutive bullet items before forcing a new #### subheading break to organize the points.
 - Apply **bold text** selectively to isolate core terms — never wrap entire sentences or bullet sequences in bold markers.
 `.trim();
@@ -52,7 +53,7 @@ CORE STATS:
 - The top 25–30% of customers typically drive 70%+ of revenue
 - A 5% increase in retention can lift profits by 25–95% over time
 - App-engaged customers generate 3.5× more revenue per user and 2.8× higher LTV
-- App users convert at 2–3× higher rates than non-app shoppers
+- App users convert at 2–3× rates than non-app shoppers
 - App installs consistently cluster within the top 20–30% of most engaged customers
 - Loyal customers are 4× more likely to refer
 - Early access and insider recognition drive a 30–50% lift in repeat purchase rates
@@ -60,7 +61,7 @@ CORE STATS:
 
 REAL BRAND RESULTS (cite these specifically):
 - Empire Collection (using Superfans.io): repeat purchase rate grew from ~40% to 100%, customers returning 47.5% faster, 29.8% of customers driving 85.4% of revenue, loyal customers generating 41× higher LTV than one-time buyers
-- Duo Couture (using Superfans.io): push notifications drove 37% of app revenue, mobile app generated 58% of total revenue
+- Duo Couture (using Superfans.io): mobile app generated 58% of total revenue, push notifications drove 37% of app revenue powered through Klaviyo, 75% repeat purchase rate reached on the mobile app layer, 88.6% of app shoppers are top-tier Champions driving 95.8% of app sales volume.
 - Redland Cotton (using PostPilot): handwritten birthday cards (zero discount) → 9× ROAS
 - Nine-figure apparel brand (using Alia): customers shopping for executive/business attire had ~30% higher LTV — discovered through a single popup question before any purchase
 
@@ -123,9 +124,9 @@ Include data visualisation markers exactly as specified below.
 
 ### Brand Snapshot
 
-- [Bullet: what the brand sells and DTC positioning]
-- [Bullet: visible retention signals from research — loyalty, app, reviews, social]
-- [Bullet: honest note if public research was limited]
+- **DTC Positioning:** [Core profile tracking detailing what the brand sells and its transactional architecture]
+- **Retention Signals:** [Visible data points from public research — loyalty presence, mobile app layout, reviews, social footprints]
+- **Research Scope:** [Honest note detailing any technical limitations or hidden operational visibility surfaced during research]
 
 ---
 
@@ -166,13 +167,13 @@ STATUS must be exactly one of: Gap, Partial, or Strong. Calculate these objectiv
 #### The Gap
 
 - **[Name the single biggest gap — bold lead bullet]**
-- [Why this is #1 — bullet]
-- [Supporting evidence from their quiz answers — bullet]
+- **Strategic Impact:** [Why this specific area takes immediate precedence over secondary configurations]
+- **Quiz Evidence:** [Supporting evidence mapped directly to their submitted quiz answers]
 
 #### Why It Matters
 
-- [Playbook stat or principle as bullet]
-- [Category-specific implication — bullet]
+- **Core Playbook Stat:** [Relevant stat or behavioral framework from the playbook knowledge base]
+- **Category Implication:** [Vertical-specific retention risks if this performance loop remains unoptimized]
 
 ---
 
@@ -180,15 +181,15 @@ STATUS must be exactly one of: Gap, Partial, or Strong. Calculate these objectiv
 
 #### Week 1–2: [Priority Area #1]
 
-- [Action step 1]
-- [Action step 2]
-- [Action step 3]
+- **Audit & Assessment:** [Action step 1 targeting immediate performance bottlenecks]
+- **Framework Launch:** [Action step 2 deploying a core playbook tracking method]
+- **Operational Sprint:** [Action step 3 achievable within a 7-day sprint execution]
 
 #### Week 3–4: [Priority Area #2]
 
-- [Action step 1]
-- [Action step 2]
-- [Action step 3]
+- **Program Design:** [Action step 1]
+- **Cohort Activation:** [Action step 2]
+- **Infrastructure Test:** [Action step 3]
 
 ---
 
@@ -196,27 +197,27 @@ STATUS must be exactly one of: Gap, Partial, or Strong. Calculate these objectiv
 
 #### [Tool 1 Name]
 
-- **Why it fits:** [One bullet]
-- [What it solves — bullet]
-- [CTA link naturally included — bullet]
+- **Why it fits:** [One clear punchy matching rationale statement]
+- **Core Solution:** [What immediate pipeline leak it remedies for this brand]
+- **Next Step:** [CTA destination link naturally integrated into execution text]
 
 #### [Tool 2 Name]
 
-- **Why it fits:** [One bullet]
-- [What it solves — bullet]
+- **Why it fits:** [One matching statement]
+- **Core Solution:** [What structural leak it addresses]
 
 #### [Tool 3 Name — if relevant]
 
-- **Why it fits:** [One bullet]
-- [What it solves — bullet]
+- **Why it fits:** [One matching statement]
+- **Core Solution:** [What structural leak it addresses]
 
 ---
 
 ### For [Brand Name]
 
-- [Honest brand-specific insight — bullet]
-- [Constructive direction — bullet]
-- [Energising next step — bullet]
+- **Consultant Insight:** [Direct, brand-specific growth takeaway derived from their category footprint]
+- **Strategic Mandate:** [Constructive directive highlighting immediate growth opportunities]
+- **Execution Target:** [Energizing next step targeting baseline retention compounding]
 
 ---
 
@@ -243,9 +244,9 @@ OUTPUT FORMAT — follow this exact structure every time:
 
 ## [Short headline answering their question]
 
-- [Core answer bullet 1]
-- [Core answer bullet 2]
-- [Core answer bullet 3]
+- **Core Resolution:** [Primary tactical answer to the submitted query]
+- **Operational Method:** [How to deploy this recommendation inside their current pipeline]
+- **Playbook Blueprint:** [Supporting framework or lifecycle parameter from the knowledge base]
 
 ---
 
@@ -259,104 +260,17 @@ Include 2–3 relevant playbook stats (one per line):
 
 ### For [Brand Name]
 
-[1 paragraph — max 3 sentences. Apply the insight to their brand status context.]
+- **Custom Application:** [Targeted analysis mapping this solution directly to their score gaps]
+- **Category Advantage:** [How this deployment strengthens positioning within their vertical ecosystem]
 
 ---
 
 ### Recommended Next Steps
 
-- [Action 1]
-- [Action 2]
-- [Action 3]
-
-- [Specific action 1]
-- [Specific action 2]
-- [Specific action 3]
+- **Immediate Directive:** [Specific execution choice 1]
+- **Flow Integration:** [Specific execution choice 2]
+- **Optimization Gate:** [Specific execution choice 3]
 `.trim();
-
-// ─────────────────────────────────────────────────────────────────────────────
-// CORE FUNCTIONS
-// ─────────────────────────────────────────────────────────────────────────────
-
-async function generateRetentionAudit(brandInfo, quizAnswers) {
-  const userMessage = `
-BRAND INFORMATION:
-- Brand Name: ${brandInfo.name}
-- Category: ${brandInfo.category}
-- Store URL: ${brandInfo.url}
-
-DEEP CORE QUIZ METRICS & ARCHITECTURE ANSWERS:
-1. Purchase Frequency: ${quizAnswers.q1 || 'Not provided'}
-2. Current Repeat Purchase Rate: ${quizAnswers.q2 || 'Not provided'}
-3. Best Customer Tracking Mechanism: ${quizAnswers.q3 || 'Not provided'}
-4. Top 20-30% Revenue Contribution Size: ${quizAnswers.q4 || 'Not provided'}
-5. Loyalty Program Baseline Status: ${quizAnswers.q5 || 'Not provided'}
-6. High-Value Tier Perks Distributed: ${quizAnswers.q6 || 'Not provided'}
-7. Inter-Purchase Communication Channels: ${quizAnswers.q7 || 'Not provided'}
-8. Customer Lifecycle Milestones Recognized: ${quizAnswers.q8 || 'Not provided'}
-9. Active Advocacy/Referral Stature: ${quizAnswers.q9 || 'Not provided'}
-10. System Active Retention Metrics Logged: ${quizAnswers.q10 || 'Not provided'}
-
-Please search the web for information about ${brandInfo.name} at ${brandInfo.url} to locate public retention signals, review baselines, or tech layers. Then generate the structured Retention Audit in the exact markdown design specified.
-`.trim();
-
-  try {
-    const response = await openai.responses.create({
-      model: 'gpt-4o',
-      instructions: SYSTEM_PROMPT,
-      input: userMessage,
-      tools: [{ type: 'web_search_preview' }],
-      max_output_tokens: 4096,
-      temperature: 0.7,
-    });
-
-    const text = response.output_text;
-    if (text && text.length > 200) return text;
-    throw new Error('Empty responses structure captured.');
-
-  } catch (primaryErr) {
-    console.warn('[Responses API] Falling back to Chat Completions:', primaryErr.message);
-
-    const completion = await openai.chat.completions.create({
-      model: 'gpt-4o',
-      messages: [
-        { role: 'system', content: SYSTEM_PROMPT },
-        { role: 'user', content: `${userMessage}\n\n(Note: Generate data output matching format based on metrics inputs provided.)` },
-      ],
-      max_tokens: 4096,
-      temperature: 0.7,
-    });
-
-    return completion.choices[0].message.content;
-  }
-}
-
-async function generateFollowUpReply(brandInfo, quizAnswers, audit, message, history = []) {
-  const sessionContext = `
-SESSION CONTEXT:
-Brand Name: ${brandInfo.name} | Category: ${brandInfo.category} | URL: ${brandInfo.url}
-Audit Document Matrix:
-${audit}
-`.trim();
-
-  const historyMessages = (history || []).flatMap(turn => [
-    { role: 'user', content: turn.user },
-    { role: 'assistant', content: turn.assistant },
-  ]);
-
-  const completion = await openai.chat.completions.create({
-    model: 'gpt-4o',
-    messages: [
-      { role: 'system', content: `${FOLLOW_UP_PROMPT}\n\n${SYSTEM_PROMPT}\n\n${sessionContext}` },
-      ...historyMessages,
-      { role: 'user', content: message },
-    ],
-    max_tokens: 1536,
-    temperature: 0.6,
-  });
-
-  return completion.choices[0].message.content;
-}
 
 // ─────────────────────────────────────────────────────────────────────────────
 // ROUTE REGISTRATIONS
