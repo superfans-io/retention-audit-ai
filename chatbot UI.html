@@ -124,22 +124,33 @@
     margin: 18px 0 10px !important; padding: 0 !important;
   }
 
-  /* ── Lists: disc markers #915EE9 ── */
+  /* ── Lists: custom dot markers with fixed gap (native marker spacing is unreliable cross-browser) ── */
   #ra-engine-section ul,
   #ra-engine-section .ra-content ul,
   #ra-engine-section .ra-accordion-body ul {
-    list-style-type: disc !important; list-style-position: outside !important;
-    padding-left: 1.5em !important; margin: 8px 0 20px !important;
+    list-style: none !important; padding-left: 0 !important; margin: 8px 0 20px !important;
+  }
+  #ra-engine-section ul > li,
+  #ra-engine-section .ra-content ul > li,
+  #ra-engine-section .ra-accordion-body ul > li {
+    position: relative !important; padding-left: 22px !important;
+  }
+  #ra-engine-section ul > li::before,
+  #ra-engine-section .ra-content ul > li::before,
+  #ra-engine-section .ra-accordion-body ul > li::before {
+    content: '' !important; position: absolute !important; left: 4px !important; top: 0.65em !important;
+    width: 6px !important; height: 6px !important; border-radius: 50% !important; background: #915EE9 !important;
   }
   #ra-engine-section ol,
   #ra-engine-section .ra-content ol {
-    list-style-type: decimal !important; padding-left: 1.5em !important; margin: 8px 0 20px !important;
+    list-style-type: decimal !important; list-style-position: outside !important;
+    padding-left: 2em !important; margin: 8px 0 20px !important;
   }
+  #ra-engine-section ol li::marker { color: #915EE9 !important; }
   #ra-engine-section li,
   #ra-engine-section .ra-content li {
-    margin-bottom: 10px !important; padding-left: 10px !important;
+    margin-bottom: 10px !important;
   }
-  #ra-engine-section li::marker { color: #915EE9 !important; }
 
   /* ── Spacing: prevent clumping ── */
   #ra-engine-section .ra-content > * + *,
