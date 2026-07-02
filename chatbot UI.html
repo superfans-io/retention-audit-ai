@@ -109,7 +109,7 @@
   }
   #ra-engine-section li,
   #ra-engine-section .ra-content li {
-    margin-bottom: 10px !important; padding-left: 4px !important;
+    margin-bottom: 10px !important; padding-left: 10px !important;
   }
   #ra-engine-section li::marker { color: #915EE9 !important; }
 
@@ -319,8 +319,7 @@
   #ra-quiz-actions { display: none; margin-bottom: 14px; }
   #ra-suggestions { display: none; flex-direction: column; gap: 8px; margin-bottom: 12px; }
   #ra-suggestions-label {
-    font-size: 10pt !important; font-weight: 700 !important; color: rgba(238,224,254,0.55) !important;
-    text-transform: uppercase !important; letter-spacing: 0.06em !important;
+    display: none !important;
   }
   .ra-suggest {
     background: rgba(145,94,233,0.06) !important; border: 1px solid rgba(145,94,233,0.25) !important;
@@ -340,7 +339,7 @@
     color: rgba(238,224,254,0.5) !important; font-size: 10pt !important; cursor: pointer; padding: 0 !important;
   }
   #ra-restart:hover { color: #FAF6FF !important; }
-  .ra-followup-counter { font-size: 10pt !important; color: rgba(238,224,254,0.45) !important; margin-bottom: 8px !important; }
+  .ra-followup-counter { display: none !important; }
 
   @media (max-width: 520px) {
     #ra-engine-section .ra-summary-row { grid-template-columns: 1fr !important; }
@@ -697,17 +696,6 @@ function raStartQuiz() {
   raState.quizStep = 0;
   raShowComposer(false);
   document.getElementById('ra-main-title').textContent = '';
-
-  let intro = document.getElementById('ra-quiz-intro');
-  if (!intro) {
-    intro = document.createElement('div');
-    intro.id = 'ra-quiz-intro';
-    intro.className = 'ra-m bot';
-    const summary = document.getElementById('ra-summary');
-    const pane = document.getElementById('ra-display-pane');
-    summary ? pane.insertBefore(intro, summary.nextSibling) : pane.appendChild(intro);
-  }
-  intro.innerHTML = '<p>Tell us a little about your brand <span style="color:rgba(238,224,254,0.6)">(It\'ll only take a minute, we promise!)</span></p>';
 
   raUpdateProgress(1);
   setTimeout(() => raAskQuiz(0), 500);
