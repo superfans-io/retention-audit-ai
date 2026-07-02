@@ -199,7 +199,7 @@ STATUS must be exactly one of: Gap, Partial, or Strong. Calculate these objectiv
 
 - **Why it fits:** [One clear punchy matching rationale statement]
 - **Core Solution:** [What immediate pipeline leak it remedies for this brand]
-- **Next Step:** [CTA destination link naturally integrated into execution text]
+- **Next Step:** [CTA destination link naturally included—bullet]
 
 #### [Tool 2 Name]
 
@@ -271,6 +271,90 @@ Include 2–3 relevant playbook stats (one per line):
 - **Flow Integration:** [Specific execution choice 2]
 - **Optimization Gate:** [Specific execution choice 3]
 `.trim();
+
+// ─────────────────────────────────────────────────────────────────────────────
+// CORE FUNCTIONS (THIS WAS MISSING FROM COPIED ARRAYS)
+// ─────────────────────────────────────────────────────────────────────────────
+
+async function generateRetentionAudit(brandInfo, quizAnswers) {
+  const userMessage = `
+BRAND INFORMATION:
+- Brand Name: ${brandInfo.name}
+- Category: ${brandInfo.category}
+- Store URL: ${brandInfo.url}
+
+DEEP CORE QUIZ METRICS & ARCHITECTURE ANSWERS:
+1. Purchase Frequency: ${quizAnswers.q1 || 'Not provided'}
+2. Current Repeat Purchase Rate: ${quizAnswers.q2 || 'Not provided'}
+3. Best Customer Tracking Mechanism: ${quizAnswers.q3 || 'Not provided'}
+4. Top 20-30% Revenue Contribution Size: ${quizAnswers.q4 || 'Not provided'}
+5. Loyalty Program Baseline Status: ${quizAnswers.q5 || 'Not provided'}
+6. High-Value Tier Perks Distributed: ${quizAnswers.q6 || 'Not provided'}
+7. Inter-Purchase Communication Channels: ${quizAnswers.q7 || 'Not provided'}
+8. Customer Lifecycle Milestones Recognized: ${quizAnswers.q8 || 'Not provided'}
+9. Active Advocacy/Referral Stature: ${quizAnswers.q9 || 'Not provided'}
+10. System Active Retention Metrics Logged: ${quizAnswers.q10 || 'Not provided'}
+
+Please search the web for information about ${brandInfo.name} at ${brandInfo.url} to locate public retention signals, review baselines, or tech layers. Then generate the structured Retention Audit in the exact markdown design specified.
+`.trim();
+
+  try {
+    const response = await openai.responses.create({
+      model: 'gpt-4o',
+      instructions: SYSTEM_PROMPT,
+      input: userMessage,
+      tools: [{ type: 'web_search_preview' }],
+      max_output_tokens: 4096,
+      temperature: 0.7,
+    });
+
+    const text = response.output_text;
+    if (text && text.length > 200) return text;
+    throw new Error('Empty responses structure captured.');
+
+  } catch (primaryErr) {
+    console.warn('[Responses API] Falling back to Chat Completions:', primaryErr.message);
+
+    const completion = await openai.chat.completions.create({
+      model: 'gpt-4o',
+      messages: [
+        { role: 'system', content: SYSTEM_PROMPT },
+        { role: 'user', content: `${userMessage}\n\n(Note: Generate data output matching format based on metrics inputs provided.)` },
+      ],
+      max_tokens: 4096,
+      temperature: 0.7,
+    });
+
+    return completion.choices[0].message.content;
+  }
+}
+
+async function generateFollowUpReply(brandInfo, quizAnswers, audit, message, history = []) {
+  const sessionContext = `
+SESSION CONTEXT:
+Brand Name: ${brandInfo.name} | Category: ${brandInfo.category} | URL: ${brandInfo.url}
+Audit Document Matrix:
+${audit}
+`.trim();
+
+  const historyMessages = (history || []).flatMap(turn => [
+    { role: 'user', content: turn.user },
+    { role: 'assistant', content: turn.assistant },
+  ]);
+
+  const completion = await openai.chat.completions.create({
+    model: 'gpt-4o',
+    messages: [
+      { role: 'system', content: `${FOLLOW_UP_PROMPT}\n\n${SYSTEM_PROMPT}\n\n${sessionContext}` },
+      ...historyMessages,
+      { role: 'user', content: message },
+    ],
+    max_tokens: 1536,
+    temperature: 0.6,
+  });
+
+  return completion.choices[0].message.content;
+}
 
 // ─────────────────────────────────────────────────────────────────────────────
 // ROUTE REGISTRATIONS
